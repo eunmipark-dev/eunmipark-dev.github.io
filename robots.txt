@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://eunmipark-dev.github.io/sitemap-index.xml
+Host: https://eunmipark-dev.github.io
