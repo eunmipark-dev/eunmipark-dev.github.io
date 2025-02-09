@@ -2,22 +2,9 @@ import React, { FunctionComponent, useMemo } from 'react'
 import styled from '@emotion/styled'
 import PostItem from 'components/Main/PostItem'
 import { PostListItemType } from 'types/PostItem.types'
-import useInfiniteScroll, { useInfiniteScrollType } from 'hooks/useInfiniteScroll'
-
-export type PostType = {
-    node: {
-        id: string
-        frontmatter: {
-            title: string
-            summary: string
-            date: string
-            categories: string[]
-            thumbnail: {
-                publicURL: string
-            }
-        }
-    }
-}
+import useInfiniteScroll, {
+  useInfiniteScrollType,
+} from 'hooks/useInfiniteScroll'
 
 const PostListWrapper = styled.div`
   display: grid;
@@ -35,35 +22,34 @@ const PostListWrapper = styled.div`
 `
 
 type PostListProps = {
-    selectedCategory: string,
-    posts: PostListItemType[]
+  selectedCategory: string
+  posts: PostListItemType[]
 }
 
-
 const PostList: FunctionComponent<PostListProps> = function ({
+  selectedCategory,
+  posts,
+}) {
+  const { containerRef, postList }: useInfiniteScrollType = useInfiniteScroll(
     selectedCategory,
     posts,
-  }) {
-    const { containerRef, postList }: useInfiniteScrollType = useInfiniteScroll(
-      selectedCategory,
-      posts,
-    )
-  
-    return (
-      <PostListWrapper ref={containerRef}>
-        {postList.map(
-          ({
-            node: {
-              id,
-              fields: { slug },
-              frontmatter,
-            },
-          }: PostListItemType) => (
-            <PostItem {...frontmatter} link={slug} key={id} />
-          ),
-        )}
-      </PostListWrapper>
-    )
-  }
-  
-  export default PostList
+  )
+
+  return (
+    <PostListWrapper ref={containerRef}>
+      {postList.map(
+        ({
+          node: {
+            id,
+            fields: { slug },
+            frontmatter,
+          },
+        }: PostListItemType) => (
+          <PostItem {...frontmatter} link={slug} key={id} />
+        ),
+      )}
+    </PostListWrapper>
+  )
+}
+
+export default PostList
