@@ -1,8 +1,8 @@
 ---
-date: '2025-02-06'
-title: 'Shader Study 01'
+date: '2025-02-09'
+title: 'Shader Study 02'
 categories: ['Three', 'Shader']
-summary: 'Shader Study 01'
+summary: 'Shader Study 02'
 thumbnail: './shader_01.png'
 ---
 

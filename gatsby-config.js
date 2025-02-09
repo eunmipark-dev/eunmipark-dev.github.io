@@ -12,7 +12,7 @@ module.exports = {
     title: `Eunmi's Blog`,
     description: `Eunmi's Blog`,
     author: `Eunmi`,
-    siteUrl: 'https://eunmipark-dev.github.io', // 배포 후 변경 예정
+    siteUrl: 'https://eunmipark-dev.github.io/', // 배포 후 변경 예정
   },
   plugins: [
     {
@@ -90,7 +90,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        siteUrl: 'https://eunmipark-dev.github.io',
+        siteUrl: 'https://eunmipark-dev.github.io/',
         stripQueryString: true,
       },
     },
