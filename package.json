@@ -56,7 +56,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "deploy": "gatsby build && gh-pages -d public -b master"
+    "deploy": "gatsby build && gh-pages -d public -b master && cp googleb224059eb5a7b092.html public/"
   },
   "repository": {
     "type": "git",
