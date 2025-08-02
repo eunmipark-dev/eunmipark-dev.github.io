@@ -8,6 +8,7 @@ import { PostListItemType } from '@appTypes/postItem.type'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import queryString, { ParsedQuery } from 'query-string'
 import Template from '@components/common/Template'
+import { LatestPost } from '@components/post/latest'
 
 type IndexPageProps = {
   location: {
@@ -123,7 +124,11 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
         </span>
       </TabMenu>
 
-      {activeTab === 'about' && <Introduction profileImage={gatsbyImageData} />}
+      {activeTab === 'about' && (
+        <>
+          <Introduction profileImage={gatsbyImageData} />
+        </>
+      )}
       {activeTab === 'post' && (
         <>
           <CategoryList
