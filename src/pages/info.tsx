@@ -5,15 +5,15 @@ import { Global, css } from '@emotion/react'
 import styled from '@emotion/styled'
 
 type InfoPageProps = {
-    data: {
-        site: {
-            siteMetadata: {
-                title: string
-                description: string
-                author: string
-            }
-        }
+  data: {
+    site: {
+      siteMetadata: {
+        title: string
+        description: string
+        author: string
+      }
     }
+  }
 }
 
 const globalStyle = css`
@@ -38,19 +38,19 @@ const Text1 = styled.div`
 `
 
 const InfoPage: FunctionComponent<InfoPageProps> = function ({
-    data: {
-        site: {
-            siteMetadata: { title, description, author },
-        },
+  data: {
+    site: {
+      siteMetadata: { title, description, author },
     },
+  },
 }) {
-    return (
-        <div>
-            <Global styles={globalStyle} />
-            <Text1>{description}</Text1>
-            {description} {author}
-        </div>
-    )
+  return (
+    <div>
+      <Global styles={globalStyle} />
+      <Text1>{description}</Text1>
+      {description} {author}
+    </div>
+  )
 }
 
 export default InfoPage
@@ -65,6 +65,4 @@ export const metadataQuery = graphql`
       }
     }
   }
-`;
-
-
+`

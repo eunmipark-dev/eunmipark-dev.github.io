@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useMemo } from 'react'
 import styled from '@emotion/styled'
-import PostItem from 'components/Main/PostItem'
-import { PostListItemType } from 'types/PostItem.types'
+import PostItem from '@components/main/PostItem'
+import { PostListItemType } from '@appTypes/postItem.type'
+
 import useInfiniteScroll, {
   useInfiniteScrollType,
-} from 'hooks/useInfiniteScroll'
+} from '@hooks/useInfiniteScroll'
 
 const PostListWrapper = styled.div`
   display: grid;

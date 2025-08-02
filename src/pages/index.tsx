@@ -1,13 +1,13 @@
 import React, { FunctionComponent, useMemo, useState } from 'react'
 import styled from '@emotion/styled'
-import CategoryList, { CategoryListProps } from 'components/Main/CategoryList'
-import Introduction from 'components/Main/Introduction'
-import PostList from 'components/Main/PostList'
+import CategoryList, { CategoryListProps } from '@components/main/CategoryList'
+import Introduction from '@components/main/Introduction'
+import PostList from '@components/main/PostList'
 import { graphql } from 'gatsby'
-import { PostListItemType } from 'types/PostItem.types'
+import { PostListItemType } from '@appTypes/postItem.type'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import queryString, { ParsedQuery } from 'query-string'
-import Template from 'components/Common/Template'
+import Template from '@components/common/Template'
 
 type IndexPageProps = {
   location: {

@@ -1,25 +1,110 @@
 {
-    "env": {
-      "browser": true,
-      "es2021": true
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:@typescript-eslint/recommended-requiring-type-checking",
-      "plugin:prettier/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": 12,
-      "sourceType": "module",
-      "project": "./tsconfig.json"
-    },
-    "plugins": ["react", "@typescript-eslint"],
-    "ignorePatterns": ["dist/", "node_modules/"],
-    "rules": {}
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "ignorePatterns": ["dist/", "node_modules/"],
+  "rules": {
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          ["parent", "sibling", "index"],
+          "type",
+          "unknown"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "{gatsby*, gatsby*/**}",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "{react*, react*/**}",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "@src",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@pages",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@layout",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@module",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@components",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@store",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@hooks",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@utils",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@types",
+            "group": "type"
+          },
+          {
+            "pattern": "@scss",
+            "group": "unknown"
+          },
+          {
+            "pattern": "@images",
+            "group": "unknown"
+          }
+        ],
+        "distinctGroup": false,
+        "pathGroupsExcludedImportTypes": [],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": false
+        },
+        "newlines-between": "always"
+      }
+    ]
   }
+}

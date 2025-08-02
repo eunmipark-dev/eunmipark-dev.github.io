@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react'
 import { graphql } from 'gatsby'
-import { PostPageItemType } from 'types/PostItem.types' // 바로 아래에서 정의할 것입니다
-import Template from 'components/Common/Template'
-import PostHead from 'components/Post/PostHead'
-import PostContent from 'components/Post/PostContent'
+import { PostPageItemType } from '@appTypes/postItem.type' // 바로 아래에서 정의할 것입니다
+import Template from '@components/common/Template'
+import PostHead from '@components/post/PostHead'
+import PostContent from '@components/post/PostContent'
 
 type PostTemplateProps = {
   data: {
@@ -35,7 +35,7 @@ const PostTemplate: FunctionComponent<PostTemplateProps> = function ({
         },
       },
     },
-  } = edges[0];
+  } = edges[0]
 
   return (
     <Template title={title} description={summary} url={href} image={publicURL}>
@@ -49,7 +49,6 @@ const PostTemplate: FunctionComponent<PostTemplateProps> = function ({
     </Template>
   )
 }
-
 
 export default PostTemplate
 

@@ -16,6 +16,25 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: 'gatsby-plugin-alias-imports',
+      options: {
+        alias: {
+          '@components': 'src/components',
+          '@layout': 'src/layout',
+          '@module': 'src/module',
+          '@pages': 'src/pages',
+          '@scss': 'src/scss',
+          '@store': 'src/store',
+          '@hooks': 'src/hooks',
+          '@types': 'src/types',
+          '@utils': 'src/utils',
+          '@images': 'src/images',
+          '@src': 'src',
+        },
+        extensions: ['js', 'jsx', 'ts', 'tsx'],
+      },
+    },
+    {
       resolve: 'gatsby-plugin-typescript',
       options: {
         isTSX: true,
@@ -99,6 +118,18 @@ module.exports = {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         policy: [{ userAgent: '*', allow: '/' }],
+      },
+    },
+    {
+      resolve: `gatsby-source-notion-feely`,
+      options: {
+        token: process.env.GATSBY_INTEGRATION_TOKEN,
+        databases: [
+          {
+            id: process.env.GATSBY_DATABASE_ID,
+            name: `milot`,
+          },
+        ],
       },
     },
   ],
