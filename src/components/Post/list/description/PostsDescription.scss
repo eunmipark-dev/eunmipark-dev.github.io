@@ -1,0 +1,38 @@
+@import '@scss/abstracts/mixin';
+
+.posts-description {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  svg {
+    margin-right: 8px;
+    cursor: pointer;
+
+    @include hover-fine {
+      @include animation-rotate(1s);
+    }
+  }
+
+  .count-box {
+    color: var(--color-font);
+    font-size: 10pt;
+
+    @include ellipsis;
+
+    span {
+      color: var(--color-base);
+      font-weight: 500;
+    }
+
+    strong {
+      color: var(--color-base);
+      font-weight: 600;
+
+      span {
+        color: var(--color-font);
+        font-weight: 400;
+      }
+    }
+  }
+}

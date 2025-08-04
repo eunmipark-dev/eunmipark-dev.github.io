@@ -1,0 +1,19 @@
+.treepedia-layout {
+  &__header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+    row-gap: 12px;
+  }
+
+  .desc {
+    margin-bottom: 8px;
+    color: var(--color-grey);
+    font-size: 11pt;
+
+    em {
+      color: var(--color-secondary);
+      font-style: normal;
+    }
+  }
+}

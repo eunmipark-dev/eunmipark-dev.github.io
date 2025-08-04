@@ -1,0 +1,138 @@
+[
+  {
+    "from": "/post/write/*",
+    "to": "/post/:splat"
+  },
+  {
+    "from": "/post/MarkdownRemarkexplain/*",
+    "to": "/post/:splat"
+  },
+  {
+    "from": "/post/edit/*",
+    "to": "/post/:splat"
+  },
+  {
+    "from": "/post/zip/*",
+    "to": "/post/:splat"
+  },
+  {
+    "from": "/post/svelte-viewport-tracker-component",
+    "to": "/post/development-viewport-tracker-component"
+  },
+  {
+    "from": "/post/clean-code-prologue",
+    "to": "/list"
+  },
+  {
+    "from": "/post/clean-code-chapter-1-2-3",
+    "to": "/list"
+  },
+  {
+    "from": "/post/clean-code-chapter-4-5-6",
+    "to": "/list"
+  },
+  {
+    "from": "/post/clean-code-chapter-7-8-9",
+    "to": "/list"
+  },
+  {
+    "from": "/post/clean-code-chapter-10",
+    "to": "/list"
+  },
+  {
+    "from": "/post/mac-port-kill",
+    "to": "/list"
+  },
+  {
+    "from": "/post/better-error-message",
+    "to": "/list"
+  },
+  {
+    "from": "/post/create-robots",
+    "to": "/list"
+  },
+  {
+    "from": "/post/movie-review-ford-vs-ferrari",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/review-the-genius-paik-season-2",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/review-die-krise-der-narration",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/review-pixar-soul",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/review-the-boy-and-the-heron",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/review-alternatives-a-la-prison",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/what-do-cities-live-for-review",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/cinema-paradiso-review",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/last-night-in-soho-review",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/SPO-park-concert-review",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/oppenheimer-review",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/2023-pentaport-rock-festival-review",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/review-drive-my-car",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/review-brave-new-world",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/review-uncomfortable-convenience",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/review-the-ocean-waves",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/review-a-clockwork-orange",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/review-parasyte",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/review-kill-boksoon",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/review-good-morning-vietnam",
+    "to": "/treepedia"
+  },
+  {
+    "from": "/post/review-why-fish-dont-exist",
+    "to": "/treepedia"
+  }
+]

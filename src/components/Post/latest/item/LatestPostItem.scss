@@ -1,0 +1,71 @@
+@import '@scss/abstracts/mixin';
+
+.latest-post-item {
+  @include flex-center;
+
+  min-height: 48px;
+  border-radius: 8px;
+  box-shadow:
+    1px 1px 2px var(--color-primary),
+    -1px -1px 2px var(--color-secondary);
+
+  a {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    flex-direction: column;
+    padding: 1.25rem;
+    border: 1.2px solid var(--color-primary);
+    border-radius: 8px;
+    color: var(--color-font);
+    font-size: 1.05rem;
+
+    p {
+      flex: 1;
+      margin-bottom: 1.45rem;
+      font-size: 1.15rem;
+      word-break: keep-all;
+    }
+
+    span {
+      font-size: 0.75rem;
+    }
+
+    .corner {
+      position: absolute;
+      z-index: -1;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      overflow: hidden;
+      width: 32px;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 28px 0 4px;
+      background-color: var(--color-corner);
+      transform: scale(1);
+      transition: transform 0.5s ease-out;
+    }
+
+    svg {
+      position: absolute;
+      right: 6px;
+      bottom: 6px;
+      transition: transform 0.4s;
+    }
+
+    @include hover-fine {
+      .corner {
+        transform: scale(62);
+      }
+
+      svg {
+        transform: translateY(-6px);
+      }
+    }
+  }
+}

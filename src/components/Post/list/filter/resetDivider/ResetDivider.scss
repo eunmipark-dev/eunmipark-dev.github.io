@@ -1,0 +1,29 @@
+@import '@scss/abstracts/mixin';
+
+.reset-divider {
+  display: flex;
+  align-items: center;
+  color: var(--color-link);
+  column-gap: 8px;
+  cursor: pointer;
+
+  hr {
+    flex: 1;
+  }
+
+  .reset {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    column-gap: 4px;
+    font-size: 11pt;
+
+    @include hover-fine {
+      svg {
+        @include animation-rotate(1.3s);
+
+        animation-iteration-count: infinite;
+      }
+    }
+  }
+}

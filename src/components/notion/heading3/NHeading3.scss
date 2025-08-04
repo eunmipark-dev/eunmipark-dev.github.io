@@ -1,0 +1,8 @@
+@import '@scss/abstracts/mixin';
+
+h3 {
+  @include text-gradient;
+
+  font-size: 1.2em;
+  margin-block: 0.8em 0.5em;
+}

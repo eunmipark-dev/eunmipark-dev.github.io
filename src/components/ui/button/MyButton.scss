@@ -1,0 +1,63 @@
+@import '@scss/abstracts/variables';
+@import '@scss/abstracts/mixin';
+
+.my-button {
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: -0.05px;
+  transition: background-color 0.2s;
+
+  @include flex-center;
+
+  &.size-primary {
+    height: 48px;
+    padding: 10px;
+    font-size: 12pt;
+  }
+
+  &.size-secondary {
+    height: 40px;
+    padding: 8px;
+  }
+
+  &.size-third {
+    height: 32px;
+    padding: 6px;
+    border-radius: 4px;
+  }
+
+  &.size-fourth {
+    height: 24px;
+    padding: 4px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  &.type-border {
+    background-color: var(--color-reverse-mono);
+
+    @include hover-fine {
+      border: 1.5px solid var(--color-third);
+      background-color: var(--color-third);
+      color: var(--color-base);
+    }
+  }
+
+  &.color-primary.type-border {
+    border: 1.5px solid var(--color-primary);
+    color: var(--color-font);
+  }
+
+  &.color-secondary.type-border {
+    border: 1.5px solid var(--color-secondary);
+    color: var(--color-font);
+  }
+
+  &.color-primary.type-bg {
+    background-color: var(--color-primary);
+  }
+
+  &.color-secondary.type-bg {
+    background-color: var(--color-secondary);
+  }
+}

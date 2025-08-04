@@ -1,0 +1,16 @@
+.block-toggle {
+  .toggle-title-box {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .icon-box {
+      margin-top: 2px;
+      margin-right: 6px;
+    }
+  }
+
+  .toggle-content-box {
+    margin-left: 20px;
+  }
+}

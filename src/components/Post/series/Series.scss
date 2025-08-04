@@ -1,0 +1,20 @@
+@import '@scss/abstracts/mixin';
+
+.series-box {
+  &.badge {
+    padding: 4px 12px;
+    border-radius: 16px;
+    background-color: var(--color-grey-6);
+    font-size: 1rem;
+
+    @include hover-fine {
+      background-color: var(--color-grey-4);
+    }
+  }
+
+  &.normal {
+    color: var(--color-primary);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}

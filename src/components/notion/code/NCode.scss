@@ -1,0 +1,35 @@
+.block-code {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  margin: 16px 0;
+  background-color: #efefef;
+  line-height: 1.75rem;
+
+  pre {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 0 0 4px 4px;
+    margin: 0 !important;
+    white-space: pre-wrap;
+  }
+
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 12px 0;
+
+    .language {
+      color: var(--color-grey);
+      font-size: 9pt;
+    }
+  }
+
+  .caption {
+    padding: 2px 12px;
+    color: var(--color-grey);
+    font-size: 9pt;
+  }
+}

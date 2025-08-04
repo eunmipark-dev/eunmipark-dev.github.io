@@ -1,0 +1,84 @@
+@import '@scss/abstracts/mixin';
+
+$side-layout-width: 260px;
+$side-layout-controller-border: 4px;
+
+.side-layout {
+  position: fixed;
+  top: 0;
+  display: flex;
+  width: $side-layout-width;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 60px;
+  background-color: var(--color-background);
+  box-shadow: 6px 0 18px -5px var(--color-shadow);
+  color: var(--color-font);
+  transition: transform 0.16s ease-in-out;
+
+  &.left {
+    left: 0;
+
+    &.shrink {
+      transform: translateX((-100%));
+    }
+  }
+
+  &.right {
+    right: 0;
+
+    &.shrink {
+      transform: translateX((100%));
+    }
+  }
+
+  .content {
+    overflow: auto;
+    width: 100%;
+    flex: 1;
+  }
+
+  &.dim {
+    z-index: 100;
+  }
+}
+
+.side-layout-controller {
+  position: fixed;
+  top: 50%;
+  display: flex;
+  width: 22px;
+  height: 49px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1.5px solid var(--color-primary);
+  background-color: var(--color-reverse-mono);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: left 0.16s ease-in-out;
+
+  &.left {
+    left: $side-layout-width;
+    border-radius: 0 $side-layout-controller-border $side-layout-controller-border 0;
+
+    &.shrink {
+      left: 0;
+    }
+  }
+
+  &.right {
+    right: $side-layout-width;
+    border-radius: $side-layout-controller-border 0 0 $side-layout-controller-border;
+
+    &.shrink {
+      right: 0;
+    }
+  }
+
+  @include hover-fine {
+    background-color: var(--color-grey-5);
+  }
+}

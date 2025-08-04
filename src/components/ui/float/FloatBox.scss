@@ -1,0 +1,11 @@
+@import '@scss/abstracts/mixin';
+
+.float-box {
+  position: fixed;
+  z-index: 30;
+  right: 18px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}

@@ -1,0 +1,23 @@
+.series-filter {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 2px 12px;
+
+  .title {
+    min-width: 48px;
+    color: var(--color-base);
+    font-size: 12pt;
+    font-weight: 600;
+  }
+
+  &__items {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px 12px;
+  }
+}

@@ -1,0 +1,185 @@
+@import './variables';
+
+@mixin mobile {
+  @media (max-width: #{$breakpoint-mobile}) {
+    @content;
+  }
+
+  @media (min-width: #{$breakpoint-mobile}) and (max-width: #{$breakpoint-tablet - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+@mixin hover-fine {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin animation-fade-in($duration) {
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  animation: fade-in $duration;
+}
+
+@mixin animation-fade-out($duration) {
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  animation: fade-out $duration;
+  animation-fill-mode: forwards;
+}
+
+@mixin animation-rotate($duration) {
+  @keyframes rotate {
+    from {
+      transform: rotate(0);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  animation: rotate $duration;
+}
+
+@mixin animation-motion-left($distance) {
+  @keyframes motion-left {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX($distance);
+    }
+  }
+
+  animation: motion-left;
+  animation-direction: alternate;
+  animation-duration: 0.4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+}
+
+@mixin animation-motion-right($distance) {
+  @keyframes motion-right {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX($distance);
+    }
+  }
+
+  animation: motion-right;
+  animation-direction: alternate;
+  animation-duration: 0.4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+}
+
+@mixin animation-tada($diffScale: 0.1) {
+  @keyframes tada {
+    0% {
+      transform: scale3d(1, 1, 1);
+    }
+
+    10%,
+    20% {
+      transform: scale3d(1 - $diffScale, 1 - $diffScale, 1 - $diffScale) rotate3d(0, 0, 1, -3deg);
+    }
+
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: scale3d(1 + $diffScale, 1 + $diffScale, 1 + $diffScale) rotate3d(0, 0, 1, 3deg);
+    }
+
+    40%,
+    60%,
+    80% {
+      transform: scale3d(1 + $diffScale, 1 + $diffScale, 1 + $diffScale) rotate3d(0, 0, 1, -3deg);
+    }
+
+    100% {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+
+  animation: tada;
+  animation-duration: 1.2s;
+}
+
+@mixin ellipsis($line: 1) {
+  @if ($line == 1) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+ @else {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+    text-overflow: ellipsis;
+  }
+}
+
+@mixin text-gradient() {
+  background: linear-gradient(180deg, var(--color-primary), var(--color-base));
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes steam {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}

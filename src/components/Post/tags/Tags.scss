@@ -1,0 +1,7 @@
+@import '@scss/abstracts/mixin';
+
+.tags-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}

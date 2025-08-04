@@ -41,6 +41,11 @@ export const useNotion = () => {
 
     console.log('nodess:', nodes)
 
+    console.log(
+      'node_1:',
+      nodes.filter((node: NotionNode) => node.title.startsWith('/post')),
+    )
+
     const posts: NotionNode[] = nodes
       .filter((node: NotionNode) => node.title.startsWith('/post'))
       .map((node: NotionNode) => {
@@ -53,6 +58,8 @@ export const useNotion = () => {
           Date.parse(b.notionColumn.createdTime) -
           Date.parse(a.notionColumn.createdTime),
       )
+
+    console.log('post2:', posts)
 
     const { everyPostsTags, everyPostsSeries } = classifyPost(posts)
 

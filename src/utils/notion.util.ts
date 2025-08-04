@@ -17,15 +17,20 @@ export const notionNodeToJson = (
 export const parseNotionColumn = (
   content: NotionChildrenType,
 ): NotionColumn => {
-  const { id, url, remark, created_date, edited_date, series, tag } =
+  console.log(content)
+  const { id, URL, remark, created_date, edited_date, series, tag } =
     content.properties
+
+  console.log(content.properties)
+
+  console.log('id', id)
 
   return {
     id: id.unique_id.number || -1,
     remark: getPlainTextByRichText(remark.rich_text),
     lastEditedTime: convertDatetimeFormat(edited_date.date.start || ''),
     createdTime: convertDatetimeFormat(created_date.date.start || ''),
-    notionUrl: url.title.plain_text || '',
+    notionUrl: URL.url || '',
     tag: tag.multi_select || [],
     series: series.select,
   }

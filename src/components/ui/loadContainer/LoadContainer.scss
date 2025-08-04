@@ -1,0 +1,19 @@
+@import '@scss/abstracts/mixin';
+
+.load-section {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0 auto;
+
+  .spinner svg {
+    margin-right: 8px;
+    cursor: pointer;
+
+    @include hover-fine {
+      @include animation-rotate(1s);
+    }
+  }
+}

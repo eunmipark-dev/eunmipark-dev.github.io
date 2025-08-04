@@ -1,0 +1,37 @@
+@import '@scss/abstracts/mixin';
+
+.block-full-image {
+  position: fixed;
+  z-index: 300;
+  top: 50%;
+  left: 50%;
+  overflow: auto;
+  width: 100%;
+  max-width: 80vw;
+  max-height: 80vh;
+  margin: 0;
+  background-color: var(--color-background);
+  cursor: zoom-out;
+  transform: translate(-50%, -50%);
+
+  @include mobile {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    transform: translate(0, -50%);
+  }
+
+  img {
+    width: 100%;
+    border-radius: 4px;
+    object-fit: contain;
+  }
+
+  .caption-box {
+    background-color: var(--color-background);
+    color: var(--color-grey);
+    font-size: 10pt;
+  }
+}

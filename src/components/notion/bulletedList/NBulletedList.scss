@@ -1,0 +1,13 @@
+.block-bulleted-list {
+  padding-left: 20px;
+  line-height: 32px;
+
+  ::marker {
+    font-variant-numeric: tabular-nums;
+    text-align: start !important;
+    text-align-last: start !important;
+    text-indent: 0 !important;
+    text-transform: none;
+    unicode-bidi: isolate;
+  }
+}

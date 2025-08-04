@@ -1,0 +1,92 @@
+@import '@scss/abstracts/mixin';
+
+.posts-pagination {
+  display: flex;
+  width: 100%;
+  height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+
+  .page-button {
+    position: relative;
+
+    &.first,
+    &.prev {
+      svg {
+        position: absolute;
+        left: 12px;
+      }
+
+      &.active {
+        @include hover-fine {
+          svg {
+            @include animation-motion-left($distance: -8px);
+          }
+
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &.last,
+    &.next {
+      svg {
+        position: absolute;
+        right: 12px;
+      }
+
+      &.active {
+        @include hover-fine {
+          svg {
+            @include animation-motion-right($distance: 8px);
+          }
+
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &.first svg {
+      padding-right: 2px;
+    }
+
+    &.disabled {
+      background-color: var(--color-grey-6);
+      color: var(--color-black-6);
+      cursor: default;
+      opacity: 0.3;
+    }
+  }
+
+  .left-box,
+  .right-box {
+    display: flex;
+
+    & .page-button + .page-button {
+      margin-left: 8px;
+    }
+  }
+
+  .center-box {
+    color: var(--color-primary);
+
+    & span + span {
+      margin-left: 8px;
+    }
+
+    span.current {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    span.prev,
+    span.next {
+      cursor: pointer;
+
+      @include hover-fine {
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -18,6 +18,7 @@ module.exports = {
     siteUrl: 'https://eunmipark-dev.github.io/', // 배포 후 변경 예정
   },
   plugins: [
+    'gatsby-plugin-sass',
     {
       resolve: 'gatsby-plugin-alias-imports',
       options: {
@@ -29,7 +30,7 @@ module.exports = {
           '@scss': 'src/scss',
           '@store': 'src/store',
           '@hooks': 'src/hooks',
-          '@types': 'src/types',
+          '@appTypes': 'src/types',
           '@utils': 'src/utils',
           '@images': 'src/images',
           '@src': 'src',

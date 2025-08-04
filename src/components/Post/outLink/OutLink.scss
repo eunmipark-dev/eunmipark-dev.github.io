@@ -1,0 +1,15 @@
+@import '@scss/abstracts/mixin';
+
+.out-link-box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+
+  .series-button {
+    span {
+      margin-right: 4px;
+      color: var(--color-base);
+      font-weight: 500;
+    }
+  }
+}

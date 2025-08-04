@@ -1,0 +1,42 @@
+@import '@scss/abstracts/mixin';
+
+.circle-icon-wrapper {
+  @include flex-center;
+
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &.mono {
+    border: 2px solid var(--color-mono);
+
+    @include hover-fine {
+      border: 2px solid var(--color-secondary);
+
+      svg path {
+        fill: var(--color-secondary);
+      }
+    }
+  }
+
+  &.reverse-mono {
+    border: 2px solid var(--color-reverse-mono);
+
+    @include hover-fine {
+      border: 2px solid var(--color-secondary);
+
+      svg path {
+        fill: var(--color-secondary);
+      }
+    }
+  }
+
+  &.secondary {
+    border: 2px solid var(--color-secondary);
+    background-color: var(--color-reverse-mono);
+
+    @include hover-fine {
+      border: 2px solid var(--color-base);
+    }
+  }
+}

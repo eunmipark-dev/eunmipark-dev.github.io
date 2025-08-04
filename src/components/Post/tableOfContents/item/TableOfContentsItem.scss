@@ -1,0 +1,18 @@
+@import '@scss/abstracts/mixin';
+
+.table-of-contents-item-index {
+  margin-top: 8px;
+  cursor: pointer;
+  letter-spacing: -0.8px;
+  list-style: none;
+
+  @include hover-fine {
+    @include text-gradient;
+  }
+
+  &.active {
+    font-weight: 700;
+
+    @include text-gradient;
+  }
+}

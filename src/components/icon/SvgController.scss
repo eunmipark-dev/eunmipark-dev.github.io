@@ -1,0 +1,55 @@
+@import '@scss/abstracts/theme';
+
+.svg-wrapper {
+  &.pointer {
+    cursor: pointer;
+  }
+
+  &.black {
+    path {
+      fill: #090909;
+    }
+  }
+
+  &.white {
+    path {
+      fill: #f7f7f7;
+    }
+  }
+
+  &.base {
+    path {
+      fill: #2f5d62;
+    }
+  }
+
+  &.primary {
+    path {
+      fill: var(--color-primary);
+    }
+  }
+
+  &.secondary {
+    path {
+      fill: var(--color-secondary);
+    }
+  }
+
+  &.third {
+    path {
+      fill: var(--color-third);
+    }
+  }
+
+  &.mono {
+    path {
+      fill: var(--color-mono);
+    }
+  }
+
+  &.reverse-mono {
+    path {
+      fill: var(--color-reverse-mono);
+    }
+  }
+}

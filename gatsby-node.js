@@ -7,8 +7,45 @@
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
  */
+
+const redirects = require('./redirects.json')
+
+exports.createPages = async ({ actions, graphql }) => {
+  const { createPage, createRedirect } = actions
+
+  const { data } = await graphql(`
+    query {
+      allNotion {
+        edges {
+          node {
+            id
+            title
+          }
+        }
+      }
+    }
+  `)
+  data.allNotion.edges.forEach(({ node }) => {
+    const { id, title } = node
+    if (title && title.toUpperCase().startsWith('/POST')) {
+      createPage({
+        path: title,
+        component: require.resolve(`./src/pages/post.tsx`),
+        context: { id, slug: `${title}` },
+      })
+    }
+  })
+
+  redirects.forEach(r => {
+    createRedirect({
+      fromPath: r.from,
+      toPath: r.to,
+    })
+  })
+}
+
 // Generate Post Page Through Markdown Data
-exports.createPages = async ({ actions, graphql, reporter }) => {
+/*exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
 
   // Get All Markdown File For Paging
@@ -92,4 +129,4 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 
     createNodeField({ node, name: 'slug', value: slug });
   }
-};
+};*/

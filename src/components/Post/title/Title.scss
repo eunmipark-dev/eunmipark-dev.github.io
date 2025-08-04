@@ -1,0 +1,10 @@
+.post-title {
+  cursor: default;
+  pointer-events: none;
+
+  h1 {
+    margin: 0 0 1rem;
+    color: var(--color-font);
+    word-break: keep-all;
+  }
+}
