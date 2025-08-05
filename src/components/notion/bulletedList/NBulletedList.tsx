@@ -4,7 +4,7 @@ import './NBulletedList.scss'
 import { NParagraph } from '@components/notion'
 import { Contents } from '@components/post'
 
-import { BulletedListItemChildren } from '@appTypes'
+import { BulletedListItemChildren } from '@appTypes/notion.type'
 
 interface NBulletedListProps {
   bulletedListItem: BulletedListItemChildren

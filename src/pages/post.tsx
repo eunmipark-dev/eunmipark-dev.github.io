@@ -9,7 +9,7 @@ import { useNotion } from '@hooks/useNotion'
 import { getPlainTextByRichText, notionNodeToJson } from '@utils/notion.util'
 import { BlockType, ImageChildren } from '@appTypes/notion.type'
 import {
-  //   Contents,
+  Contents,
   //   Feedback,
   //   LastEditedCaution,
   //   OutLink,
@@ -50,7 +50,7 @@ export const Head: HeadFC = ({ pageContext }: any) => {
     : ''
 
   const descriptions = []
-  descriptions.push('저자: Ethan')
+  descriptions.push('저자: Milot')
 
   if (node?.properties?.created_date) {
     descriptions.push(`작성일: ${node?.properties?.created_date?.date.start}`)
@@ -129,10 +129,11 @@ const PostPage: React.FC<PageProps> = ({ pageContext }: any) => {
         { <LastEditedCaution
           lastEditedDate={new Date(node?.properties?.edited_date?.date?.start)}
         />
-        <TableOfContents target={['h1', 'h2', 'h3']} />
+        <TableOfContents target={['h1', 'h2', 'h3']} /> */}
         <div className="contents-box">
-          <Contents childrens={node?.children} />
-        </div> } */}
+          {node?.children && <Contents childrens={node.children} />}
+        </div>
+        {/* } */}
       </article>
       <section className="post__footer"></section>
       {/* <FloatBox useTop /> */}

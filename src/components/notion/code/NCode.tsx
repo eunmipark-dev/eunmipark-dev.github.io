@@ -8,9 +8,9 @@ import { IconCopyLink } from '@components/icon'
 import { NParagraph } from '@components/notion'
 import useClipboard from '@hooks/useClipboard'
 import { ARIA_LABEL } from '@src/constants'
-import { getPlainTextByRichText } from '@utils/notion'
+import { getPlainTextByRichText } from '@utils/notion.util'
 
-import { Code } from '@appTypes'
+import { Code } from '@appTypes/notion.type'
 
 interface NCodeProps {
   code: Code

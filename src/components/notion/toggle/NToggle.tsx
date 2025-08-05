@@ -7,7 +7,7 @@ import { NParagraph } from '@components/notion'
 import { Contents } from '@components/post'
 import { ARIA_LABEL } from '@src/constants'
 
-import { NotionChildrenType, TextBlock } from '@appTypes'
+import { NotionChildrenType, TextBlock } from '@appTypes/notion.type'
 
 interface NToggleProps {
   toggle: TextBlock

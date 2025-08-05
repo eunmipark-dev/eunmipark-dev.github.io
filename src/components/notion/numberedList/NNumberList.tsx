@@ -4,7 +4,7 @@ import './NNumberList.scss'
 import { NParagraph } from '@components/notion'
 import { Contents } from '@components/post'
 
-import { NumberedListItemChildren } from '@appTypes'
+import { NumberedListItemChildren } from '@appTypes/notion.type'
 
 interface NNumberedListProps {
   numberedListItem: NumberedListItemChildren

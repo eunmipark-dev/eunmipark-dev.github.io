@@ -3,7 +3,7 @@ import * as React from 'react'
 import './NTodo.scss'
 import { NParagraph } from '@components/notion'
 
-import { Todo } from '@appTypes'
+import { Todo } from '@appTypes/notion.type'
 
 interface NTodoProps {
   todo: Todo

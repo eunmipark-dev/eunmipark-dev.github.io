@@ -17,7 +17,7 @@ import {
 import NImage from '@components/notion/image/NImage'
 import { Divider } from '@components/ui'
 
-import { BlockType, NotionChildrenType } from '@appTypes'
+import { BlockType, NotionChildrenType } from '@appTypes/notion.type'
 
 interface ContentBlockRenderProps {
   block: NotionChildrenType
@@ -75,9 +75,10 @@ export default function ContentBlockRender({ block }: ContentBlockRenderProps) {
         if (block.divider) return <Divider />
         break
       default:
+        return <></>
         break
     }
-    return
+    return <></>
   }
   return render()
 }

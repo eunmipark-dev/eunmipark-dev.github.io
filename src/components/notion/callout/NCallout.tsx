@@ -5,7 +5,7 @@ import './NCallout.scss'
 import { NParagraph } from '@components/notion'
 import { Contents } from '@components/post'
 
-import { Callout, NotionChildrenType } from '@appTypes'
+import { Callout, NotionChildrenType } from '@appTypes/notion.type'
 interface NCalloutProps {
   callout: Callout
   children: NotionChildrenType[]

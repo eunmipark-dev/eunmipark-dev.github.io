@@ -1,5 +1,5 @@
 // export * from './caution';
-// export * from './contents';
+export * from './contents'
 export * from './date'
 // export * from './feedback';
 export * from './latest'

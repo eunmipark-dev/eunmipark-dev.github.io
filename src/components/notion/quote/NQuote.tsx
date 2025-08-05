@@ -5,7 +5,7 @@ import './NQuote.scss'
 import { NParagraph } from '@components/notion'
 import { Contents } from '@components/post'
 
-import { NotionChildrenType, TextBlock } from '@appTypes'
+import { NotionChildrenType, TextBlock } from '@appTypes/notion.type'
 
 interface NQuoteProps {
   quote?: TextBlock

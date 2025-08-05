@@ -4,7 +4,7 @@ import './NParagraph.scss'
 import { Linker } from '@components/ui'
 import { ARIA_LABEL } from '@src/constants'
 
-import { Caption, RichText, TextBlock, TextItem } from '@appTypes'
+import { Caption, RichText, TextBlock, TextItem } from '@appTypes/notion.type'
 
 interface NParagraphProps {
   paragraph?: TextBlock

@@ -1,11 +1,11 @@
 import * as React from 'react'
 
 import './NImage.scss'
-import { useShowImageLayerStore } from '@store/config'
+//import { useShowImageLayerStore } from '@store/config'
 
 import { NParagraph } from '../paragraph'
 
-import { ImageChildren } from '@appTypes'
+import { ImageChildren } from '@appTypes/notion.type'
 
 interface NImageProps {
   imageBlock: ImageChildren
@@ -20,7 +20,7 @@ export default function NImage({ imageBlock }: NImageProps) {
     return acc + ` ${item.plain_text}`
   }, '')
 
-  const { show: showImageLayer } = useShowImageLayerStore()
+  //const { show: showImageLayer } = useShowImageLayerStore()
 
   return (
     <>
@@ -33,7 +33,7 @@ export default function NImage({ imageBlock }: NImageProps) {
             srcSet={`${url}&width=540 380w,
             ${url}&width=1140 760w,
             ${url}&width=1536 1024w,`}
-            onClick={() => showImageLayer(imageBlock)}
+            onClick={() => {}}
           />
           <figcaption className="caption-box">
             <NParagraph richText={image.caption} />
