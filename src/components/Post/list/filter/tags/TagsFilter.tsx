@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-import './TagsFilter.scss';
-import { Tag } from '@components/post/tags';
-import { useWeezipNotion } from '@hooks/useWeezipNotion';
+import './TagsFilter.scss'
+import { Tag } from '@components/post/tags'
+import { useNotion } from '@hooks/useNotion'
 
 export default function TagsFilter() {
-  const { everyPostsTags } = useWeezipNotion();
+  const { everyPostsTags } = useNotion()
   return (
     !!everyPostsTags?.length && (
       <div className="tag-filter">
@@ -17,5 +17,5 @@ export default function TagsFilter() {
         </div>
       </div>
     )
-  );
+  )
 }

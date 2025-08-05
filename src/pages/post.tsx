@@ -5,33 +5,27 @@ import * as React from 'react'
 // import '@scss/global.scss'
 // import '@scss/pages/PostPage.scss'
 import SEO from '@components/header/SEO'
-import { useNotion } from '@hooks/useNotion'
 import { getPlainTextByRichText, notionNodeToJson } from '@utils/notion.util'
 import { BlockType, ImageChildren } from '@appTypes/notion.type'
 import {
   Contents,
   //   Feedback,
-  //   LastEditedCaution,
+  LastEditedCaution,
   //   OutLink,
   //   Share,
   TableOfContents,
   Title,
-  //   TitleDescription,
+  TitleDescription,
 } from '@components/post'
 // import { Giscus } from '@components/post/giscus';
-// import { FloatBox } from '@components/ui';
+import { FloatBox } from '@components/ui'
 import Breadcrumb, {
   BreadcrumbStep,
 } from '@components/ui/breadcrumb/Breadcrumb'
-// import { useWeezipNotion } from '@hooks/useWeezipNotion';
+import { useNotion } from '@hooks/useNotion'
 import { MainLayout } from '@layout/main'
 // import { NAMES } from '@src/constants';
-// import { getPlainTextByRichText, notionNodeToJson } from '@utils/notion';
 import { paths } from '@utils/url.util'
-
-//import { FloatBox } from '@components/ui'
-
-// import { BlockType, ImageChildren, ParagraphChildren } from '@appTypes';
 
 export const Head: HeadFC = ({ pageContext }: any) => {
   const { getNodeByUrl } = useNotion()
@@ -120,25 +114,29 @@ const PostPage: React.FC<PageProps> = ({ pageContext }: any) => {
       <Breadcrumb steps={breadcrumbSteps} />
       <article>
         <Title slug={slug} title={title} />
-        {
-          /* <TitleDescription
+
+        <TitleDescription
           createdDate={node?.properties?.created_date}
           editedDate={node?.properties?.edited_date}
           tag={node?.properties?.tag?.multi_select}
           useTagLink
         />
-        { <LastEditedCaution
-          lastEditedDate={new Date(node?.properties?.edited_date?.date?.start)}
-        />*/
-          <TableOfContents target={['h1', 'h2', 'h3']} />
-        }
+
+        <LastEditedCaution
+          lastEditedDate={
+            new Date(node?.properties?.edited_date?.date?.start ?? 0)
+          }
+        />
+
+        <TableOfContents target={['h1', 'h2', 'h3']} />
+
         <div className="contents-box">
           {node?.children && <Contents childrens={node.children} />}
         </div>
         {/* } */}
       </article>
       <section className="post__footer"></section>
-      {/* <FloatBox useTop /> */}
+      {<FloatBox useTop />}
     </MainLayout>
   )
 }

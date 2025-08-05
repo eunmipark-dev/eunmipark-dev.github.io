@@ -9,9 +9,9 @@ import { ARIA_LABEL } from '@src/constants'
 
 import { DateProperty, MultiSelect } from '@appTypes/notion.type'
 interface TitleDescriptionProps {
-  tag: MultiSelect
-  createdDate: DateProperty
-  editedDate: DateProperty
+  tag?: MultiSelect
+  createdDate?: DateProperty
+  editedDate?: DateProperty
   useCopy?: boolean
   useTagLink?: boolean
   isShowTag?: boolean
@@ -42,8 +42,8 @@ export default function TitleDescription({
             onClick={handleCopy}
           />
         )}
-        <CreateDate strDate={createdDate?.date?.start} />
-        <EditDate strDate={editedDate?.date?.start} />
+        {createdDate && <CreateDate strDate={createdDate?.date?.start} />}
+        {editedDate && <EditDate strDate={editedDate?.date?.start} />}
       </div>
     </div>
   )

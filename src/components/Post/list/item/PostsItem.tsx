@@ -4,9 +4,9 @@ import './PostsItem.scss'
 import { Series, TitleDescription } from '@components/post'
 import { Linker } from '@components/ui'
 import { ARIA_LABEL } from '@src/constants'
-import { getPlainTextByRichText, notionNodeToJson } from '@utils/notion'
+import { getPlainTextByRichText, notionNodeToJson } from '@utils/notion.util'
 
-import { NotionNode } from '@appTypes'
+import { NotionNode } from '@appTypes/notion.type'
 
 interface PostsItemProps {
   post: NotionNode

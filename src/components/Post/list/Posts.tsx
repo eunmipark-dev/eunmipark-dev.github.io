@@ -7,7 +7,7 @@ import { PostEmptyChecker } from './emptyChecker'
 import { PostsItem } from './item'
 import { Pagination } from '../pagination'
 
-import { NotionNode } from '@appTypes'
+import { NotionNode } from '@appTypes/notion.type'
 
 interface PostsProps {
   list: NotionNode[]

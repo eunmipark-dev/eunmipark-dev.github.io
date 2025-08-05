@@ -19,16 +19,16 @@ export default function FloatMoveTop() {
     }
   }, [scrollY])
 
-  return (
-    showButton.isVisibility && (
-      <CircleIconWrapper
-        aria-label={`페이지 최상단으로 ${ARIA_LABEL.MOVE}`}
-        color="secondary"
-        size={44}
-        onClick={moveToTop}
-      >
-        <IconEndArrow color="primary" direction="top" />
-      </CircleIconWrapper>
-    )
+  return showButton.isVisibility ? (
+    <CircleIconWrapper
+      aria-label={`페이지 최상단으로 ${ARIA_LABEL.MOVE}`}
+      color="secondary"
+      size={44}
+      onClick={moveToTop}
+    >
+      <IconEndArrow color="primary" direction="top" />
+    </CircleIconWrapper>
+  ) : (
+    <></>
   )
 }

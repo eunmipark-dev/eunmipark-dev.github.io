@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-import { Series } from '@components/post';
-import './SeriesFilter.scss';
-import { useWeezipNotion } from '@hooks/useWeezipNotion';
+import { Series } from '@components/post'
+import './SeriesFilter.scss'
+import { useNotion } from '@hooks/useNotion'
 
 export default function SeriesFilter() {
-  const { everyPostsSeries } = useWeezipNotion();
+  const { everyPostsSeries } = useNotion()
   return (
     !!everyPostsSeries?.length && (
       <div className="series-filter">
@@ -17,5 +17,5 @@ export default function SeriesFilter() {
         </div>
       </div>
     )
-  );
+  )
 }

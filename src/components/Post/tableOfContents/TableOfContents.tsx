@@ -1,32 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 
-import useResize from '@hooks/useResize';
+import useResize from '@hooks/useResize'
 
-import { TableOfContentsBlock, TableOfContentsSide } from '.';
+import { TableOfContentsBlock, TableOfContentsSide } from '.'
 
 interface TableOfContentsProps {
-  target: ('h1' | 'h2' | 'h3')[];
+  target: ('h1' | 'h2' | 'h3')[]
 }
 
 export default function TableOfContents({ target }: TableOfContentsProps) {
-  const { resizedInnerWidth } = useResize();
-  const [tableOfContents, setTableOfContents] = useState<HTMLHeadingElement[]>([]);
+  const { resizedInnerWidth } = useResize()
+  const [tableOfContents, setTableOfContents] = useState<HTMLHeadingElement[]>(
+    [],
+  )
 
   useEffect(() => {
-    const elHeaders = document.querySelectorAll<HTMLHeadingElement>(target.join(','));
+    const elHeaders = document.querySelectorAll<HTMLHeadingElement>(
+      target.join(','),
+    )
+
+    console.log()
+
     if (!!elHeaders?.length) {
-      const headers: HTMLHeadingElement[] = [];
+      const headers: HTMLHeadingElement[] = []
       elHeaders.forEach(el => {
-        if (el.className.includes('table-of-contents-item')) headers.push(el);
-      });
-      setTableOfContents(headers);
+        if (el.className.includes('table-of-contents-item')) headers.push(el)
+      })
+      setTableOfContents(headers)
     }
-  }, []);
+  }, [])
 
   return (
     <>
       <TableOfContentsBlock list={tableOfContents} />
-      {resizedInnerWidth > 1280 && <TableOfContentsSide list={tableOfContents} />}
+      {resizedInnerWidth > 1280 && (
+        <TableOfContentsSide list={tableOfContents} />
+      )}
     </>
-  );
+  )
 }
