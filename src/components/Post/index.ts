@@ -8,6 +8,6 @@ export * from './latest'
 // export * from './pagination';
 // export * from './series';
 // export * from './share';
-// export * from './tableOfContents';
+export * from './tableOfContents'
 // export * from './tags';
 export * from './title'

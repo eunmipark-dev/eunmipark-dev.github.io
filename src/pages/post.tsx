@@ -14,17 +14,17 @@ import {
   //   LastEditedCaution,
   //   OutLink,
   //   Share,
-  //   TableOfContents,
+  TableOfContents,
   Title,
   //   TitleDescription,
 } from '@components/post'
 // import { Giscus } from '@components/post/giscus';
 // import { FloatBox } from '@components/ui';
-// import Breadcrumb, {
-//   BreadcrumbStep,
-// } from '@components/ui/breadcrumb/Breadcrumb'
+import Breadcrumb, {
+  BreadcrumbStep,
+} from '@components/ui/breadcrumb/Breadcrumb'
 // import { useWeezipNotion } from '@hooks/useWeezipNotion';
-//import { MainLayout } from '@layout/main'
+import { MainLayout } from '@layout/main'
 // import { NAMES } from '@src/constants';
 // import { getPlainTextByRichText, notionNodeToJson } from '@utils/notion';
 import { paths } from '@utils/url.util'
@@ -104,23 +104,24 @@ const PostPage: React.FC<PageProps> = ({ pageContext }: any) => {
   const title = getPlainTextByRichText(node?.properties?.remark?.rich_text)
   const series = node?.properties?.series?.select
 
-  //   const breadcrumbSteps: BreadcrumbStep[] = [
-  //     { name: '홈', url: paths.home() },
-  //     { name: '글 목록', url: paths.posts() },
-  //   ]
-  //   if (series) {
-  //     breadcrumbSteps.push({
-  //       name: `${series.name}`,
-  //       url: paths.posts({ series: series?.name }),
-  //     })
-  //   }
+  const breadcrumbSteps: BreadcrumbStep[] = [
+    { name: '홈', url: paths.home() },
+    { name: '글 목록', url: paths.posts() },
+  ]
+  if (series) {
+    breadcrumbSteps.push({
+      name: `${series.name}`,
+      url: paths.posts({ series: series?.name }),
+    })
+  }
 
   return (
-    <div className="post">
-      {/* <Breadcrumb steps={breadcrumbSteps} /> */}
+    <MainLayout className="post">
+      <Breadcrumb steps={breadcrumbSteps} />
       <article>
         <Title slug={slug} title={title} />
-        {/* <TitleDescription
+        {
+          /* <TitleDescription
           createdDate={node?.properties?.created_date}
           editedDate={node?.properties?.edited_date}
           tag={node?.properties?.tag?.multi_select}
@@ -128,8 +129,9 @@ const PostPage: React.FC<PageProps> = ({ pageContext }: any) => {
         />
         { <LastEditedCaution
           lastEditedDate={new Date(node?.properties?.edited_date?.date?.start)}
-        />
-        <TableOfContents target={['h1', 'h2', 'h3']} /> */}
+        />*/
+          <TableOfContents target={['h1', 'h2', 'h3']} />
+        }
         <div className="contents-box">
           {node?.children && <Contents childrens={node.children} />}
         </div>
@@ -137,7 +139,7 @@ const PostPage: React.FC<PageProps> = ({ pageContext }: any) => {
       </article>
       <section className="post__footer"></section>
       {/* <FloatBox useTop /> */}
-    </div>
+    </MainLayout>
   )
 }
 

@@ -1,0 +1,88 @@
+@import '@scss/abstracts/mixin';
+
+header {
+  position: sticky;
+  z-index: 200;
+  top: 0;
+  width: 100%;
+  flex-direction: row;
+  padding: 8px 0;
+  background-color: var(--color-background-opacity);
+  transition-duration: 0.2s;
+
+  @include flex-center;
+
+  .title {
+    @include ellipsis;
+    @include text-gradient;
+
+    display: block;
+    max-width: 480px;
+    margin-left: 12px;
+    cursor: pointer;
+    font-weight: 500;
+
+    &:hover {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  .icon-box {
+    @include flex-center;
+
+    width: 48px;
+    height: 48px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    @include hover-fine {
+      border-radius: 4px;
+      background-color: var(--color-secondary);
+    }
+  }
+
+  .left-box {
+    position: absolute;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+
+    svg {
+      cursor: pointer;
+    }
+  }
+
+  .right-box {
+    position: absolute;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+
+    svg {
+      cursor: pointer;
+    }
+  }
+
+  @include animation-fade-in(300ms);
+
+  &.invisible {
+    position: sticky;
+    top: -60px;
+    height: 60px;
+
+    @include animation-fade-out(300ms);
+
+    .logo-box {
+      display: none;
+    }
+  }
+}

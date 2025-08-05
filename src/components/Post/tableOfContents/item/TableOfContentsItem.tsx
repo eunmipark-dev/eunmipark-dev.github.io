@@ -1,16 +1,19 @@
-import React from 'react';
+import React from 'react'
 
-import './TableOfContentsItem.scss';
-import { ARIA_LABEL } from '@src/constants';
-import { moveToOffset } from '@utils/scroll';
+import './TableOfContentsItem.scss'
+import { ARIA_LABEL } from '@src/constants'
+import { moveToOffset } from '@utils/scroll.util'
 
 interface TableOfContentsItemProps {
-  item: HTMLHeadingElement;
-  isActive?: boolean;
+  item: HTMLHeadingElement
+  isActive?: boolean
 }
-export default function TableOfContentsItem({ item, isActive }: TableOfContentsItemProps) {
-  const tag = item.tagName.toLowerCase();
-  const text = item.outerText;
+export default function TableOfContentsItem({
+  item,
+  isActive,
+}: TableOfContentsItemProps) {
+  const tag = item.tagName.toLowerCase()
+  const text = item.outerText
 
   return (
     <li
@@ -21,5 +24,5 @@ export default function TableOfContentsItem({ item, isActive }: TableOfContentsI
     >
       {text}
     </li>
-  );
+  )
 }

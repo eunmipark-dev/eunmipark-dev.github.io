@@ -1,0 +1,14 @@
+.side-bar-nav {
+  z-index: 120;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-top: 50px;
+
+  ul {
+    width: 100%;
+    padding: 0;
+  }
+}

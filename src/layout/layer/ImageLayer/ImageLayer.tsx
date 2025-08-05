@@ -1,25 +1,29 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import './ImageLayer.scss';
-import { GlobalPortal } from '@components/GlobalPortal';
-import { NParagraph } from '@components/notion';
-import { DimLayout } from '@layout/dim';
-import { useShowImageLayerStore } from '@store/config';
+import './ImageLayer.scss'
+import { GlobalPortal } from '@components/GlobalPortal'
+import { NParagraph } from '@components/notion'
+import { DimLayout } from '@layout/dim'
+import { useShowImageLayerStore } from '@store/config'
 
 export default function ImageLayer() {
-  const { isVisibility, imageBlock, hide: handleHideImageLayer } = useShowImageLayerStore();
+  const {
+    isVisibility,
+    imageBlock,
+    hide: handleHideImageLayer,
+  } = useShowImageLayerStore()
 
   let url = '',
-    captionText = '';
+    captionText = ''
   if (imageBlock) {
-    const { id, image } = imageBlock;
+    const { id, image } = imageBlock
 
     url = imageBlock.image
       ? `https://treefeely.notion.site/image/${encodeURIComponent(image.file.url)}?table=block&id=${id}&cache=v2`
-      : ``;
+      : ``
     captionText = image?.caption.reduce((acc, item) => {
-      return acc + ` ${item.plain_text}`;
-    }, '');
+      return acc + ` ${item.plain_text}`
+    }, '')
   }
 
   return (
@@ -43,5 +47,5 @@ export default function ImageLayer() {
         </DimLayout>
       </GlobalPortal.Consumer>
     )
-  );
+  )
 }

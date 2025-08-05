@@ -1,0 +1,22 @@
+@import '@scss/abstracts/variables';
+@import '@scss/abstracts/mixin';
+
+.snb-open-icon {
+  @include flex-center;
+
+  position: fixed;
+  z-index: $z-index-10;
+  top: 6px;
+  left: 12px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  @include hover-fine {
+    border-radius: 4px;
+    background-color: var(--color-secondary);
+  }
+}

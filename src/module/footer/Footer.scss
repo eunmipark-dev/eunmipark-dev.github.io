@@ -1,0 +1,54 @@
+@import '@scss/abstracts/mixin';
+
+footer {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  padding: 36px 24px;
+  background-color: var(--color-base);
+
+  h2,
+  a,
+  span,
+  p {
+    color: var(--color-font-reverse);
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+  }
+
+  .container {
+    display: flex;
+    width: 100%;
+    max-width: 768px;
+    flex-direction: column;
+    row-gap: 1rem;
+
+    .contact-box {
+      a {
+        display: flex;
+      }
+
+      p {
+        margin-bottom: 6px;
+      }
+
+      .contact-item {
+        display: flex;
+
+        div + div {
+          margin-left: 12px;
+        }
+      }
+    }
+
+    .refer-box a {
+      margin-left: 8px;
+    }
+  }
+}

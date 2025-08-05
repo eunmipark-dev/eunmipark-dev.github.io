@@ -9,7 +9,7 @@ import { IconClose, IconSearch } from '@components/icon'
 import { DimLayout } from '@layout/dim'
 import { ARIA_LABEL } from '@src/constants'
 import { useShowSearchStore } from '@store/config'
-import { throttle } from '@utils/common'
+import { throttle } from '@utils/common.util'
 import { paths } from '@utils/url.util'
 
 import { RecommendTag } from '../../../components/search/recommend'
