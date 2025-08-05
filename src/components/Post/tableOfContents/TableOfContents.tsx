@@ -19,7 +19,7 @@ export default function TableOfContents({ target }: TableOfContentsProps) {
       target.join(','),
     )
 
-    console.log()
+    console.log('elHeaders:', elHeaders)
 
     if (!!elHeaders?.length) {
       const headers: HTMLHeadingElement[] = []

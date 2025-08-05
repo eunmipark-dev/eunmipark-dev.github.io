@@ -30,15 +30,9 @@ export const enum NAMES {
   TREEFEELY = 'Treefeely',
 }
 
-export const GNB_MENUS = Object.freeze([
-  { url: paths.home(), title: NAMES.SITE, isOutLink: false, Icon: IconHome },
-  { url: paths.posts(), title: '글 목록', isOutLink: false, Icon: IconList },
-  {
-    url: 'https://brunch.co.kr/magazine/treepedia',
-    title: '트리피디아',
-    isOutLink: true,
-  },
-  { url: 'https://treefeely.com', title: NAMES.TREEFEELY, isOutLink: true },
+export const SIDE_MENUS = Object.freeze([
+  { url: paths.home(), title: 'About', isOutLink: false, Icon: IconHome },
+  { url: paths.posts(), title: 'Posts', isOutLink: false, Icon: IconList },
 ])
 
 export const RECOMMEND_TAGS = Object.freeze([

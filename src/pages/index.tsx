@@ -9,6 +9,7 @@ import { IGatsbyImageData } from 'gatsby-plugin-image'
 import queryString, { ParsedQuery } from 'query-string'
 import Template from '@components/common/Template'
 import { LatestPost } from '@components/post/latest'
+import { MainLayout } from '@layout/main'
 
 type IndexPageProps = {
   location: {
@@ -74,35 +75,37 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
       : parsed.category
 
   return (
-    <Template
-      title={title}
-      description={description}
-      url={siteUrl}
-      image={publicURL}
-    >
-      <TabMenu>
-        <span
-          className={activeTab === 'about' ? 'active' : ''}
-          onClick={() => setActiveTab('about')}
-        >
-          about
-        </span>
-        <span
-          className={activeTab === 'post' ? 'active' : ''}
-          onClick={() => setActiveTab('post')}
-        >
-          post
-        </span>
-      </TabMenu>
+    <MainLayout className="index-layout">
+      <Template
+        title={title}
+        description={description}
+        url={siteUrl}
+        image={publicURL}
+      >
+        <TabMenu>
+          <span
+            className={activeTab === 'about' ? 'active' : ''}
+            onClick={() => setActiveTab('about')}
+          >
+            about
+          </span>
+          <span
+            className={activeTab === 'post' ? 'active' : ''}
+            onClick={() => setActiveTab('post')}
+          >
+            post
+          </span>
+        </TabMenu>
 
-      {activeTab === 'about' && (
-        <>
-          <Introduction profileImage={gatsbyImageData} />
-          <LatestPost />
-        </>
-      )}
-      {activeTab === 'post' && <></>}
-    </Template>
+        {activeTab === 'about' && (
+          <>
+            <Introduction profileImage={gatsbyImageData} />
+            <LatestPost />
+          </>
+        )}
+        {activeTab === 'post' && <></>}
+      </Template>
+    </MainLayout>
   )
 }
 
