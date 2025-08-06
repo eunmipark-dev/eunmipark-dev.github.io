@@ -11,6 +11,8 @@ import Template from '@components/common/Template'
 import { LatestPost } from '@components/post/latest'
 import { MainLayout } from '@layout/main'
 
+import '@scss/global.scss'
+
 type IndexPageProps = {
   location: {
     search: string

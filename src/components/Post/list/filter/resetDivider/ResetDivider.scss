@@ -1,4 +1,4 @@
-@import '@scss/abstracts/mixin';
+@use '@scss/abstracts/mixin' as *;
 
 .reset-divider {
   display: flex;

@@ -1,4 +1,4 @@
-@import '@scss/abstracts/mixin';
+@use '@scss/abstracts/mixin' as *;
 
 .table-of-contents-item-index {
   margin-top: 8px;

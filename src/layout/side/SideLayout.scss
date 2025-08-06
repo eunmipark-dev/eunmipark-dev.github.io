@@ -1,4 +1,4 @@
-@import '@scss/abstracts/mixin';
+@use '@scss/abstracts/mixin' as *;
 
 $side-layout-width: 260px;
 $side-layout-controller-border: 4px;
@@ -62,7 +62,8 @@ $side-layout-controller-border: 4px;
 
   &.left {
     left: $side-layout-width;
-    border-radius: 0 $side-layout-controller-border $side-layout-controller-border 0;
+    border-radius: 0 $side-layout-controller-border
+      $side-layout-controller-border 0;
 
     &.shrink {
       left: 0;
@@ -71,7 +72,8 @@ $side-layout-controller-border: 4px;
 
   &.right {
     right: $side-layout-width;
-    border-radius: $side-layout-controller-border 0 0 $side-layout-controller-border;
+    border-radius: $side-layout-controller-border 0 0
+      $side-layout-controller-border;
 
     &.shrink {
       right: 0;

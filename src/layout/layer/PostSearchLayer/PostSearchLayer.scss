@@ -1,5 +1,5 @@
-@import '@scss/abstracts/variables';
-@import '@scss/abstracts/mixin';
+@use '@scss/abstracts/variables' as *;
+@use '@scss/abstracts/mixin' as *;
 
 .post-search-container {
   @include flex-center;

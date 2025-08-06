@@ -1,4 +1,4 @@
-@import '@scss/abstracts/mixin';
+@use '@scss/abstracts/mixin' as *;
 
 .side-bar-nav-item {
   display: flex;

@@ -1,4 +1,4 @@
-@import './variables';
+@use './variables' as *;
 
 @mixin mobile {
   @media (max-width: #{$breakpoint-mobile}) {
@@ -123,20 +123,23 @@
 
     10%,
     20% {
-      transform: scale3d(1 - $diffScale, 1 - $diffScale, 1 - $diffScale) rotate3d(0, 0, 1, -3deg);
+      transform: scale3d(1 - $diffScale, 1 - $diffScale, 1 - $diffScale)
+        rotate3d(0, 0, 1, -3deg);
     }
 
     30%,
     50%,
     70%,
     90% {
-      transform: scale3d(1 + $diffScale, 1 + $diffScale, 1 + $diffScale) rotate3d(0, 0, 1, 3deg);
+      transform: scale3d(1 + $diffScale, 1 + $diffScale, 1 + $diffScale)
+        rotate3d(0, 0, 1, 3deg);
     }
 
     40%,
     60%,
     80% {
-      transform: scale3d(1 + $diffScale, 1 + $diffScale, 1 + $diffScale) rotate3d(0, 0, 1, -3deg);
+      transform: scale3d(1 + $diffScale, 1 + $diffScale, 1 + $diffScale)
+        rotate3d(0, 0, 1, -3deg);
     }
 
     100% {
@@ -153,9 +156,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-
- @else {
+  } @else {
     display: -webkit-box;
     overflow: hidden;
     -webkit-box-orient: vertical;

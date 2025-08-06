@@ -1,5 +1,5 @@
-@import '@scss/abstracts/variables';
-@import '@scss/abstracts/mixin';
+@use '@scss/abstracts/variables' as *;
+@use '@scss/abstracts/mixin' as *;
 
 .snb-open-icon {
   @include flex-center;

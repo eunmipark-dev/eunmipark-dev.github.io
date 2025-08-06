@@ -1,4 +1,4 @@
-@import '@scss/abstracts/mixin';
+@use '@scss/abstracts/mixin' as *;
 
 .table-of-contents-block {
   position: relative;
@@ -19,7 +19,12 @@
     height: 120%;
     border-radius: 12px;
     animation: steam 5s ease-in-out infinite;
-    background: linear-gradient(75deg, var(--color-primary), var(--color-base), var(--color-third));
+    background: linear-gradient(
+      75deg,
+      var(--color-primary),
+      var(--color-base),
+      var(--color-third)
+    );
     background-size: 800% 800%;
     content: '';
   }
