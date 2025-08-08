@@ -9,7 +9,7 @@ const buildURLWithParams = (
 export const paths = Object.freeze({
   home: () => buildURLWithParams('/'),
   posts: (params?: { keyword?: string; tag?: string; series?: string }) => {
-    return buildURLWithParams('/list', params)
+    return buildURLWithParams('/list/', params)
   },
   treepedia: () => buildURLWithParams('/treepedia'),
 })

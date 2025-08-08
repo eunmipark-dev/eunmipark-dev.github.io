@@ -2,12 +2,12 @@ import * as React from 'react'
 
 import './MainLayout.scss'
 import { GlobalPortal } from '@components/GlobalPortal'
-import { SNBOpenIcon } from '@components/float'
+// import { SNBOpenIcon } from '@components/float'
 import { PostSearchLayer } from '@components/search'
 import { ScrollProgress } from '@components/ui/progress'
 import { Footer } from '@module/footer'
 import { Header } from '@module/header'
-import { SideBarNavigation } from '@module/side'
+// import { SideBarNavigation } from '@module/side'
 
 interface MainLayoutProps {
   children: React.ReactNode
@@ -19,11 +19,11 @@ export default function MainLayout({ children, className }: MainLayoutProps) {
     <GlobalPortal.Provider>
       <main className={`main-layout ${className}`}>
         <Header />
-        <SNBOpenIcon />
+        {/* <SNBOpenIcon /> */}
         <ScrollProgress />
         <div className="content">{children}</div>
         <Footer />
-        <SideBarNavigation />
+        {/* <SideBarNavigation /> */}
         <PostSearchLayer />
       </main>
     </GlobalPortal.Provider>

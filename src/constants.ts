@@ -3,7 +3,7 @@ import { paths } from '@utils/url.util'
 
 export const HOST_DOMAIN = 'weezip.treefeely.com'
 export const OWNER_EMAIL = 'weezip.ethan@gmail.com'
-export const CONFIG_THEME_KEY = 'weezip-theme'
+export const CONFIG_THEME_KEY = 'blog-theme'
 
 export const enum Themes {
   LIGHT = 'light',

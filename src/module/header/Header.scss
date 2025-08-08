@@ -1,4 +1,5 @@
 @use '@scss/abstracts/mixin' as *;
+@use '@scss/abstracts/variables' as *;
 
 header {
   position: sticky;
@@ -6,11 +7,18 @@ header {
   top: 0;
   width: 100%;
   flex-direction: row;
-  padding: 8px 0;
-  background-color: var(--color-background-opacity);
+  padding: 18px 0;
+  //background-color: var(--color-background-opacity);
   transition-duration: 0.2s;
+  border-bottom: 1px solid var(--color-line-1);
+  backdrop-filter: blur(15px);
+  @include responsive-padding(15px, 30px, 50px);
 
-  @include flex-center;
+  // 너비가 $breakpoint-desktop 이상일때 패딩 100
+  // $breakpoint-tablet ~ $breakpoint-desktop 일때 패딩 50
+  // $breakpoint-mobile 일때 패딩 20
+
+  @include flex-space-between;
 
   .title {
     @include ellipsis;
@@ -70,6 +78,33 @@ header {
     svg {
       cursor: pointer;
     }
+
+    .menu-button {
+      display: none; // 기본 숨김
+    }
+
+    .menu {
+      display: none; // 기본 숨김, 데스크톱에서 활성화
+
+      .menu-list {
+        margin: 0;
+        padding: 0;
+
+        li {
+          margin-left: 16px;
+
+          a {
+            color: var(--color-font);
+            text-decoration: none;
+            font-weight: 500;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
   }
 
   @include animation-fade-in(300ms);
@@ -83,6 +118,97 @@ header {
 
     .logo-box {
       display: none;
+    }
+  }
+
+  // 데스크톱 (768px 이상): 메뉴 가로 나열
+  @include desktop {
+    .right-box {
+      .menu-button {
+        display: none;
+      }
+
+      .menu {
+        display: flex;
+        //position: static;
+        background: none;
+        border: none;
+        padding: 0;
+
+        .menu-list {
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  // 모바일 (768px 이하): 메뉴 버튼 표시
+  @include mobile {
+    .right-box {
+      .menu-button {
+        display: flex;
+      }
+
+      .menu {
+        display: none; // 모바일에서는 숨김
+      }
+    }
+  }
+}
+
+/* 메뉴 오버레이 스타일 (모바일 드롭다운) */
+div.menu-overlay {
+  display: none;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-grey-2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  overflow: hidden;
+  transition:
+    max-height 0.5s ease-in-out,
+    opacity 0.5s ease-in-out,
+    transform 0.5s ease-in-out;
+
+  &.open {
+    display: block;
+    max-height: 400px;
+    opacity: 1;
+    //transform: translateY(0);
+  }
+
+  &:not(.open) {
+    max-height: 0;
+    opacity: 0;
+    //transform: translateY(-20px);
+  }
+
+  .menu-list {
+    list-style: none;
+    margin: 0;
+    //padding: 16px 20px;
+
+    .menu {
+      &:hover {
+        background-color: var(--color-selection-bg);
+      }
+
+      a {
+        padding: 12px 0;
+        margin: 0px 15px;
+        display: block;
+        width: calc(100% - 30px);
+        font-size: 1.1rem;
+        color: var(--color-font);
+        text-decoration: none;
+        border-bottom: 1px solid var(--color-grey-2);
+        &:last-child {
+          //padding-bottom: 0px;
+          border-bottom: none;
+        }
+      }
     }
   }
 }

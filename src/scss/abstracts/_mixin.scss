@@ -1,5 +1,23 @@
 @use './variables' as *;
 
+@mixin responsive-padding($mobile, $tablet, $desktop) {
+  /* 3) mobile (기본) */
+  padding-left: $mobile;
+  padding-right: $mobile;
+
+  /* 2) tablet ~ desktop-1 */
+  @media (min-width: $breakpoint-tablet) and (max-width: calc(#{$breakpoint-desktop} - 0.02px)) {
+    padding-left: $tablet;
+    padding-right: $tablet;
+  }
+
+  /* 1) desktop 이상 */
+  @media (min-width: $breakpoint-desktop) {
+    padding-left: $desktop;
+    padding-right: $desktop;
+  }
+}
+
 @mixin mobile {
   @media (max-width: #{$breakpoint-mobile}) {
     @content;
@@ -34,6 +52,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@mixin flex-space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 @mixin animation-fade-in($duration) {
