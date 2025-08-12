@@ -1,8 +1,5 @@
 import React, { FunctionComponent, useMemo, useState } from 'react'
 import styled from '@emotion/styled'
-import CategoryList, { CategoryListProps } from '@components/main/CategoryList'
-import Introduction from '@components/main/Introduction'
-import PostList from '@components/main/PostList'
 import { graphql } from 'gatsby'
 import { PostListItemType } from '@appTypes/postItem.type'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
@@ -10,8 +7,12 @@ import queryString, { ParsedQuery } from 'query-string'
 import Template from '@components/common/Template'
 import { LatestPost } from '@components/post/latest'
 import { MainLayout } from '@layout/main'
-
 import '@scss/global.scss'
+import { aboutData } from '@data/about_data'
+import SkillsSection from '@components/main/SkillsSection'
+import ProjectsSection from '@components/main/ProjectsSection'
+import PhotosSection from '@components/main/PhotosSection'
+import CompanySection from '@components/main/CompanySection' // 새 컴포넌트
 
 type IndexPageProps = {
   location: {
@@ -34,20 +35,18 @@ type IndexPageProps = {
   }
 }
 
-const TabMenu = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 5px 0px 16px 0px;
+const Container = styled.div`
+  padding: 20px;
+  background-color: #f0f4f8; /* Redis 느낌의 부드러운 배경 */
+  color: #333;
+`
 
-  span {
-    margin: 0 8px;
-    cursor: pointer;
-    font-weight: bold;
-
-    &.active {
-      text-decoration: underline;
-    }
-  }
+const Section = styled.section`
+  margin-bottom: 40px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Redis 스타일 그림자 */
 `
 
 const IndexPage: FunctionComponent<IndexPageProps> = function ({
@@ -62,8 +61,6 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
     },
   },
 }) {
-  const [activeTab, setActiveTab] = useState<'about' | 'post'>('about')
-
   const parsed: ParsedQuery<string> = queryString.parse(search)
   const selectedCategory: string =
     typeof parsed.category !== 'string' || !parsed.category
@@ -78,28 +75,23 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
         url={siteUrl}
         image={publicURL}
       >
-        <TabMenu>
-          <span
-            className={activeTab === 'about' ? 'active' : ''}
-            onClick={() => setActiveTab('about')}
-          >
-            about
-          </span>
-          <span
-            className={activeTab === 'post' ? 'active' : ''}
-            onClick={() => setActiveTab('post')}
-          >
-            post
-          </span>
-        </TabMenu>
-
-        {activeTab === 'about' && (
-          <>
-            <Introduction profileImage={gatsbyImageData} />
+        <Container>
+          <Section>
+            <PhotosSection imageData={gatsbyImageData} />
+          </Section>
+          <Section>
+            <SkillsSection skills={aboutData.skills} />
+          </Section>
+          <Section>
+            <CompanySection companies={aboutData.companies} />
+          </Section>
+          <Section>
+            <ProjectsSection projects={aboutData.projects} />
+          </Section>
+          <Section>
             <LatestPost />
-          </>
-        )}
-        {activeTab === 'post' && <></>}
+          </Section>
+        </Container>
       </Template>
     </MainLayout>
   )

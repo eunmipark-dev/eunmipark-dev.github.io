@@ -29,7 +29,6 @@ export const useNotion = () => {
   `)
 
   const memoized = useMemo(() => {
-    console.log('data?.allNotion', data?.allNotion)
     const nodes: NotionNode[] = data?.allNotion?.edges?.map(
       ({ node }: { node: NotionNode }) => {
         return node
@@ -39,12 +38,25 @@ export const useNotion = () => {
       },
     )
 
-    console.log('nodess:', nodes)
-
-    console.log(
-      'node_1:',
-      nodes.filter((node: NotionNode) => node.title.startsWith('/post')),
+    const profile: NotionNode | undefined = nodes.find((node: NotionNode) =>
+      node.title.startsWith('/profile'),
     )
+
+    const processedProfile: NotionNode | undefined = profile
+      ? {
+          ...profile,
+          notionColumn: parseNotionColumn(
+            notionNodeToJson(profile) as NotionChildrenType,
+          ),
+        }
+      : undefined
+
+    //console.log(processedProfile?.notionColumn)
+    console.log(notionNodeToJson(profile))
+    const njson = notionNodeToJson(profile)
+    // for(let i=0; i<(njson?.children.length??1); i++) {
+    //     console.log(njson.)
+    // }
 
     const posts: NotionNode[] = nodes
       .filter((node: NotionNode) => node.title.startsWith('/post'))
@@ -58,8 +70,6 @@ export const useNotion = () => {
           Date.parse(b.notionColumn.createdTime) -
           Date.parse(a.notionColumn.createdTime),
       )
-
-    console.log('post2:', posts)
 
     const { everyPostsTags, everyPostsSeries } = classifyPost(posts)
 

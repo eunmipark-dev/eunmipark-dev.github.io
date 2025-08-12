@@ -17,13 +17,8 @@ export const notionNodeToJson = (
 export const parseNotionColumn = (
   content: NotionChildrenType,
 ): NotionColumn => {
-  console.log(content)
   const { id, URL, remark, created_date, edited_date, series, tag } =
     content.properties
-
-  console.log(content.properties)
-
-  console.log('id', id)
 
   return {
     id: id.unique_id.number || -1,

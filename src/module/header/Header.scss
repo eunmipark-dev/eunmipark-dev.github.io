@@ -48,11 +48,11 @@ header {
     border: 0;
     background: none;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: color 0.2s;
 
     @include hover-fine {
       border-radius: 4px;
-      background-color: var(--color-secondary);
+      color: var(--color-secondary) !important;
     }
   }
 
@@ -69,8 +69,6 @@ header {
   }
 
   .right-box {
-    position: absolute;
-    right: 10px;
     display: flex;
     align-items: center;
     column-gap: 8px;
@@ -80,15 +78,19 @@ header {
     }
 
     .menu-button {
-      display: none; // 기본 숨김
+      //display: none; // 기본 숨김
     }
 
     .menu {
-      display: none; // 기본 숨김, 데스크톱에서 활성화
+      //display: none; // 기본 숨김, 데스크톱에서 활성화
 
       .menu-list {
         margin: 0;
         padding: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 1.2rem;
 
         li {
           margin-left: 16px;
@@ -118,41 +120,6 @@ header {
 
     .logo-box {
       display: none;
-    }
-  }
-
-  // 데스크톱 (768px 이상): 메뉴 가로 나열
-  @include desktop {
-    .right-box {
-      .menu-button {
-        display: none;
-      }
-
-      .menu {
-        display: flex;
-        //position: static;
-        background: none;
-        border: none;
-        padding: 0;
-
-        .menu-list {
-          flex-direction: row;
-          align-items: center;
-        }
-      }
-    }
-  }
-
-  // 모바일 (768px 이하): 메뉴 버튼 표시
-  @include mobile {
-    .right-box {
-      .menu-button {
-        display: flex;
-      }
-
-      .menu {
-        display: none; // 모바일에서는 숨김
-      }
     }
   }
 }
@@ -188,7 +155,7 @@ div.menu-overlay {
   .menu-list {
     list-style: none;
     margin: 0;
-    //padding: 16px 20px;
+    font-size: 1.2rem;
 
     .menu {
       &:hover {
@@ -200,7 +167,7 @@ div.menu-overlay {
         margin: 0px 15px;
         display: block;
         width: calc(100% - 30px);
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         color: var(--color-font);
         text-decoration: none;
         border-bottom: 1px solid var(--color-grey-2);

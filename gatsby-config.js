@@ -33,6 +33,7 @@ module.exports = {
           '@appTypes': 'src/types',
           '@utils': 'src/utils',
           '@images': 'src/images',
+          '@data': 'src/data',
           '@src': 'src',
         },
         extensions: ['js', 'jsx', 'ts', 'tsx'],
