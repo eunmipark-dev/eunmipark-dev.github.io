@@ -1,18 +1,14 @@
-import React, { FunctionComponent, useMemo, useState } from 'react'
+import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 import { graphql } from 'gatsby'
-import { PostListItemType } from '@appTypes/postItem.type'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 import queryString, { ParsedQuery } from 'query-string'
 import Template from '@components/common/Template'
-import { LatestPost } from '@components/post/latest'
 import { MainLayout } from '@layout/main'
 import '@scss/global.scss'
 import { aboutData } from '@data/about_data'
-import SkillsSection from '@components/main/SkillsSection'
-import ProjectsSection from '@components/main/ProjectsSection'
-import PhotosSection from '@components/main/PhotosSection'
-import CompanySection from '@components/main/CompanySection' // 새 컴포넌트
+import SectionComponent from '@components/main/SectionComponent'
+import SkillsContent from '@components/main/SkillsContent'
+import CompaniesContent from '@components/main/CompaniesContent'
 
 type IndexPageProps = {
   location: {
@@ -26,27 +22,23 @@ type IndexPageProps = {
         siteUrl: string
       }
     }
-    file: {
-      childImageSharp: {
-        gatsbyImageData: IGatsbyImageData
-      }
-      publicURL: string
-    }
   }
 }
 
 const Container = styled.div`
-  padding: 20px;
-  background-color: #f0f4f8; /* Redis 느낌의 부드러운 배경 */
+  padding: 40px 20px;
+  background-color: #f9f9f9;
   color: #333;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
 `
 
-const Section = styled.section`
+const Intro = styled.div`
+  text-align: center;
   margin-bottom: 40px;
-  padding: 20px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Redis 스타일 그림자 */
+  font-size: 1.2rem;
+  color: #555;
 `
 
 const IndexPage: FunctionComponent<IndexPageProps> = function ({
@@ -54,10 +46,6 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
   data: {
     site: {
       siteMetadata: { title, description, siteUrl },
-    },
-    file: {
-      childImageSharp: { gatsbyImageData },
-      publicURL,
     },
   },
 }) {
@@ -69,28 +57,17 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
 
   return (
     <MainLayout className="index-layout">
-      <Template
-        title={title}
-        description={description}
-        url={siteUrl}
-        image={publicURL}
-      >
+      <Template title={title} description={description} url={siteUrl}>
         <Container>
-          <Section>
-            <PhotosSection imageData={gatsbyImageData} />
-          </Section>
-          <Section>
-            <SkillsSection skills={aboutData.skills} />
-          </Section>
-          <Section>
-            <CompanySection companies={aboutData.companies} />
-          </Section>
-          <Section>
-            <ProjectsSection projects={aboutData.projects} />
-          </Section>
-          <Section>
-            <LatestPost />
-          </Section>
+          <Intro>
+            Hi, I'm Eunmi Park. I'm developing a map-based data visualization.
+          </Intro>
+          <SectionComponent title="Skills">
+            <SkillsContent skills={aboutData.skills} />
+          </SectionComponent>
+          <SectionComponent title="Companies">
+            <CompaniesContent companies={aboutData.companies} />
+          </SectionComponent>
         </Container>
       </Template>
     </MainLayout>
@@ -98,7 +75,6 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
 }
 
 export default IndexPage
-
 export const getPostList = graphql`
   query getPostList {
     site {
@@ -107,12 +83,6 @@ export const getPostList = graphql`
         description
         siteUrl
       }
-    }
-    file(name: { eq: "profile" }) {
-      childImageSharp {
-        gatsbyImageData(width: 120, height: 120)
-      }
-      publicURL
     }
   }
 `
