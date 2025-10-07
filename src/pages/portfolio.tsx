@@ -59,27 +59,21 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
       : parsed.category
 
   return (
-    <MainLayout className="index-layout">
-      <Template title={title} description={description} url={siteUrl}>
-        <Container>
-          <Intro>
-            Hi, I'm Eunmi Park. I'm developing a map-based data visualization.
-          </Intro>
-          <MapComponent
-            center={[127.0, 37.5]} // 서울 좌표
-            zoom={10}
-            styleUrl="https://demotiles.maplibre.org/style.json"
-            height="500px" // 높이 조정 (100vh 대신 고정값으로 테스트)
-          />
-          <SectionComponent title="Skills">
-            <SkillsContent skills={aboutData.skills} />
-          </SectionComponent>
-          <SectionComponent title="Companies">
-            <CompaniesContent companies={aboutData.companies} />
-          </SectionComponent>
-        </Container>
-      </Template>
-    </MainLayout>
+    <div>
+      <Intro>shakit</Intro>
+      <MapComponent
+        center={[127.0, 37.5]} // 서울 좌표
+        zoom={10}
+        styleUrl="https://demotiles.maplibre.org/style.json"
+        height="500px" // 높이 조정 (100vh 대신 고정값으로 테스트)
+      />
+      <SectionComponent title="Skills">
+        <SkillsContent skills={aboutData.skills} />
+      </SectionComponent>
+      <SectionComponent title="Companies">
+        <CompaniesContent companies={aboutData.companies} />
+      </SectionComponent>
+    </div>
   )
 }
 
