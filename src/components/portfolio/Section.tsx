@@ -10,37 +10,32 @@ const Section: React.FC<SectionProps> = ({ title, children }) => {
   return (
     <section
       css={css`
-        padding: 2rem;
+        padding: 1rem; // 패딩 줄임
         background: var(--section-bg);
-        margin: 1rem 0;
-        border-radius: 8px;
-        transition:
-          transform 0.2s ease,
-          box-shadow 0.2s ease;
-
+        margin: 0.5rem 0;
+        border-radius: 4px; // 라운드 줄임
+        transition: box-shadow 0.2s ease;
         &:hover {
-          transform: translateY(-5px); /* Lift on hover */
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
         @media (min-width: 1024px) {
-          padding: 3rem; /* More padding on wide screens */
-          max-width: 1200px;
-          margin: 2rem auto; /* Center on wide screens */
-        }
-
-        @media (max-width: 768px) {
-          padding: 1rem;
+          padding: 1.5rem;
+          max-width: 800px; // 넓은 화면 센터, 이미지처럼 좁게
+          margin: 1rem auto;
         }
       `}
     >
-      <h2
-        css={css`
-          margin-bottom: 1rem;
-        `}
-      >
-        {title}
-      </h2>
+      <div>
+        <h2
+          css={css`
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            color: red;
+          `}
+        >
+          {title}aa
+        </h2>
+      </div>
       {children}
     </section>
   )

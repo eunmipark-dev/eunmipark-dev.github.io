@@ -3,9 +3,13 @@ import { useThemeStore } from '@store/themeStore'
 import { css } from '@emotion/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons' // Add these icons to your dependencies if needed
+import { IconProp } from '@fortawesome/fontawesome-svg-core' // Add this import
 
 const Header: React.FC = () => {
   const { theme, toggleTheme } = useThemeStore()
+
+  const moonIcon = faMoon as IconProp // Cast here
+  const sunIcon = faSun as IconProp // Cast here
 
   return (
     <header
@@ -49,7 +53,10 @@ const Header: React.FC = () => {
           }
         `}
       >
-        <FontAwesomeIcon icon={theme === 'light' ? faMoon : faSun} size="lg" />
+        <FontAwesomeIcon
+          icon={theme === 'light' ? moonIcon : sunIcon}
+          size="lg"
+        />
       </button>
     </header>
   )
