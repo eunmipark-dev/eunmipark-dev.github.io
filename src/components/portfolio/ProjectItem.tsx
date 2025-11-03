@@ -1,6 +1,6 @@
 import React from 'react'
 import { css } from '@emotion/react'
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image' // 타입 추가
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 
 interface ProjectItemProps {
   title: string
@@ -22,16 +22,20 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
   return (
     <div
       css={css`
-        background: #2d3748; // 다크 모드 카드 배경 (이미지 맞춤), var(--section-bg) 사용 가능
+        background: var(--project-card-bg);
         border-radius: 8px;
         padding: 0.5rem;
-        transition: transform 0.2s ease;
-        width: 100%; // 좁은 화면 full
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+        width: 100%;
+        box-shadow: var(--shadow);
         @media (min-width: 768px) {
-          width: 48%; // 넓은 화면 2열
+          width: calc(50% - 0.5rem); /* 2-column with gap */
         }
         &:hover {
           transform: scale(1.02);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
       `}
     >
@@ -40,7 +44,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
         alt={title}
         css={css`
           width: 100%;
-          height: 150px;
+          height: 140px; /* Slightly shorter to match image */
           border-radius: 4px 4px 0 0;
           object-fit: cover;
         `}
@@ -48,7 +52,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
       <h3
         css={css`
           font-size: 1rem;
-          margin: 0.5rem 0;
+          margin: 0.5rem 0 0.25rem;
           color: var(--accent-color);
         `}
       >
@@ -57,23 +61,25 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
       <p
         css={css`
           font-size: 0.8rem;
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.25rem;
+          color: var(--text-secondary);
         `}
       >
         {description}
       </p>
       <p
         css={css`
-          font-size: 0.8rem;
-          color: #a0aec0;
+          font-size: 0.75rem;
+          color: var(--text-tertiary);
+          margin-bottom: 0.25rem;
         `}
       >
         {tech.join(' · ')}
       </p>
       <p
         css={css`
-          font-size: 0.8rem;
-          color: #a0aec0;
+          font-size: 0.75rem;
+          color: var(--text-tertiary);
           margin-bottom: 0.5rem;
         `}
       >
@@ -82,14 +88,15 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
       <a
         href={link}
         css={css`
-          background: #4a5568; // 버튼 색상 (이미지 다크 모드 맞춤)
-          color: #fff;
+          background: var(--button-bg);
+          color: var(--button-text);
           padding: 0.3rem 0.6rem;
           border-radius: 4px;
           text-decoration: none;
           font-size: 0.8rem;
+          transition: background 0.2s ease;
           &:hover {
-            background: #2d3748;
+            background: var(--button-hover);
           }
         `}
       >

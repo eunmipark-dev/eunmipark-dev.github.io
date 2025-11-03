@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 import maplibregl, { Map } from 'maplibre-gl'
-import 'maplibre-gl/dist/maplibre-gl.css'
+//import 'maplibre-gl/dist/maplibre-gl.css'
 
 interface MapComponentProps {
   center: [number, number] // [경도, 위도]
@@ -13,7 +13,7 @@ interface MapComponentProps {
 
 const MapContainer = styled.div<{ width?: string; height?: string }>`
   width: ${({ width }) => width || '100%'};
-  height: ${({ height }) => height || '100vh'};
+  height: ${({ height }) => height || '100%'};
 `
 
 const MapComponent: React.FC<MapComponentProps> = ({
