@@ -26,7 +26,7 @@ export default function Header() {
   const [status, setStatus] = useState('')
   const [postTitle, setPostTitle] = useState('')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+  const [isMobile, setIsMobile] = useState(false) // 초기값을 false로 변경 (SSR 안전)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
@@ -41,6 +41,28 @@ export default function Header() {
   }, [])
 
   useEffect(() => {
+    // 클라이언트 측에서만 실행되도록 체크
+    if (typeof window === 'undefined') return
+
+    const handleResize = () => {
+      const newIsMobile = window.innerWidth < 768
+      if (newIsMobile !== isMobile) {
+        setIsMobile(newIsMobile)
+        if (!newIsMobile && isMenuOpen) setIsMenuOpen(false)
+      }
+    }
+
+    // 초기 설정
+    handleResize()
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [isMenuOpen, isMobile]) // 의존성 배열 유지
+
+  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         buttonRef.current &&
@@ -51,22 +73,12 @@ export default function Header() {
       }
     }
 
-    const handleResize = () => {
-      const newIsMobile = window.innerWidth < 768
-      if (newIsMobile !== isMobile) {
-        setIsMobile(newIsMobile)
-        if (!newIsMobile && isMenuOpen) setIsMenuOpen(false)
-      }
-    }
-
     document.addEventListener('mousedown', handleClickOutside)
-    window.addEventListener('resize', handleResize)
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
-      window.removeEventListener('resize', handleResize)
     }
-  }, [isMenuOpen, isMobile])
+  }, []) // 빈 배열로 한 번만 실행
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev)
 

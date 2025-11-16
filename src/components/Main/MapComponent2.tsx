@@ -231,50 +231,50 @@ const MapComponent2: React.FC<MapComponentProps> = ({
         })
         map.current.addLayer(threeLayer.current as AnyLayer)
 
-        map.current.addSource('national-park', {
-          type: 'geojson',
-          data: {
-            type: 'FeatureCollection',
-            features: [
-              {
-                type: 'Feature',
-                geometry: {
-                  type: 'Point',
-                  coordinates: [127.0558, 37.5144],
-                },
-              },
-              {
-                type: 'Feature',
-                geometry: {
-                  type: 'Point',
-                  coordinates: [127.0558, 37.5145],
-                },
-              },
-            ],
-          },
-        })
+        // map.current.addSource('national-park', {
+        //   type: 'geojson',
+        //   data: {
+        //     type: 'FeatureCollection',
+        //     features: [
+        //       {
+        //         type: 'Feature',
+        //         geometry: {
+        //           type: 'Point',
+        //           coordinates: [127.0558, 37.5144],
+        //         },
+        //       },
+        //       {
+        //         type: 'Feature',
+        //         geometry: {
+        //           type: 'Point',
+        //           coordinates: [127.0558, 37.5145],
+        //         },
+        //       },
+        //     ],
+        //   },
+        // })
 
-        map.current.addLayer({
-          id: 'park-boundary',
-          type: 'fill',
-          source: 'national-park',
-          paint: {
-            'fill-color': '#888888',
-            'fill-opacity': 0.4,
-          },
-          filter: ['==', '$type', 'Polygon'],
-        })
+        // map.current.addLayer({
+        //   id: 'park-boundary',
+        //   type: 'fill',
+        //   source: 'national-park',
+        //   paint: {
+        //     'fill-color': '#888888',
+        //     'fill-opacity': 0.4,
+        //   },
+        //   filter: ['==', '$type', 'Polygon'],
+        // })
 
-        map.current.addLayer({
-          id: 'park-volcanoes',
-          type: 'circle',
-          source: 'national-park',
-          paint: {
-            'circle-radius': 6,
-            'circle-color': '#B42222',
-          },
-          filter: ['==', '$type', 'Point'],
-        })
+        // map.current.addLayer({
+        //   id: 'park-volcanoes',
+        //   type: 'circle',
+        //   source: 'national-park',
+        //   paint: {
+        //     'circle-radius': 6,
+        //     'circle-color': '#B42222',
+        //   },
+        //   filter: ['==', '$type', 'Point'],
+        // })
       }
     })
 
