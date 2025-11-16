@@ -12,8 +12,8 @@ require('dotenv').config()
 
 module.exports = {
   siteMetadata: {
-    title: `Eunmi's Blog`,
-    description: `Eunmi's Blog`,
+    title: `SilverMi`,
+    description: `SilverMi's Blog`,
     author: `Eunmi`,
     siteUrl: 'https://eunmipark-dev.github.io/', // 배포 후 변경 예정
   },

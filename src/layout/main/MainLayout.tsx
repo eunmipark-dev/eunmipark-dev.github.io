@@ -5,7 +5,6 @@ import { GlobalPortal } from '@components/GlobalPortal'
 // import { SNBOpenIcon } from '@components/float'
 import { PostSearchLayer } from '@components/search'
 import { ScrollProgress } from '@components/ui/progress'
-import { Footer } from '@module/footer'
 import { Header } from '@module/header'
 // import { SideBarNavigation } from '@module/side'
 
@@ -22,7 +21,6 @@ export default function MainLayout({ children, className }: MainLayoutProps) {
         {/* <SNBOpenIcon /> */}
         <ScrollProgress />
         <div className="content">{children}</div>
-        <Footer />
         {/* <SideBarNavigation /> */}
         <PostSearchLayer />
       </main>

@@ -90,8 +90,8 @@ export default function Header() {
             <StaticImage
               alt="Blog Logo"
               className="logo"
-              src="../../images/blog_logo.png"
-              width={75}
+              src="../../images/logo.png"
+              width={100}
             />
           </div>
         </Linker>

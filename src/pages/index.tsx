@@ -5,13 +5,6 @@ import queryString, { ParsedQuery } from 'query-string'
 import Template from '@components/common/Template'
 import { MainLayout } from '@layout/main'
 import '@scss/global.scss'
-import { aboutData } from '@data/about_data'
-import SectionComponent from '@components/main/SectionComponent'
-import SkillsContent from '@components/main/SkillsContent'
-import CompaniesContent from '@components/main/CompaniesContent'
-import maplibregl from 'maplibre-gl' // 라이브러리 임포트
-import 'maplibre-gl/dist/maplibre-gl.css' // CSS 임포트 (필수: 지도 스타일링)
-import MapComponent from '@components/main/MapComponent'
 
 type IndexPageProps = {
   location: {
@@ -28,20 +21,94 @@ type IndexPageProps = {
   }
 }
 
-const Container = styled.div`
-  padding: 40px 20px;
-  background-color: #f9f9f9;
-  color: #333;
-  max-width: 800px;
-  margin: 0 auto;
-  font-family: 'Inter', sans-serif;
+// SCSS를 Emotion styled로 변환 (블루 테마 적용)
+const MainContainer = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 `
 
-const Intro = styled.div`
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: 1.2rem;
-  color: #555;
+const CardContainer = styled.div`
+  --blue-border-color: #007bff; // Main blue color
+  --blue-light-color: oklch(
+    from var(--blue-border-color) l c h / 0.8
+  ); // Lighter variant
+  --blue-dark-color: rgba(255, 255, 255, 0.1);
+  --gradient-color: oklch(
+    from var(--blue-border-color) 0.3 calc(c / 2) h / 0.2
+  ); // Gradient for background
+  --color-neutral-900: oklch(0.185 0 0); // Neutral dark background
+  --color-text: oklch(0.985 0 0); // Light text color
+  --color-description: rgba(255, 255, 255, 0.5); // Semi-transparent description
+
+  position: relative;
+  width: 90%;
+  height: 500px;
+  padding: 2px;
+  border-radius: 24px;
+  background: linear-gradient(
+    -30deg,
+    transparent,
+    var(--gradient-color),
+    transparent
+  );
+  border: 1px solid var(--blue-dark-color);
+  box-shadow: 0 0 8px rgba(var(--blue-border-color), 0.6);
+  color: var(--color-text);
+`
+
+const ContentContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  overflow: hidden;
+`
+
+const ContentTop = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 48px;
+  padding-bottom: 16px;
+  height: 100%;
+`
+
+const ContentBottom = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 48px;
+  padding-top: 16px;
+`
+
+const Title = styled.p`
+  font-size: 36px;
+  font-weight: 500;
+  //margin-top: auto;
+`
+
+const Description = styled.p`
+  opacity: 0.5;
+`
+
+const Divider = styled.hr`
+  margin-top: auto;
+  border: none;
+  height: 1px;
+  background-color: currentColor;
+  opacity: 0.1;
+  mask-image: linear-gradient(to right, transparent, black, transparent);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black,
+    transparent
+  );
 `
 
 const IndexPage: FunctionComponent<IndexPageProps> = function ({
@@ -61,23 +128,25 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
   return (
     <MainLayout className="index-layout">
       <Template title={title} description={description} url={siteUrl}>
-        <Container>
-          <Intro>
-            Hi, I'm Eunmi Park. I'm developing a map-based data visualization.
-          </Intro>
-          <MapComponent
-            center={[127.0, 37.5]} // 서울 좌표
-            zoom={10}
-            styleUrl="https://demotiles.maplibre.org/style.json"
-            height="500px" // 높이 조정 (100vh 대신 고정값으로 테스트)
-          />
-          <SectionComponent title="Skills">
-            <SkillsContent skills={aboutData.skills} />
-          </SectionComponent>
-          <SectionComponent title="Companies">
-            <CompaniesContent companies={aboutData.companies} />
-          </SectionComponent>
-        </Container>
+        <MainContainer className="main-container">
+          <CardContainer className="card-container">
+            <ContentContainer className="content-container">
+              <ContentTop className="content-top">
+                <Title className="title">
+                  Hi, I'm SilverMi — <br /> a frontend developer focused on GIS
+                  and HD-map development.
+                </Title>
+              </ContentTop>
+              <Divider className="divider" />
+              <ContentBottom className="content-bottom">
+                <Description className="description">
+                  Thank You for Visiting My Blog 💘 <div></div> 📧
+                  pomvvv@gmail.com{' '}
+                </Description>
+              </ContentBottom>
+            </ContentContainer>
+          </CardContainer>
+        </MainContainer>
       </Template>
     </MainLayout>
   )

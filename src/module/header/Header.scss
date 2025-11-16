@@ -13,11 +13,6 @@ header {
   border-bottom: 1px solid var(--color-line-1);
   backdrop-filter: blur(15px);
   @include responsive-padding(15px, 30px, 50px);
-
-  // 너비가 $breakpoint-desktop 이상일때 패딩 100
-  // $breakpoint-tablet ~ $breakpoint-desktop 일때 패딩 50
-  // $breakpoint-mobile 일때 패딩 20
-
   @include flex-space-between;
 
   .title {
