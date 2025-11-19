@@ -32,7 +32,7 @@ export default function TitleDescription({
   }
   return (
     <div className="title-description">
-      {isShowTag && <Tags tag={tag} useLink={useTagLink} />}
+      {isShowTag && tag && <Tags tag={tag} useLink={useTagLink} />}
       <div className="title-description__right">
         {useCopy && (
           <IconCopyLink

@@ -6,6 +6,7 @@ export interface Properties {
   edited_date: DateProperty
   series: SelectProperty
   tag: MultiSelectProperty
+  image: Media
 }
 
 interface Parent {
@@ -50,6 +51,7 @@ export interface NotionColumn {
   notionUrl: string
   tag?: MultiSelect
   series?: Select
+  image?: Media
 }
 
 export enum BlockType {
@@ -66,6 +68,7 @@ export enum BlockType {
   BOOKMARK = 'bookmark',
   CODE = 'code',
   IMAGE = 'image',
+  MEDIA = 'media',
   DIVIDER = 'divider',
 }
 
@@ -120,6 +123,10 @@ export interface CodeChildren extends Children {
 export interface ImageChildren extends Children {
   type: BlockType.IMAGE
   image: Image
+}
+export interface MediaChildren extends Children {
+  type: BlockType.MEDIA
+  media: Media
 }
 export interface DividerChildren extends Children {
   type: BlockType.DIVIDER
@@ -260,11 +267,11 @@ export interface Code {
 
 export interface Image {
   caption: Caption
-  file: ImageFile
+  file: File
   type: 'file'
 }
 
-export interface ImageFile {
+export interface File {
   expiry_time: string
   url: string
 }
@@ -273,4 +280,16 @@ export interface PropDate {
   end: string
   start: string
   time_zone?: string
+}
+
+export interface MediaFile {
+  file: File
+  name: string
+  type: 'file'
+}
+
+export interface Media {
+  files: MediaFile[]
+  id: string
+  type: 'files'
 }

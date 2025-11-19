@@ -9,7 +9,7 @@ export default function TagsFilter() {
   return (
     !!everyPostsTags?.length && (
       <div className="tag-filter">
-        <p className="title">태그</p>
+        <p className="title">TAG</p>
         <div className="tag-filter__items">
           {everyPostsTags.map(name => (
             <Tag key={name} name={name} useLink />

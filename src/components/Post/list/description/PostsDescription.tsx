@@ -1,14 +1,18 @@
-import React from 'react';
+import React from 'react'
 
-import './PostsDescription.scss';
+import './PostsDescription.scss'
 
 interface PostsDescriptionProps {
-  isLoading: boolean;
-  length: number;
-  filteredText: string;
+  isLoading: boolean
+  length: number
+  filteredText: string
 }
 
-export default function PostsDescription({ isLoading, length, filteredText }: PostsDescriptionProps) {
+export default function PostsDescription({
+  isLoading,
+  length,
+  filteredText,
+}: PostsDescriptionProps) {
   return (
     <div className={`posts-description ${isLoading ? 'loading' : ''}`}>
       <div className="count-box ellipsis">
@@ -18,8 +22,9 @@ export default function PostsDescription({ isLoading, length, filteredText }: Po
             <span> | </span>
           </strong>
         )}
-        총 <span>{length}</span>건{filteredText !== '전체' && '의 검색결과'}
+        A total of <span>{length}</span>
+        {filteredText !== '전체' && ' search '} result
       </div>
     </div>
-  );
+  )
 }

@@ -4,15 +4,10 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 
 import '@scss/global.scss'
-import '@scss/pages/PostsPage.scss'
+import '@scss/pages/PostsPage.scss' // 기존 스타일 재사용 가능, 필요 시 조정
 
 import SEO from '@components/header/SEO'
-import {
-  Posts,
-  PostsDescription,
-  PostsFilter,
-  //   ResetDivider,
-} from '@components/post'
+import { PostsDescription, PostsFilter, ResetDivider } from '@components/post'
 import { LoadContainer } from '@components/ui'
 import { useNotion } from '@hooks/useNotion'
 import { MainLayout } from '@layout/main'
@@ -20,14 +15,14 @@ import { includesString } from '@utils/common.util'
 import { getParamValue, paths } from '@utils/url.util'
 
 import { NotionNode } from '@appTypes/notion.type'
-import Images from '@components/post/list/Images'
+import Images from '@components/post/list/Images' // 새로 추가된 Images 컴포넌트 import
 
 export const Head: HeadFC = () => {
   return (
     <SEO
       description={`열심히 글을 작성해 봅시다.`}
       pathname={paths.posts()}
-      title={`SilverMi: Post List`}
+      title={`SilverMi: Post Image List`}
     >
       <link
         href={`https://weezip.treefeely.com${paths.posts()}`}
@@ -37,7 +32,7 @@ export const Head: HeadFC = () => {
   )
 }
 
-const ListPage: React.FC<PageProps> = ({ location }) => {
+const ImageListPage: React.FC<PageProps> = ({ location }) => {
   const params = new URLSearchParams(location.search)
   const { posts } = useNotion()
 
@@ -79,7 +74,7 @@ const ListPage: React.FC<PageProps> = ({ location }) => {
       _list = posts
     }
 
-    console.log('lisT:::', list)
+    console.log('lisT:::', _list) // 오타 수정: list -> _list
 
     setList(_list)
   }
@@ -96,8 +91,7 @@ const ListPage: React.FC<PageProps> = ({ location }) => {
     <MainLayout className="posts-layout">
       <section className="posts-layout__header">
         <PostsFilter />
-        {/* <ResetDivider /> */}
-        <br />
+        <ResetDivider />
         <PostsDescription
           filteredText={filterText}
           isLoading={isLoading}
@@ -106,10 +100,9 @@ const ListPage: React.FC<PageProps> = ({ location }) => {
       </section>
       {
         <LoadContainer isError={false} isLoading={isLoading}>
-          {/* 리스트 시작 */}
-          {/* <Posts list={list} /> */}
+          {/* 이미지 리스트 시작 */}
           <Images list={list} />
-          {/* 리스트 끝 */}
+          {/* 이미지 리스트 끝 */}
         </LoadContainer>
       }
     </MainLayout>
@@ -133,4 +126,4 @@ export const postQuery = graphql`
   }
 `
 
-export default ListPage
+export default ImageListPage

@@ -1,0 +1,20 @@
+@use '@scss/abstracts/mixin' as *;
+
+.images-container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(200px, 1fr)
+  ); // 반응형 그리드: 최소 200px, 자동 맞춤
+  gap: 1rem; // 아이템 간 간격
+  width: 100%;
+  padding: 0;
+  margin: 0;
+
+  @include mobile {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(150px, 1fr)
+    ); // 모바일에서 더 작은 최소 너비
+  }
+}

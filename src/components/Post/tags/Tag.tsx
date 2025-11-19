@@ -18,8 +18,6 @@ export default function Tag({ name, useLink = false, ...rest }: TagProps) {
       label: `${name} 목록으로 ${ARIA_LABEL.MOVE}`,
       ...rest,
     },
-    <span className={`tag-item ${useLink ? 'linked' : 'normal'}`}>
-      #{name}
-    </span>,
+    <span className={`tag-item ${useLink ? 'linked' : 'normal'}`}>{name}</span>,
   )
 }

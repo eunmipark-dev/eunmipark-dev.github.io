@@ -1,0 +1,89 @@
+@use '@scss/abstracts/mixin' as *;
+
+.image-item {
+  box-sizing: border-box;
+  border-radius: 8px; // 카드 전체 모서리 둥글게
+  border: 1px solid #aaaaac;
+  background-color: var(--color-background);
+  cursor: pointer;
+  transition:
+    border 0.2s,
+    color 0.2s;
+  overflow: hidden; // 전체 오버플로 방지
+
+  a {
+    color: var(--color-font) 의 검색결과;
+    display: block;
+    height: 100%;
+  }
+
+  @include hover-fine {
+    border: 1px solid var(--color-base);
+    background-color: var(--color-grey-6);
+
+    p {
+      color: var(--color-base);
+    }
+  }
+
+  &__thumbnail-wrapper {
+    width: 100%;
+    height: 200px; // 고정 높이로 모든 이미지 영역 동일
+    overflow: hidden;
+    background-color: #f0f0f0;
+    border-top-left-radius: 8px; // 이미지 위쪽 왼쪽 모서리 둥글게
+    border-top-right-radius: 8px; // 이미지 위쪽 오른쪽 모서리 둥글게
+    border-bottom-left-radius: 0; // 아래쪽 각지게
+    border-bottom-right-radius: 0; // 아래쪽 각지게
+    margin: 0; // 모든 여백 제거
+  }
+
+  &__thumbnail {
+    width: 100%;
+    height: 100%; // wrapper를 여백 없이 가득 채움 (가로/세로 꽉 차게)
+    object-fit: cover; // 비율 유지하며 커버 (여백 없이 가득 채움)
+    margin: 0; // 모든 여백 제거
+    padding: 0; // 패딩 제거
+  }
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0; // 플레이스홀더도 여백 없이 가득
+    margin: 0;
+    padding: 0;
+  }
+
+  &__info {
+    width: 100%;
+    //background-color: #ffffff63; // 플레이스홀더도 여백 없이 가득
+    margin: 0;
+    padding: 1rem;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    //padding: 1rem; // 측면 패딩 유지 (상단/하단 여백 최소화)
+    padding-top: 0; // 이미지와 내용 사이 여백 완전 제거
+    margin: 0; // 모든 여백 제거
+
+    @include mobile {
+      padding: 0.75rem;
+      padding-top: 0;
+      margin: 0;
+    }
+    p {
+      margin: 0 0 12px; // 상단 margin 0으로 이미지 직후 바로 시작
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.75rem;
+      word-break: keep-all;
+
+      @include mobile {
+        font-size: 1rem;
+        line-height: 1.5rem;
+      }
+    }
+  }
+}

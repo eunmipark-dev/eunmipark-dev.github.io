@@ -101,7 +101,7 @@ export default function Header() {
           </p>
         )}
         <div className="right-box">
-          {theme === 'light' ? (
+          {/* {theme === 'light' ? (
             <button
               aria-label={`현재 라이트 모드. 다크 모드로 ${ARIA_LABEL.EDIT}`}
               className="icon-box"
@@ -124,7 +124,7 @@ export default function Header() {
             onClick={handleShowSearch}
           >
             <IconSearch />
-          </button>
+          </button> */}
           {isMobile && (
             <button
               ref={buttonRef}

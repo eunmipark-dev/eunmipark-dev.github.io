@@ -52,15 +52,18 @@ export const useNotion = () => {
       : undefined
 
     //console.log(processedProfile?.notionColumn)
-    console.log(notionNodeToJson(profile))
+    //console.log(notionNodeToJson(profile))
     const njson = notionNodeToJson(profile)
     // for(let i=0; i<(njson?.children.length??1); i++) {
     //     console.log(njson.)
     // }
 
+    console.log('nodes', nodes)
+
     const posts: NotionNode[] = nodes
       .filter((node: NotionNode) => node.title.startsWith('/post'))
       .map((node: NotionNode) => {
+        console.log('node', node)
         const json = notionNodeToJson(node)
         node.notionColumn = parseNotionColumn(json as NotionChildrenType)
         return node
@@ -70,6 +73,9 @@ export const useNotion = () => {
           Date.parse(b.notionColumn.createdTime) -
           Date.parse(a.notionColumn.createdTime),
       )
+
+    console.log('post', posts)
+    console.log('--------')
 
     const { everyPostsTags, everyPostsSeries } = classifyPost(posts)
 

@@ -1,9 +1,15 @@
 @use '@scss/abstracts/mixin' as *;
 
 .tag-item {
+  border-radius: 8px;
+  border: 1px solid var(--color-grey-6);
+  background-color: var(--color-grey-6);
+  padding: 2px 6px;
+
   &.linked {
     padding: 4px 12px;
     border-radius: 16px;
+
     background-color: var(--color-grey-6);
     font-size: 1rem;
 

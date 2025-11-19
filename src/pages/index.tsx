@@ -27,7 +27,6 @@ const MainContainer = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
 `
 
 const CardContainer = styled.div`
@@ -36,17 +35,19 @@ const CardContainer = styled.div`
     from var(--blue-border-color) l c h / 0.8
   ); // Lighter variant
   --blue-dark-color: rgba(255, 255, 255, 0.1);
+
   --gradient-color: oklch(
     from var(--blue-border-color) 0.3 calc(c / 2) h / 0.2
   ); // Gradient for background
   --color-neutral-900: oklch(0.185 0 0); // Neutral dark background
-  --color-text: oklch(0.985 0 0); // Light text color
+  --color-text: oklch(0.1 0 0); // Light text color
   --color-description: rgba(255, 255, 255, 0.5); // Semi-transparent description
 
   position: relative;
   width: 90%;
   height: 500px;
   padding: 2px;
+  margin-top: 20px;
   border-radius: 24px;
   background: linear-gradient(
     -30deg,
@@ -54,7 +55,7 @@ const CardContainer = styled.div`
     var(--gradient-color),
     transparent
   );
-  border: 1px solid var(--blue-dark-color);
+  border: 1px solid rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 8px rgba(var(--blue-border-color), 0.6);
   color: var(--color-text);
 `
@@ -93,7 +94,7 @@ const Title = styled.p`
 `
 
 const Description = styled.p`
-  opacity: 0.5;
+  opacity: 0.9;
 `
 
 const Divider = styled.hr`
@@ -140,8 +141,7 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
               <Divider className="divider" />
               <ContentBottom className="content-bottom">
                 <Description className="description">
-                  Thank You for Visiting My Blog 💘 <div></div> 📧
-                  pomvvv@gmail.com{' '}
+                  Thank You for Visiting My Blog 💘 📧 pomvvv@gmail.com
                 </Description>
               </ContentBottom>
             </ContentContainer>
