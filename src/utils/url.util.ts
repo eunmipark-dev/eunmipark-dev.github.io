@@ -11,7 +11,7 @@ export const paths = Object.freeze({
   posts: (params?: { keyword?: string; tag?: string; series?: string }) => {
     return buildURLWithParams('/list/', params)
   },
-  treepedia: () => buildURLWithParams('/treepedia'),
+  practice: () => buildURLWithParams('/practice'),
 })
 
 export const getParamValue = (params: URLSearchParams, key: string) => {

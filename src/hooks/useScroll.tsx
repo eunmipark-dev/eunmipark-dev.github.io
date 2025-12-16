@@ -13,7 +13,6 @@ const useScroll = (
   const handleScroll = throttle(() => {
     const currentScroll = window.scrollY
     setScrollY(window.scrollY)
-
     setIsScrollingUp(currentScroll < lastScrollTop.current)
     lastScrollTop.current = currentScroll
 

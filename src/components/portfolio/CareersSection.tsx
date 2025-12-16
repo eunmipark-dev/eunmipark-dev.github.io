@@ -23,7 +23,7 @@ const CareersSection: React.FC = () => {
       >
         {
           <MapComponent2
-            center={[127.0558, 37.5144]} // 서울 좌표
+            center={[128.41451, 35.64276]} // 서울 좌표
             zoom={18}
             styleUrl="https://api.maptiler.com/maps/cb21b21b-bd8a-4755-93cf-8c913992e9fe/style.json?key=aICEdYI8vikL3swSJyKg"
             accessToken="cGsuZXlKMUlqb2laMlZ1ZG5acklpd2lZU0k2SW1OcVpUY3hNelp6TnpBMWRtVXlkMjFyTm5rM2FIY3pNVElpZlEuMmZGVkNsOG4zaHIxQkN4a3l4czFsdw=="

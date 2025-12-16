@@ -1,20 +1,29 @@
 import { LngLat, Map, MercatorCoordinate, Point } from 'mapbox-gl'
 import {
+  AdditiveBlending,
   AmbientLight,
+  AxesHelper,
   Camera,
+  CameraHelper,
   DirectionalLight,
   DirectionalLightHelper,
+  FrontSide,
   MathUtils,
   Matrix4,
+  Mesh,
+  MeshPhongMaterial,
   PerspectiveCamera,
   Raycaster,
   Scene,
+  ShaderMaterial,
+  TorusGeometry,
   Vector3,
   WebGLRenderer,
   WebGLRenderTarget,
 } from 'three'
 //@ts-ignore
 import { GLTFLoader, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
+import * as dat from 'dat.gui'
 
 interface layerProps {
   map: Map
@@ -37,6 +46,11 @@ const scale: number = 5.4184e-8
 const deviceCount: number = 1000
 
 const SQRT3 = Math.sqrt(3)
+
+// add object
+let material = new MeshPhongMaterial({ color: 0x00ff00 })
+let torusGeometry = new TorusGeometry(5, 1.5, 16, 100)
+let torusObject = new Mesh(torusGeometry, material)
 
 export default class {
   id = 'traffic-layer'
@@ -108,11 +122,10 @@ export default class {
     loader.load(
       'https://docs.mapbox.com/mapbox-gl-js/assets/34M_17/34M_17.gltf',
       (gltf: any) => {
-        const { x, y, z } = getPositionFromLongLat([127.0558, 37.5144])
+        //const { x, y, z } = getPositionFromLongLat([127.0558, 37.5144])
+        const { x, y, z } = getPositionFromLongLat([128.41451, 35.64276])
         gltf.scene.position.set(x, y, z)
-        this.scene.add(gltf.scene)
-        console.log(gltf.scene)
-        console.log('ff')
+        //        this.scene.add(gltf.scene)
       },
     )
 
@@ -129,6 +142,87 @@ export default class {
     })
 
     this.renderer.autoClear = false
+
+    const gui = new dat.GUI()
+    const cameraFolder = gui.addFolder('Three.js Camera')
+
+    console.log(this.camera.position)
+
+    cameraFolder.add(this.camera.position, 'x', -10, 10).listen() // 실시간 listen으로 업데이트
+    cameraFolder.add(this.camera.position, 'y', -10, 10).listen()
+    cameraFolder.add(this.camera.position, 'z', -10, 10).listen()
+    cameraFolder.open()
+
+    gui.domElement.style.position = 'absolute'
+    gui.domElement.style.top = '10px'
+    gui.domElement.style.right = '10px'
+
+    const { x, y, z } = getPositionFromLongLat([128.41451, 35.64376])
+    torusObject.position.set(x, y, z)
+
+    // **Glow Shader Material**
+    let glowMaterial = new ShaderMaterial({
+      uniforms: {
+        //viewVector: { value: this.camera.position },
+        u_time: { value: 0.0 },
+      },
+      vertexShader: vertexShader(),
+      fragmentShader: fragmentShader(),
+      side: FrontSide,
+      blending: AdditiveBlending,
+      transparent: true,
+    })
+    function vertexShader() {
+      return `
+                    varying float intensity;
+                    
+                    void main() {
+                        vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
+                        gl_Position = projectionMatrix * modelViewPosition;
+
+                        vec3 vNormal = normalize( normalMatrix * normal ); // 정점 법선벡터
+                        vec3 vNormel = normalize( vec3( modelViewMatrix * vec4( position, 1.0 ) ) ); // 정점 위치벡터 (모델 중심에서 나가는 방향향)
+                        intensity = pow(( 1.0 - dot( vNormal, vNormel ) ) * 0.5, 5.0);
+                    }`
+    }
+    function fragmentShader() {
+      return `
+                    varying float intensity;
+                    uniform float u_time; // 시간을 위한 유니폼
+                    
+
+                    void main() {
+                         //vec3 glowColor = vec3(0.3, 1.0, 0.3); // 형광 녹색
+                        //float pulse = 0.5 * sin(u_time * 2.0) + 0.5;
+                        float pulse = 0.25 * sin(u_time * 2.0) + 0.75;
+                         float r = 0.5 + 0.5 * sin(u_time * 2.0);
+                        float g = 0.5 + 0.5 * sin(u_time * 2.5 + 1.0);
+                        float b = 0.5 + 0.5 * sin(u_time * 3.0 + 2.0);
+
+                        vec3 glowColor = vec3(r, g, b); // RGB 값이 시간에 따라 변화
+                        gl_FragColor = vec4(glowColor, intensity * pulse); // intensity 값에 따라 밝기 조절
+                    }`
+    }
+
+    // **Glow Mesh (약간 더 큰 토러스)**
+    let torusGlowGeometry = new TorusGeometry(5, 2.5, 16, 100)
+    let torusGlowMesh = new Mesh(torusGlowGeometry, glowMaterial)
+    torusObject.add(torusGlowMesh)
+    //torusObject.glow = torusGlowMesh;
+
+    this.scene.add(torusObject)
+
+    // ./add object
+
+    // add camera helper
+    // 축 헬퍼: 세계 좌표계 확인 (크기 1000은 테스트값, scale에 맞춰 조정)
+    const axesHelper = new AxesHelper(1000) // 빨강(X), 초록(Y), 파랑(Z)
+    this.scene.add(axesHelper)
+
+    // 카메라 헬퍼: 카메라의 프러스텀(시야 범위) 시각화
+    const cameraHelper = new CameraHelper(this.camera)
+    this.scene.add(cameraHelper)
+    // ./add camera helper
 
     this.mbox.on('zoom', this.onCameraChanged.bind(this))
   }
@@ -235,8 +329,6 @@ export default class {
             .invert()
             .decompose(camera.position, camera.quaternion, camera.scale)*/
 
-    //console.log(camera.position)
-
     const rad = MathUtils.degToRad(mbox.getBearing() + 30)
 
     light.position.set(-Math.sin(rad), -Math.cos(rad), SQRT3).normalize()
@@ -245,7 +337,8 @@ export default class {
     //this.renderHUD()
     this.renderer.render(this.scene, this.camera)
     this.mbox.triggerRepaint()
-    // console.log('reemmememem')
+
+    //console.log(torusObject.position.toArray())
   }
 
   pickObject_(p: Point) {}

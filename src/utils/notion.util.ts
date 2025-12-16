@@ -17,12 +17,8 @@ export const notionNodeToJson = (
 export const parseNotionColumn = (
   content: NotionChildrenType,
 ): NotionColumn => {
-  console.log('content.properties,', content.properties)
-
-  const { id, URL, remark, created_date, edited_date, series, tag, image } =
+  const { id, URL, remark, created_date, edited_date, series, tag } =
     content.properties
-
-  console.log('url', image.files[0]?.file.url)
 
   return {
     id: id.unique_id.number || -1,
@@ -32,7 +28,6 @@ export const parseNotionColumn = (
     notionUrl: URL.url || '',
     tag: tag.multi_select || [],
     series: series.select,
-    image: image,
   }
 }
 

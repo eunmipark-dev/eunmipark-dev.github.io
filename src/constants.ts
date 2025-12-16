@@ -1,8 +1,7 @@
 import { IconHome, IconList } from '@components/icon'
 import { paths } from '@utils/url.util'
 
-export const HOST_DOMAIN = 'weezip.treefeely.com'
-export const OWNER_EMAIL = 'weezip.ethan@gmail.com'
+export const OWNER_EMAIL = 'pomvvv@gmail.com'
 export const CONFIG_THEME_KEY = 'blog-theme'
 
 export const enum Themes {
@@ -26,13 +25,18 @@ export const enum ARIA_LABEL {
 }
 
 export const enum NAMES {
-  SITE = 'Weezip',
-  TREEFEELY = 'Treefeely',
+  SITE = 'SilverMi',
 }
 
 export const SIDE_MENUS = Object.freeze([
   { url: paths.home(), title: 'About', isOutLink: false, Icon: IconHome },
   { url: paths.posts(), title: 'Posts', isOutLink: false, Icon: IconList },
+  //   {
+  //     url: paths.practice(),
+  //     title: 'Practice',
+  //     isOutLink: false,
+  //     Icon: IconList,
+  //   },
 ])
 
 export const RECOMMEND_TAGS = Object.freeze([

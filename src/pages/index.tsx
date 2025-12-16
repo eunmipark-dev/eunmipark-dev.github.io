@@ -94,7 +94,7 @@ const Title = styled.p`
 `
 
 const Description = styled.p`
-  opacity: 0.9;
+  opacity: 0.5;
 `
 
 const Divider = styled.hr`

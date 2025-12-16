@@ -25,7 +25,7 @@ export const Head: HeadFC = () => {
       title={`SilverMi: Post Image List`}
     >
       <link
-        href={`https://weezip.treefeely.com${paths.posts()}`}
+        href={`https://eunmipark-dev.github.io${paths.posts()}`}
         rel="canonical"
       />
     </SEO>
@@ -73,8 +73,6 @@ const ImageListPage: React.FC<PageProps> = ({ location }) => {
     } else {
       _list = posts
     }
-
-    console.log('lisT:::', _list) // 오타 수정: list -> _list
 
     setList(_list)
   }

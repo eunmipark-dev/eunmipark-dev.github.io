@@ -11,7 +11,7 @@ import {
   Posts,
   PostsDescription,
   PostsFilter,
-  //   ResetDivider,
+  ResetDivider,
 } from '@components/post'
 import { LoadContainer } from '@components/ui'
 import { useNotion } from '@hooks/useNotion'
@@ -30,7 +30,7 @@ export const Head: HeadFC = () => {
       title={`SilverMi: Post List`}
     >
       <link
-        href={`https://weezip.treefeely.com${paths.posts()}`}
+        href={`https://eunmipark-dev.github.io${paths.posts()}`}
         rel="canonical"
       />
     </SEO>
@@ -79,8 +79,6 @@ const ListPage: React.FC<PageProps> = ({ location }) => {
       _list = posts
     }
 
-    console.log('lisT:::', list)
-
     setList(_list)
   }
 
@@ -107,8 +105,8 @@ const ListPage: React.FC<PageProps> = ({ location }) => {
       {
         <LoadContainer isError={false} isLoading={isLoading}>
           {/* 리스트 시작 */}
-          {/* <Posts list={list} /> */}
-          <Images list={list} />
+          <Posts list={list} />
+          {/* <Images list={list} /> */}
           {/* 리스트 끝 */}
         </LoadContainer>
       }

@@ -10,6 +10,8 @@
 
 require('dotenv').config()
 
+const siteUrl = 'https://eunmipark-dev.github.io'
+
 module.exports = {
   siteMetadata: {
     title: `SilverMi`,
@@ -118,11 +120,43 @@ module.exports = {
         stripQueryString: true,
       },
     },
-    'gatsby-plugin-sitemap',
+    /* 노션 사이트맵 설정 */
+
+    // 'gatsby-plugin-sitemap',
+    // {
+    //   resolve: 'gatsby-plugin-robots-txt',
+    //   options: {
+    //     policy: [{ userAgent: '*', allow: '/' }],
+    //   },
+    // },
     {
-      resolve: 'gatsby-plugin-robots-txt',
+      resolve: `gatsby-plugin-sitemap`,
       options: {
-        policy: [{ userAgent: '*', allow: '/' }],
+        query: `{
+          allNotion {
+            edges {
+              node {
+                id
+                title
+              }
+            }
+          }
+        }`,
+        resolveSiteUrl: () => siteUrl,
+        resolvePages: ({ allNotion: { edges: allPages } }) => {
+          return allPages
+            .filter(edge => edge.node.title)
+            .map(edge => {
+              return { ...edge.node, path: edge.node.title }
+            })
+        },
+        serialize: props => {
+          return {
+            url: `${props.title}`,
+            changefreq: 'daily',
+            priority: 0.7,
+          }
+        },
       },
     },
     {

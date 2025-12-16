@@ -13,6 +13,7 @@ interface NImageProps {
 
 export default function NImage({ imageBlock }: NImageProps) {
   const { id, image } = imageBlock
+
   const url = image
     ? `https://treefeely.notion.site/image/${encodeURIComponent(image.file.url)}?table=block&id=${id}&cache=v2`
     : ``

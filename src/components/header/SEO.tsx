@@ -1,25 +1,36 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import { useSiteMetadata } from '@hooks/useSiteMetadata';
-import { NAMES } from '@src/constants';
+import { useSiteMetadata } from '@hooks/useSiteMetadata'
+import { NAMES } from '@src/constants'
 
 interface SEOProps {
-  title?: string;
-  description?: string;
-  pathname?: string;
-  thumbnail?: string;
-  children?: React.ReactNode;
-  keywords?: string[];
+  title?: string
+  description?: string
+  pathname?: string
+  thumbnail?: string
+  children?: React.ReactNode
+  keywords?: string[]
 }
 
-const SEO = ({ title, description, pathname, thumbnail, children, keywords = [] }: SEOProps) => {
-  const { title: defaultTitle, description: defaultDescription, siteUrl } = useSiteMetadata();
+const SEO = ({
+  title,
+  description,
+  pathname,
+  thumbnail,
+  children,
+  keywords = [],
+}: SEOProps) => {
+  const {
+    title: defaultTitle,
+    description: defaultDescription,
+    siteUrl,
+  } = useSiteMetadata()
 
   const seo = {
     title: `${title ? `${title} | ` : ``}${defaultTitle}`,
     description: description || defaultDescription,
     url: `${siteUrl}${pathname || ``}`,
-  };
+  }
 
   return (
     <>
@@ -27,7 +38,7 @@ const SEO = ({ title, description, pathname, thumbnail, children, keywords = [] 
       <meta content="index,follow" name="robots" />
       <meta content="kr" name="content-language" />
       <meta content={seo.description} name="description" />
-      <meta content={['treefeely', 'weezip', ...keywords]?.join(', ')} name="keywords" />
+      <meta content={['sillvermi', ...keywords]?.join(', ')} name="keywords" />
 
       <meta content={'website'} property="og:type" />
       <meta content={seo.title} property="og:title" />
@@ -56,7 +67,7 @@ const SEO = ({ title, description, pathname, thumbnail, children, keywords = [] 
       )}
       {children}
     </>
-  );
-};
+  )
+}
 
-export default SEO;
+export default SEO
