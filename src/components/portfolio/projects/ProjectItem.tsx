@@ -1,14 +1,13 @@
 import React from 'react'
 import { css } from '@emotion/react'
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 
 interface ProjectItemProps {
   title: string
   description: string
-  image: IGatsbyImageData
+  image: string // 이제 문자열 URL (GatsbyImageData 대신)
   tech: string[]
   date: string
-  link: string
+  link: string | undefined
 }
 
 const ProjectItem: React.FC<ProjectItemProps> = ({
@@ -39,8 +38,8 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
         }
       `}
     >
-      <GatsbyImage
-        image={image}
+      <img
+        src={image} // 일반 img 태그로 GIF 지원
         alt={title}
         css={css`
           width: 100%;
@@ -48,6 +47,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
           border-radius: 4px 4px 0 0;
           object-fit: cover;
         `}
+        loading="lazy" // lazy loading 추가 (성능 최적화)
       />
       <h3
         css={css`

@@ -37,8 +37,6 @@ const MapComponent2: React.FC<MapComponentProps> = ({
   const threeScene = useRef<THREE.Scene | null>(null)
   const threeLayer = useRef<ThreeLayer | null>(null)
 
-  console.log('11')
-
   useEffect(() => {
     if (!mapContainer.current) return // 컨테이너가 없으면 초기화 방지
     if (map.current) return // 지도가 이미 초기화된 경우 중복 방지

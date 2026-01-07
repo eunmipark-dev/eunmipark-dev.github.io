@@ -10,17 +10,15 @@ const Section: React.FC<SectionProps> = ({ title, children }) => {
   return (
     <section
       css={css`
-        padding: 3.5rem 2.5rem;
+        //padding: 1.5rem 0rem;
         /* background: var(--section-bg); */
-        margin: 0.5rem 0;
+        //margin: 0.5rem 0; /* 기존 여백 유지 (필요 시 조정) */
         border-radius: 8px;
         transition: box-shadow 0.2s ease;
         /* box-shadow: var(--shadow); */
 
         @media (min-width: 1024px) {
-          padding: 3.5rem;
-          max-width: 1000px;
-          margin: 1rem auto;
+          padding: 3.5rem 0rem;
         }
       `}
     >

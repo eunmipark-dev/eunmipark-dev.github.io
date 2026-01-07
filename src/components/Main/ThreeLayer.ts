@@ -2,6 +2,7 @@ import { LngLat, Map, MercatorCoordinate, Point } from 'mapbox-gl'
 import {
   AdditiveBlending,
   AmbientLight,
+  ArrowHelper,
   AxesHelper,
   Camera,
   CameraHelper,
@@ -17,9 +18,11 @@ import {
   Scene,
   ShaderMaterial,
   TorusGeometry,
+  Vector2,
   Vector3,
   WebGLRenderer,
   WebGLRenderTarget,
+  Color,
 } from 'three'
 //@ts-ignore
 import { GLTFLoader, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
@@ -52,6 +55,50 @@ let material = new MeshPhongMaterial({ color: 0x00ff00 })
 let torusGeometry = new TorusGeometry(5, 1.5, 16, 100)
 let torusObject = new Mesh(torusGeometry, material)
 
+// **Glow Shader Material**
+let glowMaterial = new ShaderMaterial({
+  uniforms: {
+    //viewVector: { value: this.camera.position },
+    u_time: { value: 0.0 },
+  },
+  vertexShader: vertexShader(),
+  fragmentShader: fragmentShader(),
+  side: FrontSide,
+  blending: AdditiveBlending,
+  transparent: true,
+})
+function vertexShader() {
+  return `
+                    varying float intensity;
+                    
+                    void main() {
+                        vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
+                        gl_Position = projectionMatrix * modelViewPosition;
+
+                        vec3 vNormal = normalize( normalMatrix * normal ); // 정점 법선벡터
+                        vec3 vNormel = normalize( vec3( modelViewMatrix * vec4( position, 1.0 ) ) ); // 정점 위치벡터 (모델 중심에서 나가는 방향향)
+                        intensity = pow(( 1.0 - dot( vNormal, vNormel ) ) * 0.5, 5.0);
+                    }`
+}
+function fragmentShader() {
+  return `
+                    varying float intensity;
+                    uniform float u_time; // 시간을 위한 유니폼
+                    
+
+                    void main() {
+                         //vec3 glowColor = vec3(0.3, 1.0, 0.3); // 형광 녹색
+                        //float pulse = 0.5 * sin(u_time * 2.0) + 0.5;
+                        float pulse = 0.25 * sin(u_time * 2.0) + 0.75;
+                         float r = 0.5 + 0.5 * sin(u_time * 2.0);
+                        float g = 0.5 + 0.5 * sin(u_time * 2.5 + 1.0);
+                        float b = 0.5 + 0.5 * sin(u_time * 3.0 + 2.0);
+
+                        vec3 glowColor = vec3(r, g, b); // RGB 값이 시간에 따라 변화
+                        gl_FragColor = vec4(glowColor, intensity * pulse); // intensity 값에 따라 밝기 조절
+                    }`
+}
+
 export default class {
   id = 'traffic-layer'
   type = 'custom'
@@ -73,6 +120,10 @@ export default class {
 
   canvas: HTMLCanvasElement
   canvasLabel: HTMLCanvasElement
+
+  rayHelper?: ArrowHelper
+
+  selectedObject: Mesh | null = null
 
   constructor(props: layerProps) {
     const { map, modelOrigin } = props
@@ -130,6 +181,7 @@ export default class {
     )
 
     const { _fov, width, height } = map.transform
+
     this.camera = new PerspectiveCamera(
       MathUtils.radToDeg(_fov),
       width / height,
@@ -146,8 +198,6 @@ export default class {
     const gui = new dat.GUI()
     const cameraFolder = gui.addFolder('Three.js Camera')
 
-    console.log(this.camera.position)
-
     cameraFolder.add(this.camera.position, 'x', -10, 10).listen() // 실시간 listen으로 업데이트
     cameraFolder.add(this.camera.position, 'y', -10, 10).listen()
     cameraFolder.add(this.camera.position, 'z', -10, 10).listen()
@@ -160,54 +210,11 @@ export default class {
     const { x, y, z } = getPositionFromLongLat([128.41451, 35.64376])
     torusObject.position.set(x, y, z)
 
-    // **Glow Shader Material**
-    let glowMaterial = new ShaderMaterial({
-      uniforms: {
-        //viewVector: { value: this.camera.position },
-        u_time: { value: 0.0 },
-      },
-      vertexShader: vertexShader(),
-      fragmentShader: fragmentShader(),
-      side: FrontSide,
-      blending: AdditiveBlending,
-      transparent: true,
-    })
-    function vertexShader() {
-      return `
-                    varying float intensity;
-                    
-                    void main() {
-                        vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
-                        gl_Position = projectionMatrix * modelViewPosition;
-
-                        vec3 vNormal = normalize( normalMatrix * normal ); // 정점 법선벡터
-                        vec3 vNormel = normalize( vec3( modelViewMatrix * vec4( position, 1.0 ) ) ); // 정점 위치벡터 (모델 중심에서 나가는 방향향)
-                        intensity = pow(( 1.0 - dot( vNormal, vNormel ) ) * 0.5, 5.0);
-                    }`
-    }
-    function fragmentShader() {
-      return `
-                    varying float intensity;
-                    uniform float u_time; // 시간을 위한 유니폼
-                    
-
-                    void main() {
-                         //vec3 glowColor = vec3(0.3, 1.0, 0.3); // 형광 녹색
-                        //float pulse = 0.5 * sin(u_time * 2.0) + 0.5;
-                        float pulse = 0.25 * sin(u_time * 2.0) + 0.75;
-                         float r = 0.5 + 0.5 * sin(u_time * 2.0);
-                        float g = 0.5 + 0.5 * sin(u_time * 2.5 + 1.0);
-                        float b = 0.5 + 0.5 * sin(u_time * 3.0 + 2.0);
-
-                        vec3 glowColor = vec3(r, g, b); // RGB 값이 시간에 따라 변화
-                        gl_FragColor = vec4(glowColor, intensity * pulse); // intensity 값에 따라 밝기 조절
-                    }`
-    }
-
     // **Glow Mesh (약간 더 큰 토러스)**
     let torusGlowGeometry = new TorusGeometry(5, 2.5, 16, 100)
     let torusGlowMesh = new Mesh(torusGlowGeometry, glowMaterial)
     torusObject.add(torusGlowMesh)
+    torusObject.userData.name = 'test-object'
     //torusObject.glow = torusGlowMesh;
 
     this.scene.add(torusObject)
@@ -216,15 +223,105 @@ export default class {
 
     // add camera helper
     // 축 헬퍼: 세계 좌표계 확인 (크기 1000은 테스트값, scale에 맞춰 조정)
-    const axesHelper = new AxesHelper(1000) // 빨강(X), 초록(Y), 파랑(Z)
-    this.scene.add(axesHelper)
+    //const axesHelper = new AxesHelper(1000) // 빨강(X), 초록(Y), 파랑(Z)
+    //this.scene.add(axesHelper)
 
     // 카메라 헬퍼: 카메라의 프러스텀(시야 범위) 시각화
-    const cameraHelper = new CameraHelper(this.camera)
-    this.scene.add(cameraHelper)
+    //const cameraHelper = new CameraHelper(this.camera)
+    //this.scene.add(cameraHelper)
     // ./add camera helper
 
     this.mbox.on('zoom', this.onCameraChanged.bind(this))
+
+    // raycast on hover (with throttle)
+    const mouse = new Vector2()
+
+    // 간단한 throttle 함수 (lodash 대신 vanilla JS)
+    const throttle = (func: Function, delay: number) => {
+      let lastCall = 0
+      return (...args: any[]) => {
+        const now = new Date().getTime()
+        if (now - lastCall < delay) return
+        lastCall = now
+        return func(...args)
+      }
+    }
+
+    const checkObjects = throttle((e: any) => {
+      mouse.x = (e.point.x / this.mbox.transform.width) * 2 - 1
+      mouse.y = 1 - (e.point.y / this.mbox.transform.height) * 2
+
+      // Set raycaster from camera
+      this.raycaster.setFromCamera(mouse, this.camera)
+
+      // Intersect with scene objects (recursive: true to check children)
+      const intersects = this.raycaster.intersectObjects(
+        this.scene.children,
+        true,
+      )
+
+      // Filter intersects to only include objects with userData.name === 'test-object'
+      const filteredIntersects = intersects.filter(
+        intersect => intersect.object.userData.name === 'test-object',
+      )
+
+      let needsRepaint = false
+
+      if (filteredIntersects.length > 0) {
+        const intersect = filteredIntersects[0]
+        const object = intersect.object as Mesh // Assuming it's a Mesh
+
+        if (object !== this.selectedObject) {
+          // Restore previous object's color if exists
+          if (this.selectedObject) {
+            const prevMaterial = this.selectedObject
+              .material as MeshPhongMaterial
+            if (this.selectedObject.userData.originalColor) {
+              prevMaterial.color.copy(
+                this.selectedObject.userData.originalColor,
+              )
+            }
+            needsRepaint = true
+          }
+
+          // Save original color if not already saved
+          const currentMaterial = object.material as MeshPhongMaterial
+          if (!object.userData.originalColor) {
+            object.userData.originalColor = currentMaterial.color.clone()
+          }
+
+          // Change color to highlight (e.g., red)
+          currentMaterial.color.set(0xff0000)
+          this.selectedObject = object
+          needsRepaint = true
+        }
+      } else {
+        // No intersect: Restore previous object's color
+        if (this.selectedObject) {
+          const prevMaterial = this.selectedObject.material as MeshPhongMaterial
+          if (this.selectedObject.userData.originalColor) {
+            prevMaterial.color.copy(this.selectedObject.userData.originalColor)
+          }
+          this.selectedObject = null
+          needsRepaint = true
+        }
+      }
+
+      // Optimized repaint: Only trigger if color changed
+      if (needsRepaint) {
+        this.mbox.triggerRepaint()
+      }
+    }, 100) // 100ms throttle (부하에 따라 200~500ms로 늘려봐)
+
+    this.mbox.on('mousemove', checkObjects)
+
+    // 마우스 아웃 시 helper 제거 (옵션)
+    this.mbox.on('mouseout', () => {
+      if (this.rayHelper) {
+        this.scene.remove(this.rayHelper)
+        this.rayHelper = undefined
+      }
+    })
   }
 
   onCameraChanged() {
@@ -252,23 +349,18 @@ export default class {
         tileSize,
         scale,
         elevation,
+        _nearZ,
+        _farZ,
       } = mbox.transform,
       halfFov = _fov / 2
-    /* cameraToSeaLevelDistance = (_camera.position[2] * worldSize) / Math.cos(_pitch),
-            horizonDistance = cameraToSeaLevelDistance / _horizonShift,
-            undergroundDistance = (1000 * pixelsPerMeter) / Math.cos(_pitch),
-            farZ = (camera.far = Math.max(
-                horizonDistance,
-                cameraToSeaLevelDistance + undergroundDistance,
-            )),
-            nearZ = (camera.near = height / 50),
-            halfHeight = Math.tan(halfFov) * nearZ,
-            halfWidth = (halfHeight * width) / height*/
 
     const groundAngle = Math.PI / 2 + _pitch
+
     const pitchAngle = Math.cos(Math.PI / 2 - _pitch)
-    //const worldSize = tileSize * scale
+
     const fovAboveCenter = _fov * (0.5 + centerOffset.y / height)
+
+    glowMaterial.uniforms.u_time.value += 0.02
 
     // Adjust distance to MSL by the minimum possible elevation visible on screen,
     // this way the far plane is pushed further in the case of negative elevation.
@@ -278,6 +370,7 @@ export default class {
     const cameraToSeaLevelDistance =
       (_camera.position[2] * worldSize - minElevationInPixels) /
       Math.cos(_pitch)
+
     const topHalfSurfaceDistance =
       (Math.sin(fovAboveCenter) * cameraToSeaLevelDistance) /
       Math.sin(
@@ -319,15 +412,24 @@ export default class {
         ),
       )
     //ok
-    camera.projectionMatrix = m.multiply(l)
-    /*camera.projectionMatrix
-            .makePerspective(-halfWidth, halfWidth, halfHeight, -halfHeight, nearZ, farZ)
-            .clone()
-            .invert()
-            .multiply(m)
-            .multiply(l)
-            .invert()
-            .decompose(camera.position, camera.quaternion, camera.scale)*/
+    //camera.projectionMatrix = m.multiply(l)
+    camera.projectionMatrix
+      .makePerspective(
+        -halfWidth,
+        halfWidth,
+        halfHeight,
+        -halfHeight,
+        //_nearZ,
+        //_farZ,
+        nearZ,
+        farZ,
+      )
+      .clone()
+      .invert()
+      .multiply(m)
+      .multiply(l)
+      .invert()
+      .decompose(camera.position, camera.quaternion, camera.scale)
 
     const rad = MathUtils.degToRad(mbox.getBearing() + 30)
 
