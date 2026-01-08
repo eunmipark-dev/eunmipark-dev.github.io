@@ -1,0 +1,42 @@
+.about-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stack on mobile */
+  }
+}
+
+.about-avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.about-description {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 0.5rem; /* Tighter spacing */
+}
+
+.about-skills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+}
+
+.about-skill {
+  color: var(--bubble-color);
+  background: var(--bubble-bg);
+  text-decoration: none;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: var(--skill-button-hover);
+  }
+}

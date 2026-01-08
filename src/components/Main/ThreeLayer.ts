@@ -26,7 +26,7 @@ import {
 } from 'three'
 //@ts-ignore
 import { GLTFLoader, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
-import * as dat from 'dat.gui'
+//import * as dat from 'dat.gui'
 
 interface layerProps {
   map: Map
@@ -195,17 +195,17 @@ export default class {
 
     this.renderer.autoClear = false
 
-    const gui = new dat.GUI()
-    const cameraFolder = gui.addFolder('Three.js Camera')
+    // const gui = new dat.GUI()
+    // const cameraFolder = gui.addFolder('Three.js Camera')
 
-    cameraFolder.add(this.camera.position, 'x', -10, 10).listen() // 실시간 listen으로 업데이트
-    cameraFolder.add(this.camera.position, 'y', -10, 10).listen()
-    cameraFolder.add(this.camera.position, 'z', -10, 10).listen()
-    cameraFolder.open()
+    // cameraFolder.add(this.camera.position, 'x', -10, 10).listen() // 실시간 listen으로 업데이트
+    // cameraFolder.add(this.camera.position, 'y', -10, 10).listen()
+    // cameraFolder.add(this.camera.position, 'z', -10, 10).listen()
+    // cameraFolder.open()
 
-    gui.domElement.style.position = 'absolute'
-    gui.domElement.style.top = '10px'
-    gui.domElement.style.right = '10px'
+    // gui.domElement.style.position = 'absolute'
+    // gui.domElement.style.top = '10px'
+    // gui.domElement.style.right = '10px'
 
     const { x, y, z } = getPositionFromLongLat([128.41451, 35.64376])
     torusObject.position.set(x, y, z)

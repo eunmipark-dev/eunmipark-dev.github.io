@@ -2,7 +2,7 @@ import React from 'react'
 import { css } from '@emotion/react'
 
 interface SectionProps {
-  title: string
+  title?: string // Make title optional
   children: React.ReactNode
 }
 
@@ -22,16 +22,19 @@ const Section: React.FC<SectionProps> = ({ title, children }) => {
         }
       `}
     >
-      <h2
-        css={css`
-          margin-bottom: 0.75rem;
-          font-size: 1.3rem;
-          color: var(--text-color);
-          font-weight: 600;
-        `}
-      >
-        {title}
-      </h2>
+      {title && ( // Conditionally render title if it exists
+        <h2
+          css={css`
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+            color: var(--text-color);
+            font-weight: 600;
+            text-align: center; // Center align the title
+          `}
+        >
+          {title}
+        </h2>
+      )}
       {children}
     </section>
   )
