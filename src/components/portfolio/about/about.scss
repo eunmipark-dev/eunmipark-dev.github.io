@@ -1,10 +1,45 @@
 .about-container {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
+  //   display: flex;
+  //   align-items: flex-start;
+  //   gap: 1rem;
 
-  @media (max-width: 768px) {
-    flex-direction: column; /* Stack on mobile */
+  //   @media (max-width: 768px) {
+  //     flex-direction: column; /* Stack on mobile */
+  //   }
+  flex-direction: column-reverse;
+  text-align: center;
+  gap: 3rem;
+}
+
+.about-title {
+  font-size: 4.5rem;
+
+  line-height: 1.1;
+  margin-bottom: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+
+  .cursor {
+    opacity: 0;
+    animation: cursor 1s infinite;
+    color: rgb(125, 125, 125);
+  }
+  @keyframes cursor {
+    0% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
   }
 }
 
@@ -16,9 +51,11 @@
 }
 
 .about-description {
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   line-height: 1.4;
-  margin-bottom: 0.5rem; /* Tighter spacing */
+  //margin-bottom: 0.5rem; /* Tighter spacing */
+  margin: 2.5rem 0rem 2.5rem 0rem;
+  color: rgb(95, 95, 95);
 }
 
 .about-skills {
@@ -34,7 +71,7 @@
   text-decoration: none;
   padding: 0.3rem 0.8rem;
   border-radius: 4px;
-  transition: background 0.2s ease;
+  border: 1px solid rgb(156, 156, 156);
 
   &:hover {
     background: var(--skill-button-hover);

@@ -28,10 +28,7 @@ const harin = css`
 
 const contentContainerStyle = css`
   margin: 0 auto; /* 중앙 정렬 */
-  padding: 0 10rem; /* 모바일에서 여백 추가 (선택적) */
-  @media (max-width: 768px) {
-    padding: 0 0.5rem; /* 작은 화면에서 조정 */
-  }
+  padding: 0 8rem;
 `
 
 const AboutPage: React.FC = () => {

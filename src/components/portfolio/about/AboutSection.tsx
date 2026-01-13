@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import './about.scss' // SCSS 파일 import (경로 확인)
+import { css } from '@emotion/react'
 import Section from '../Section'
 
 const AboutSection: React.FC = () => {
@@ -21,42 +21,183 @@ const AboutSection: React.FC = () => {
 
   const avatarImage = getImage(data.avatar)
 
-  const skills = [
-    { name: 'UDE', link: '#' },
-    { name: 'Rapbox', link: '#' },
-    { name: 'Three', link: '#' },
-    { name: 'React', link: '#' },
-    { name: 'Vite', link: '#' },
+  const skillCategories = [
+    {
+      category: 'frontend',
+      skills: [
+        { name: 'TypeScript', link: '#' },
+        { name: 'Vue', link: '#' },
+        { name: 'Vite', link: '#' },
+        { name: 'React', link: '#' },
+      ],
+    },
+    {
+      category: 'backend',
+      skills: [
+        { name: 'Node', link: '#' },
+        { name: 'Express', link: '#' },
+        { name: 'Spring', link: '#' },
+      ],
+    },
+    {
+      category: 'Map',
+      skills: [
+        { name: 'Mapbox', link: '#' },
+        { name: 'OpenLayers', link: '#' },
+      ],
+    },
+    {
+      category: 'Tools',
+      skills: [
+        { name: 'PostgreSql', link: '#' },
+        { name: 'Git', link: '#' },
+      ],
+    },
   ]
 
   return (
     <Section>
-      <div className="about-container">
+      <div
+        css={css`
+          flex-direction: column-reverse;
+          text-align: center;
+          gap: 3rem;
+        `}
+      >
+        <h1
+          css={css`
+            font-size: 5rem;
+            line-height: 1.1;
+            margin-bottom: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+
+            .cursor {
+              opacity: 0;
+              animation: cursor 1s infinite;
+              color: rgb(125, 125, 125);
+            }
+            @keyframes cursor {
+              0% {
+                opacity: 0;
+              }
+              40% {
+                opacity: 0;
+              }
+              50% {
+                opacity: 1;
+              }
+              90% {
+                opacity: 1;
+              }
+              100% {
+                opacity: 0;
+              }
+            }
+          `}
+        >
+          PARK EUNMI
+          <a className="cursor">_</a>
+        </h1>
+
         {avatarImage && (
           <GatsbyImage
             image={avatarImage}
             alt="Eunni Park"
-            className="about-avatar"
+            css={css`
+              width: 180px;
+              height: 180px;
+              border-radius: 8px;
+              box-shadow: var(--shadow);
+            `}
           />
         )}
-        <div>
-          <p className="about-description">
-            {' '}
-            {/* 클래스 적용 */}
-            Hello, my name is Eunni Park, and vehicle monitoring systems. Thank
-            you for visiting my page. No map, vehicle monitoring systems.
-          </p>
-          <div className="about-skills">
-            {' '}
-            {/* 클래스 적용 */}
-            {skills.map((skill, index) => (
-              <a key={index} href={skill.link} className="about-skill">
-                {' '}
-                {/* 클래스 적용 */}
-                {skill.name}
-              </a>
-            ))}
-          </div>
+
+        <div
+          css={css`
+            font-size: 1.2rem;
+            line-height: 1.4;
+            margin: 4rem 0rem 2.5rem 0rem;
+            color: rgb(95, 95, 95);
+          `}
+        >
+          Hi, I'm Eunni Park. Thanks for checking out my page! <div />I
+          specialize in creating map-based data visualizations.
+        </div>
+        <div
+          css={css`
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            font-size: 0.8rem;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 4rem;
+
+            @media (max-width: 768px) {
+              flex-direction: column;
+              gap: 1.5rem;
+            }
+          `}
+        >
+          {skillCategories.map((cat, catIndex) => (
+            <div
+              key={catIndex}
+              css={css`
+                flex: 1;
+                text-align: left;
+                border-right: 1px solid #ddd;
+                padding-right: 1rem;
+
+                &:last-child {
+                  border-right: none;
+                  padding-right: 0;
+                }
+
+                @media (max-width: 768px) {
+                  border-right: none;
+                  padding-right: 0;
+                  text-align: center;
+                }
+              `}
+            >
+              <h3
+                css={css`
+                  color: #aaa;
+                  font-size: 1.2rem;
+                  font-weight: normal;
+                  margin-bottom: 1.5rem;
+                  text-transform: uppercase;
+                `}
+              >
+                {cat.category}
+              </h3>
+              {cat.skills.map((skill, index) => (
+                <a
+                  key={index}
+                  href={skill.link}
+                  css={css`
+                    display: block;
+                    color: #333;
+                    text-decoration: none;
+                    margin-bottom: 0.5rem;
+                    transition:
+                      transform 0.3s ease,
+                      color 0.3s ease;
+                    font-size: 1.2rem;
+
+                    &:hover {
+                      transform: translateX(5px);
+                      color: #007bff;
+                    }
+                  `}
+                >
+                  {skill.name}
+                </a>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </Section>

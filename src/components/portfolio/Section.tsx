@@ -10,7 +10,7 @@ const Section: React.FC<SectionProps> = ({ title, children }) => {
   return (
     <section
       css={css`
-        //padding: 1.5rem 0rem;
+        padding: 10rem 0rem;
         /* background: var(--section-bg); */
         //margin: 0.5rem 0; /* 기존 여백 유지 (필요 시 조정) */
         border-radius: 8px;
@@ -25,8 +25,8 @@ const Section: React.FC<SectionProps> = ({ title, children }) => {
       {title && ( // Conditionally render title if it exists
         <h2
           css={css`
-            margin-bottom: 0.75rem;
-            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-size: 3rem;
             color: var(--text-color);
             font-weight: 600;
             text-align: center; // Center align the title

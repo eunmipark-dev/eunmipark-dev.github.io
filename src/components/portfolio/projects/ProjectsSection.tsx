@@ -1,4 +1,4 @@
-// ProjectsSection.tsx (기존 파일 수정)
+// ProjectsSection.tsx (부모 컨테이너 수정)
 import React, { useMemo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { css } from '@emotion/react'
@@ -40,9 +40,17 @@ const ProjectsSection: React.FC = () => {
     <Section title="Projects">
       <div
         css={css`
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1rem;
+          display: grid; /* Grid로 변경 */
+          grid-template-columns: 1fr; /* 모바일: 1열 (모든 카드 동일 너비) */
+          gap: 1rem; /* 기존 gap 유지 */
+
+          @media (min-width: 768px) {
+            grid-template-columns: repeat(2, 1fr); /* 중형: 2열 (동일 너비) */
+          }
+
+          @media (min-width: 1024px) {
+            grid-template-columns: repeat(3, 1fr); /* 대형: 3열 (동일 너비) */
+          }
         `}
       >
         {projects.map(project => {

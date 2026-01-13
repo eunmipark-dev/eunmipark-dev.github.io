@@ -27,7 +27,7 @@ export const projects: Project[] = [
     imageFileName: 'project_02.png', // GIF 예시 (기존 PNG/JPG 대신 GIF로 변경 가능)
     tech: ['React', 'Three'],
     date: '2023.12 ~ 2024.12',
-    link: '#',
+    //link: '#',
     organization: 'MORAI',
   },
   {
@@ -37,7 +37,6 @@ export const projects: Project[] = [
     imageFileName: '',
     tech: ['Vue', 'Three'],
     date: '2023.05 ~ 2023.11',
-    link: '#',
     organization: 'MORAI',
   },
   {
@@ -47,7 +46,6 @@ export const projects: Project[] = [
     imageFileName: 'project_04.png',
     tech: ['Node', 'Vue', 'Mapbox', 'PostreSql'],
     date: '2022.01 ~ 2022.06',
-    link: '#',
     organization: 'CEST',
   },
   {
