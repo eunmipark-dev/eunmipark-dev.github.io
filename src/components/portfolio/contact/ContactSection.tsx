@@ -1,7 +1,7 @@
 import React from 'react'
 // import Section from '../Section'
 import './contact.scss'
-import Section from '../Section'
+import Section from '../section/Section'
 
 const ContactSection: React.FC = () => {
   const socialLinks = [

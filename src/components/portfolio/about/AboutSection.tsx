@@ -1,6 +1,6 @@
 // AboutSection.tsx
 import React from 'react'
-import Section from '../Section'
+import Section from '../section/Section'
 import './about.scss'
 
 const AboutSection: React.FC = () => {
@@ -13,11 +13,12 @@ const AboutSection: React.FC = () => {
         <div className="hero-content">
           <div className="hero-label-wrapper">
             {/* 헥사곤 포인트 아이콘 */}
-            <p className="hero-label">FRONT-END DEVELOPER</p>
+            <div className="hero-label">FRONT-END DEVELOPER</div>
           </div>
 
           <h1>
-            PARK EUNMI<span className="cursor">_</span>
+            PARK EUNMI
+            {/* <span className="cursor">_</span> */}
           </h1>
 
           <div className="accent-line"></div>

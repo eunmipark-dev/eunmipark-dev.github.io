@@ -42,15 +42,16 @@
 }
 
 .hero-label {
-  font-size: 32px;
-  letter-spacing: 0.5em;
+  font-size: 55px;
+  letter-spacing: 0.2em;
   color: #888;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 /* 2. PARK EUNMI 타이틀 (레이아웃 흔들림 방지) */
 .hero h1 {
-  font-size: clamp(60px, 8vw, 120px);
+  font-size: clamp(80px, 9vw, 160px);
   font-weight: 800;
   line-height: 1;
   margin-bottom: 2rem;
@@ -83,15 +84,53 @@
 /* 5. 설명 문구 */
 .description {
   //width: 100%;
-  font-size: clamp(20px, 1.6vw, 23px);
+  font-size: clamp(40px, 1.6vw, 50px);
   line-height: 1.8;
   color: #aaa;
   opacity: 0;
   animation: fadeInUp 1s ease forwards 1.3s;
 
   strong {
-    color: #ffffff;
+    position: relative;
+    display: inline-block;
+    color: #fff;
     font-weight: 600;
+    /* 2.5s부터 시작하는 강조 효과 */
+    animation: textEmphasis 1.5s ease-in-out forwards 2.5s;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0; // 처음엔 안보임
+      height: 1px;
+      background: rgba(255, 255, 255, 0.6);
+      /* 2.5s부터 밑줄이 서서히 그어짐 */
+      animation: lineDraw 1s ease-out forwards 2s;
+    }
+  }
+}
+
+/* 강조 효과: 텍스트가 살짝 밝아지며 글로우 효과 발생 */
+@keyframes textEmphasis {
+  0% {
+    text-shadow: 0 0 0px rgba(255, 255, 255, 0);
+  }
+  50% {
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    color: #ffffff;
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+  }
+}
+
+/* 밑줄 효과: 왼쪽에서 오른쪽으로 확장 */
+@keyframes lineDraw {
+  to {
+    width: 100%;
   }
 }
 

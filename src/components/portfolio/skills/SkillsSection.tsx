@@ -1,68 +1,70 @@
+// SkillsSection.tsx
 import React from 'react'
+import { motion, Variants } from 'framer-motion'
+import Section from '../section/Section'
 import './skills.scss'
-import Section from '../Section'
-import { motion } from 'framer-motion'
+
+const skillsData = [
+  {
+    category: 'Core Frontend',
+    items: ['React', 'Vue', 'TypeScript', 'JavaScript (ES6+)'],
+  },
+  {
+    category: 'Graphics & Map',
+    items: ['Three.js', 'Mapbox GL JS', 'Canvas API', 'WebGL'],
+  },
+  {
+    category: 'Build & Tools',
+    items: ['Vite', 'Webpack', 'Emotion', 'SCSS'],
+  },
+]
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
+  },
+}
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.5, ease: 'easeOut' },
+  },
+}
 
 const SkillsSection: React.FC = () => {
-  const skillCategories = [
-    {
-      category: 'frontend',
-      skills: [
-        { name: 'TypeScript', link: '#' },
-        { name: 'Vue', link: '#' },
-        { name: 'Vite', link: '#' },
-        { name: 'React', link: '#' },
-      ],
-    },
-    {
-      category: 'backend',
-      skills: [
-        { name: 'Node', link: '#' },
-        { name: 'Express', link: '#' },
-        { name: 'Spring', link: '#' },
-      ],
-    },
-    {
-      category: 'Map',
-      skills: [
-        { name: 'Mapbox', link: '#' },
-        { name: 'OpenLayers', link: '#' },
-      ],
-    },
-    {
-      category: 'Tools',
-      skills: [
-        { name: 'PostgreSql', link: '#' },
-        { name: 'Git', link: '#' },
-      ],
-    },
-  ]
-
   return (
-    <Section title="SKILLS">
-      <div className="skills">
-        {skillCategories.map((cat, catIndex) => (
-          <motion.div
-            key={catIndex}
-            className="skillContainer" // Note: Fixed typo from "skiilContainer" to "skillContainer"
-            initial={{ opacity: 0, y: 50 }} // Start faded out and shifted down
-            whileInView={{ opacity: 1, y: 0 }} // Fade in and slide up on scroll into view
-            viewport={{ once: false }} // Animate only once
-            transition={{
-              duration: 0.6,
-              ease: 'easeOut',
-              delay: catIndex * 0.2, // Stagger delay for each container (e.g., 0s, 0.2s, 0.4s...)
-            }}
-          >
-            <h3 className="category">{cat.category}</h3>
-            {cat.skills.map((skill, index) => (
-              <a key={index} href={skill.link} className="skill">
-                {skill.name}
-              </a>
-            ))}
+    <Section title="Skills">
+      <motion.div
+        className="skills-grid"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, margin: '-100px' }}
+      >
+        {skillsData.map((group, idx) => (
+          <motion.div key={idx} className="skill-card" variants={itemVariants}>
+            {/* Stack Overflow 방식: 내부 요소를 추가하여 테두리를 만듭니다. */}
+            <div className="skill-card-inner">
+              <div className="card-header">
+                <h3>{group.category}</h3>
+              </div>
+              <ul className="skill-list">
+                {group.items.map((item, i) => (
+                  <li key={i}>
+                    <span className="dot"></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </Section>
   )
 }

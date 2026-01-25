@@ -1,0 +1,47 @@
+.section-container {
+  width: 100%;
+  padding: 10rem 0; // 섹션 간 충분한 여백
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .section-title {
+    font-size: clamp(4rem, 7vw, 6rem); // 반응형 폰트 크기
+    font-weight: 800;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+
+    // 타이틀 강조를 위한 하단 가상 요소 (선택 사항)
+    &::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: #ffffff;
+      margin: 1.5rem auto 0;
+      opacity: 0.3;
+    }
+  }
+
+  .section-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+// 모바일 대응
+@media (max-width: 768px) {
+  .section-container {
+    padding: 6rem 1.5rem;
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 3rem;
+    }
+  }
+}

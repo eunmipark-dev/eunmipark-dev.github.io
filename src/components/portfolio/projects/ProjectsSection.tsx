@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { css } from '@emotion/react'
 import ProjectItem from './ProjectItem'
-import Section from '../Section'
+import Section from '../section/Section'
 import { projects } from './data'
 import { motion, AnimatePresence, Variants } from 'framer-motion'
 

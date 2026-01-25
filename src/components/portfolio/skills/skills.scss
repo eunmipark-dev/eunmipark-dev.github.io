@@ -1,57 +1,85 @@
-.skills {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  font-size: 0.8rem;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding-top: 4rem;
+/* skills.scss */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 0 1rem;
+}
 
-  @media (max-width: 768px) {
+.skill-card {
+  position: relative;
+  /* 1. 부모는 테두리 색상이 됩니다. */
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px; /* 테두리 두께 */
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  clip-path: polygon(
+    20px 0%,
+    calc(100% - 20px) 0%,
+    100% 20px,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    20px 100%,
+    0% calc(100% - 20px),
+    0% 20px
+  );
+
+  .skill-card-inner {
+    /* 2. 자식은 실제 카드 배경색이 됩니다. */
+    background: #0a0a0a;
+    padding: 2.5rem;
+    //height: 100%;
+
+    /* 부모와 동일한 모양을 상속받거나 직접 지정하여 1px 안쪽으로 들어오게 합니다. */
+    clip-path: inherit;
+    display: flex;
     flex-direction: column;
-    gap: 1.5rem;
   }
 
-  .skillContainer {
-    // Fixed typo from "skiilContainer"
-    flex: 1;
-    text-align: left;
-    border-right: 1px solid #333;
-    padding-right: 1rem;
+  &:hover {
+    transform: translateY(-5px);
+    /* 호버 시 부모 배경(테두리)을 밝게 하여 강조 효과를 줍니다. */
+    background: rgba(255, 255, 255, 0.5);
 
-    &:last-child {
-      border-right: none;
-      padding-right: 0;
+    .skill-card-inner {
+      //background: rgba(255, 255, 255, 0.05);
     }
+  }
+}
 
-    @media (max-width: 768px) {
-      border-right: none;
-      padding-right: 0;
-      text-align: center;
+/* 헥사곤 아이콘 제거에 따른 타이틀 정렬 */
+.card-header {
+  margin-bottom: 2rem;
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+}
+
+.skill-list {
+  list-style: none;
+  padding: 0;
+  li {
+    font-size: 1.1rem;
+    color: #999;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .dot {
+      width: 4px;
+      height: 4px;
+      background: #333;
+      border-radius: 50%;
     }
-
-    .category {
-      color: #888;
-      font-size: 1.2rem;
-      font-weight: normal;
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-    }
-
-    .skill {
-      display: block;
-      color: #eeeeee;
-      text-decoration: none;
-      margin-bottom: 0.5rem;
-      transition:
-        transform 0.3s ease,
-        color 0.3s ease;
-      font-size: 1.2rem;
-
-      &:hover {
-        transform: translateX(5px);
-        color: #007bff;
+    &:hover {
+      color: #fff;
+      .dot {
+        background: #fff;
+        box-shadow: 0 0 8px #fff;
       }
     }
   }

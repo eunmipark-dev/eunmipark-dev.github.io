@@ -1,5 +1,5 @@
 import React from 'react'
-import Section from './Section'
+import Section from './section/Section'
 import { css } from '@emotion/react'
 import MapComponent from '@components/main/MapComponent'
 import MapComponent2 from '@components/main/MapComponent2'
