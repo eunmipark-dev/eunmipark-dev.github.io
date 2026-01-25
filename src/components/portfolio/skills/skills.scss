@@ -1,0 +1,58 @@
+.skills {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  font-size: 0.8rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 4rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .skillContainer {
+    // Fixed typo from "skiilContainer"
+    flex: 1;
+    text-align: left;
+    border-right: 1px solid #333;
+    padding-right: 1rem;
+
+    &:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+
+    @media (max-width: 768px) {
+      border-right: none;
+      padding-right: 0;
+      text-align: center;
+    }
+
+    .category {
+      color: #888;
+      font-size: 1.2rem;
+      font-weight: normal;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .skill {
+      display: block;
+      color: #eeeeee;
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+      transition:
+        transform 0.3s ease,
+        color 0.3s ease;
+      font-size: 1.2rem;
+
+      &:hover {
+        transform: translateX(5px);
+        color: #007bff;
+      }
+    }
+  }
+}

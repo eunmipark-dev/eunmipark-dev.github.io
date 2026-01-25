@@ -7,6 +7,7 @@ import * as THREE from 'three'
 import { GLTFLoader, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
 import ThreeLayer from './ThreeLayer'
 import { AnyLayer } from 'mapbox-gl'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 interface MapComponentProps {
   center: [number, number] // [경도, 위도]

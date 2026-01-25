@@ -1,0 +1,64 @@
+.contact-section {
+  padding: 80px 20px;
+  text-align: center;
+
+  .contact-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: #111;
+  }
+
+  .contact-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+
+    @media (max-width: 480px) {
+      gap: 20px;
+    }
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #888; // 기본 색상 (회색조)
+    //color: red;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    .icon-wrapper {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 8px;
+
+      svg {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.3s ease;
+      }
+    }
+
+    .icon-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+
+    // 호버 효과: baejino.com 스타일
+    &:hover {
+      color: var(--hover-color); // 아이콘 색상 변경
+      transform: translateY(-8px); // 위로 살짝 올라옴
+
+      .icon-label {
+        opacity: 1; // 텍스트 진하게
+      }
+
+      svg {
+        // 추가적인 아이콘 애니메이션을 원한다면 여기에 작성
+      }
+    }
+  }
+}

@@ -17,13 +17,13 @@ export const projects: Project[] = [
     imageFileName: 'project_01.png', // GIF 예시
     tech: ['Mapbox', 'Vue', 'Three'],
     date: '2025.01 ~ 2025.02',
-    link: '#',
+    link: 'https://bus-01.netlify.app/',
     organization: '',
   },
   {
     id: 2,
     title: 'Scenario Editor',
-    description: 'Desktop app for editing scenario data...',
+    description: '',
     imageFileName: 'project_02.png', // GIF 예시 (기존 PNG/JPG 대신 GIF로 변경 가능)
     tech: ['React', 'Three'],
     date: '2023.12 ~ 2024.12',

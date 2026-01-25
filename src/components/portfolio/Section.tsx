@@ -1,5 +1,6 @@
 import React from 'react'
 import { css } from '@emotion/react'
+import { motion } from 'framer-motion'
 
 interface SectionProps {
   title?: string // Make title optional
@@ -11,14 +12,12 @@ const Section: React.FC<SectionProps> = ({ title, children }) => {
     <section
       css={css`
         padding: 10rem 0rem;
-        /* background: var(--section-bg); */
-        //margin: 0.5rem 0; /* 기존 여백 유지 (필요 시 조정) */
         border-radius: 8px;
         transition: box-shadow 0.2s ease;
-        /* box-shadow: var(--shadow); */
+        font-size: 2.7rem;
 
         @media (min-width: 1024px) {
-          padding: 3.5rem 0rem;
+          padding: 2.2x-sizing: inheritrem 0rem;
         }
       `}
     >
@@ -26,8 +25,8 @@ const Section: React.FC<SectionProps> = ({ title, children }) => {
         <h2
           css={css`
             margin-bottom: 2rem;
-            font-size: 3rem;
-            color: var(--text-color);
+            font-size: 6rem;
+            color: #fff;
             font-weight: 600;
             text-align: center; // Center align the title
           `}

@@ -3,17 +3,19 @@ import {
   AdditiveBlending,
   AmbientLight,
   ArrowHelper,
-  AxesHelper,
-  Camera,
-  CameraHelper,
+  BufferGeometry,
+  CylinderGeometry,
   DirectionalLight,
   DirectionalLightHelper,
   FrontSide,
+  Line,
+  LineBasicMaterial,
   MathUtils,
   Matrix4,
   Mesh,
   MeshPhongMaterial,
   PerspectiveCamera,
+  QuadraticBezierCurve3,
   Raycaster,
   Scene,
   ShaderMaterial,
@@ -21,8 +23,6 @@ import {
   Vector2,
   Vector3,
   WebGLRenderer,
-  WebGLRenderTarget,
-  Color,
 } from 'three'
 //@ts-ignore
 import { GLTFLoader, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
@@ -125,6 +125,12 @@ export default class {
 
   selectedObject: Mesh | null = null
 
+  private locations = [
+    { name: 'KNU', lngLat: [128.6147, 35.8906], label: '경북대학교' }, // 대구
+    { name: 'SHINSEGAE', lngLat: [126.9723, 37.5559], label: '신세계 I&C' }, // 서울역
+    { name: 'MORAI', lngLat: [127.0426, 37.5028], label: '모라이' }, // 강남
+  ]
+
   constructor(props: layerProps) {
     const { map, modelOrigin } = props
 
@@ -157,6 +163,9 @@ export default class {
 
     this.mbox = map
     this.modelOrigin = modelOrigin
+
+    this.addCareerObjects() // 거점 마커 추가
+    this.addConnectionArcs() // 연결선 추가
   }
 
   onAdd(map: Map, gl: any) {
@@ -322,6 +331,58 @@ export default class {
         this.rayHelper = undefined
       }
     })
+  }
+
+  private addCareerObjects() {
+    this.locations.forEach(loc => {
+      const coords = MercatorCoordinate.fromLngLat(
+        loc.lngLat as [number, number],
+        0,
+      )
+
+      // 세련된 네온 기둥(Cylinder) 생성
+      const geometry = new CylinderGeometry(5, 5, 5, 32)
+      const material = new MeshPhongMaterial({
+        color: 0x007bff,
+        transparent: true,
+        opacity: 0.8,
+        emissive: 0x007bff,
+        emissiveIntensity: 0.5,
+      })
+      const mesh = new Mesh(geometry, material)
+
+      // Mapbox 좌표계에 맞게 배치 (Y와 Z축 변환 주의)
+      mesh.position.set(coords.x, coords.y, 1)
+      mesh.rotation.x = Math.PI / 2
+      this.scene.add(mesh)
+    })
+  }
+
+  private addConnectionArcs() {
+    // 대구 -> 서울역, 서울역 -> 강남 연결 아크 생성 로직
+    for (let i = 0; i < this.locations.length - 1; i++) {
+      const start = MercatorCoordinate.fromLngLat(
+        this.locations[i].lngLat as [number, number],
+        0,
+      )
+      const end = MercatorCoordinate.fromLngLat(
+        this.locations[i + 1].lngLat as [number, number],
+        0,
+      )
+
+      // 3차원 베지어 곡선으로 아크 구현
+      const startV = new Vector3(start.x, start.y, 0)
+      const endV = new Vector3(end.x, end.y, 0)
+      const midV = new Vector3().addVectors(startV, endV).multiplyScalar(0.5)
+      midV.z = 1 // 아크의 높이 조절
+
+      const curve = new QuadraticBezierCurve3(startV, midV, endV)
+      const points = curve.getPoints(50)
+      const geometry = new BufferGeometry().setFromPoints(points)
+      const material = new LineBasicMaterial({ color: 0x00ffcc, linewidth: 2 })
+      const line = new Line(geometry, material)
+      this.scene.add(line)
+    }
   }
 
   onCameraChanged() {

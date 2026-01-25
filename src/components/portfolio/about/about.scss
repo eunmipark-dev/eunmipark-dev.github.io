@@ -1,79 +1,146 @@
-.about-container {
-  //   display: flex;
-  //   align-items: flex-start;
-  //   gap: 1rem;
-
-  //   @media (max-width: 768px) {
-  //     flex-direction: column; /* Stack on mobile */
-  //   }
-  flex-direction: column-reverse;
-  text-align: center;
-  gap: 3rem;
-}
-
-.about-title {
-  font-size: 4.5rem;
-
-  line-height: 1.1;
-  margin-bottom: 2.5rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-
-  .cursor {
-    opacity: 0;
-    animation: cursor 1s infinite;
-    color: rgb(125, 125, 125);
-  }
-  @keyframes cursor {
-    0% {
-      opacity: 0;
-    }
-    40% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 1;
-    }
-    90% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-}
-
-.about-avatar {
-  width: 180px;
-  height: 180px;
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-}
-
-.about-description {
-  font-size: 1.2rem;
-  line-height: 1.4;
-  //margin-bottom: 0.5rem; /* Tighter spacing */
-  margin: 2.5rem 0rem 2.5rem 0rem;
-  color: rgb(95, 95, 95);
-}
-
-.about-skills {
+// about.scss
+.hero {
+  height: 80vh; // 너무 길면 다음 섹션이 안보이므로 적절히 조절
   display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  font-size: 0.8rem;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  // background-color: #0a0a0a; // 어두운 배경
 }
 
-.about-skill {
-  color: var(--bubble-color);
-  background: var(--bubble-bg);
-  text-decoration: none;
-  padding: 0.3rem 0.8rem;
-  border-radius: 4px;
-  border: 1px solid rgb(156, 156, 156);
+.hero-bg-hexagon {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 70%
+  );
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  filter: blur(60px);
+  z-index: 1;
+}
 
-  &:hover {
-    background: var(--skill-button-hover);
+.hero-content {
+  text-align: center;
+  z-index: 10;
+  position: relative;
+  color: #ffffff;
+}
+
+/* 1. Frontend Developer 라벨 스타일 및 애니메이션 */
+.hero-label-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeInDown 1s ease forwards;
+}
+
+.hero-label {
+  font-size: 32px;
+  letter-spacing: 0.5em;
+  color: #888;
+  font-weight: 500;
+}
+
+/* 2. PARK EUNMI 타이틀 (레이아웃 흔들림 방지) */
+.hero h1 {
+  font-size: clamp(60px, 8vw, 120px);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 2rem;
+  /* letter-spacing 변화를 제거하여 레이아웃 시프트 방지 */
+  letter-spacing: -0.02em;
+  opacity: 0;
+  /* 이름과 커서가 동시에 나타나도록 설정 */
+  animation: fadeInUp 1.2s ease forwards 0.4s;
+}
+
+/* 3. 커서 애니메이션 (이름과 함께 등장 후 깜빡임) */
+.cursor {
+  display: inline-block;
+  margin-left: 10px;
+  color: #ffffffbd;
+  animation: blink 1s step-end infinite;
+}
+
+/* 4. 액센트 라인 (이름 아래에서 확장) */
+.accent-line {
+  width: 800px;
+  height: 2px;
+  background: #ffffff3a;
+  margin: 2.5rem auto;
+  opacity: 0;
+  transform: scaleX(0);
+  animation: lineGrow 1s ease forwards 1s;
+}
+
+/* 5. 설명 문구 */
+.description {
+  //width: 100%;
+  font-size: clamp(20px, 1.6vw, 23px);
+  line-height: 1.8;
+  color: #aaa;
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards 1.3s;
+
+  strong {
+    color: #ffffff;
+    font-weight: 600;
+  }
+}
+
+/* --- Animations --- */
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lineGrow {
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes blink {
+  from,
+  to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 48px;
+  }
+  .hero-label {
+    font-size: 12px;
   }
 }

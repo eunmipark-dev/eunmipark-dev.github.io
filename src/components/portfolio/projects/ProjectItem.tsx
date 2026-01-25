@@ -1,14 +1,13 @@
-// ProjectItem.tsx (width 관련 코드 제거)
 import React from 'react'
 import { css } from '@emotion/react'
 
 interface ProjectItemProps {
   title: string
   description: string
-  image: string // 이제 문자열 URL (GatsbyImageData 대신)
+  image: string
   tech: string[]
   date: string
-  link: string | undefined
+  link?: string
 }
 
 const ProjectItem: React.FC<ProjectItemProps> = ({
@@ -22,96 +21,111 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
   return (
     <div
       css={css`
-        background: var(--project-card-bg);
-        border: 1px solid rgb(200, 200, 200);
-        border-radius: 10px;
-
-        transition:
-          transform 0.2s ease,
-          box-shadow 0.2s ease;
-        //box-shadow: var(--shadow);
-        /* width 제거: 부모 Grid가 자동 처리 */
-
-        &:hover {
-          transform: scale(1.02);
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-      `}
+      group; /* Hover 효과를 위한 부모 설정 */
+      display: flex;
+      flex-direction: column;
+      border-radius: 12px;
+      border: 1px solid rgb(200,200,200);
+      overflow: hidden;
+      background: #fff;
+      transition: all 0.3s ease;
+      &:hover {
+        transform: translateY(-8px);
+      }
+    `}
     >
-      <img
-        src={image} // 일반 img 태그로 GIF 지원
-        alt={title}
-        css={css`
-          width: 100%;
-          height: 140px; /* Slightly shorter to match image */
-          border-radius: 8px 8px 4px 4px;
-          /*border-radius: 20px;*/
-          object-fit: cover;
-          padding: 2px 2px 0px 2px;
-          margin-bottom: 0px;
-        `}
-        loading="lazy" // lazy loading 추가 (성능 최적화)
-      />
+      {/* 이미지 컨테이너 */}
       <div
         css={css`
-          padding: 3px 10px 10px 10px;
+          width: 100%;
+          height: 200px;
+          //overflow: hidden;
+          background: #f5f5f5;
+          position: relative;
         `}
       >
+        {image ? (
+          <img
+            src={image}
+            alt={title}
+            css={css`
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              transition: transform 0.5s ease;
+              &:hover {
+                transform: scale(1.05);
+              }
+            `}
+          />
+        ) : (
+          <div
+            css={css`
+              /* 이미지 없을 때 대체 UI */
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 100%;
+              color: #ccc;
+            `}
+          >
+            No Image
+          </div>
+        )}
+      </div>
+
+      {/* 텍스트 컨텐츠 */}
+      <div
+        css={css`
+          padding: 1.5rem 0.5rem;
+          height: 120px;
+        `}
+      >
+        <div
+          css={css`
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+          `}
+        >
+          {tech.join(' / ')}
+        </div>
         <h3
           css={css`
             font-size: 1rem;
-            margin-block: 0px;
-            margin-bottom: 0.25rem;
-            color: black;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+            color: rgb(100, 100, 100);
           `}
         >
           {title}
         </h3>
-        <p
+        {/* <p
           css={css`
-            font-size: 0.8rem;
-            margin-bottom: 0.25rem;
-            color: var(--text-secondary);
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 1rem;
           `}
         >
-          {description}
-        </p>
-        <p
-          css={css`
-            font-size: 0.75rem;
-            color: var(--text-tertiary);
-            margin-bottom: 0.25rem;
-          `}
-        >
-          {tech.join(' · ')}
-        </p>
-        <p
-          css={css`
-            font-size: 0.75rem;
-            color: var(--text-tertiary);
-            margin-bottom: 0.5rem;
-          `}
-        >
-          {date}
-        </p>
+          {description || 'Short project summary goes here.'}
+        </p> */}
         {link && (
           <a
             href={link}
+            target="_blank"
+            rel="noreferrer"
             css={css`
-              /*background: rgb(165, 165, 165);*/
-              color: black;
-              border: 1px solid black;
-              padding: 0.3rem 0.6rem;
-              border-radius: 4px;
-              text-decoration: none;
-              font-size: 0.8rem;
-              transition: background 0.2s ease;
+              font-size: 0.85rem;
+              font-weight: 600;
+              text-decoration: underline;
+              color: #000;
               &:hover {
-                background: var(--button-hover);
+                color: #007bff;
               }
             `}
           >
-            Go to Page +
+            View Project →
           </a>
         )}
       </div>
