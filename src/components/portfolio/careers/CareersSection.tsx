@@ -30,7 +30,7 @@ const CareersSection: React.FC = () => {
           {/* 지도를 배경에 녹여내는 그라데이션 레이어 */}
           <div className="map-vignette"></div>
 
-          <div className="landmark-nav">
+          {/* <div className="landmark-nav">
             <div className="nav-header">
               <div className="hex-icon"></div>
               CAREER NODES
@@ -52,7 +52,7 @@ const CareersSection: React.FC = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
