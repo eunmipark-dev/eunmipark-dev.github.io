@@ -1,13 +1,13 @@
 .section-container {
   width: 100%;
-  padding: 2rem 0; // 섹션 간 충분한 여백
+  //padding: 10rem 0; // 섹션 간 충분한 여백
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   .section-title {
-    font-size: clamp(4rem, 7vw, 6rem); // 반응형 폰트 크기
+    font-size: clamp(4rem, 7vw, rem); // 반응형 폰트 크기
     font-weight: 800;
     color: #ffffff;
     text-align: center;
@@ -29,15 +29,15 @@
 
   .section-content {
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    //max-width: 1200px;
+    //margin: 0 auto;
   }
 }
 
 // 모바일 대응
 @media (max-width: 768px) {
   .section-container {
-    padding: 6rem 1.5rem;
+    //padding: 6rem 1.5rem;
 
     .section-title {
       font-size: 2rem;
