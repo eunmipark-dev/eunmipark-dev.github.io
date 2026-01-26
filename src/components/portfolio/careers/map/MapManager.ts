@@ -48,6 +48,11 @@ export default class MapManager {
       })
       this.threeLayer = threeLayer
       this.map.addLayer(threeLayer as AnyLayer)
+
+      this.map.fire('threeLayerCreated', {
+        index: 1,
+        name: 'threeLayer',
+      })
     })
   }
 

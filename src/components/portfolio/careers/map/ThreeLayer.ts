@@ -51,6 +51,7 @@ const landmarkInfos = [
     title: 'SIN I&C',
     desc: 'Smart City Solution',
     role: 'junior developer',
+    period: '2018',
   },
   {
     name: 'cest',
@@ -66,6 +67,7 @@ const landmarkInfos = [
     title: 'MORAI',
     desc: 'Autonomous Platform',
     role: 'senior eveloper',
+    period: '2023~current',
   },
 ]
 
@@ -387,7 +389,7 @@ export default class {
 
     this.mbox.flyTo({
       center: info.lnglat as LngLatLike,
-      zoom: 16,
+      zoom: 11,
       pitch: 45,
       duration: 2000,
     })

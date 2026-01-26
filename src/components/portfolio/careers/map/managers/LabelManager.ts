@@ -20,7 +20,7 @@ export default class LabelManager {
 
   // 1. 초기 라벨 엘리먼트 생성
   public createLabels(landmarkInfos: any[]) {
-    landmarkInfos.forEach((info) => {
+    landmarkInfos.forEach(info => {
       const box = document.createElement('div')
       box.className = 'label-box'
       box.innerHTML = `
@@ -41,7 +41,10 @@ export default class LabelManager {
       `
       this.container.appendChild(box)
 
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+      const path = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'path',
+      )
       path.setAttribute('class', 'connector-path')
       this.svg.appendChild(path)
 
@@ -68,7 +71,7 @@ export default class LabelManager {
     camera: THREE.Camera,
     width: number,
     height: number,
-    uScale: number
+    uScale: number,
   ) {
     landmarks.forEach((mesh, i) => {
       const el = this.elements[i]
@@ -83,12 +86,12 @@ export default class LabelManager {
       el.line.style.display = isVisible ? 'block' : 'none'
 
       if (isVisible) {
-        const offX_start = i === 0 ? -10 : 10
+        const offX_start = i === 0 ? -32 : 10
         const offY_start = -22
 
         // 줌 레벨에 따른 유동적 거리 보정
-        const labelScale = (1 / Math.log2(uScale + 1.0)) * 13.0
-        const offX = i === 0 ? -180 : 70
+        const labelScale = (1 / Math.log2(uScale + 1.0)) * 8.0
+        const offX = i === 0 ? -240 : 70
         const offY = -80
 
         const startX = x + offX_start
@@ -102,7 +105,10 @@ export default class LabelManager {
         const boxWidth = el.box.offsetWidth
         const lineTargetX = i === 0 ? boxX + boxWidth : boxX
 
-        el.line.setAttribute('d', `M ${startX} ${startY} L ${lineTargetX} ${boxY}`)
+        el.line.setAttribute(
+          'd',
+          `M ${startX} ${startY} L ${lineTargetX} ${boxY}`,
+        )
       }
     })
   }

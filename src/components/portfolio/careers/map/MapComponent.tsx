@@ -17,7 +17,7 @@ const MapContainer = styled.div<{ width?: string; height?: string }>`
 const MapComponent: React.FC = () => {
   const mapContainer = useRef<HTMLDivElement>(null)
   const mapInstance = useRef<MapManager>(null) // Mapbox 인스턴스 저장용
-  const [activeIdx, setActiveIdx] = useState<number | null>(0)
+  const [activeIdx, setActiveIdx] = useState<number | null>(2)
 
   const goToLandmark = (index: number) => {
     setActiveIdx(index)
@@ -36,6 +36,15 @@ const MapComponent: React.FC = () => {
       mapInstance.current.map.on('landmarkSelected', (data: any) => {
         setActiveIdx(data.index)
       })
+
+      mapInstance.current.map.once('threeLayerCreated', () => {
+        console.log('ThreeLayer ready - executing initial landmark selection')
+
+        // 약간의 딜레이(예: 500ms)를 주어 애니메이션이 더 자연스럽게 시작되도록 할 수 있습니다.
+        setTimeout(() => {
+          goToLandmark(2)
+        }, 1000)
+      })
     }
 
     // 2. 컴포넌트 언마운트 시 메모리 누수 방지를 위한 cleanup
@@ -52,26 +61,25 @@ const MapComponent: React.FC = () => {
     <>
       <MapContainer ref={mapContainer} id="my_map" />
       <div className="landmark-nav">
-        <div className="nav-header">
-          <div className="hex-icon"></div>
-          CAREER NODES
-        </div>
+        <div className="nav-header">CAREER NODES</div>
 
         <div className="nav-list">
-          {landmarkList.map((info, index) => (
-            <div
-              key={index}
-              className={`nav-item ${activeIdx === index ? 'active' : ''}`}
-              onClick={() => goToLandmark(index)}
-            >
-              <div className="hex-bg"></div>
-              <span className="item-index">0{index + 1}</span>
-              <div className="item-text">
-                <div className="item-title">{info.title}</div>
+          <div className="landmark-nav-inner">
+            {landmarkList.map((info, index) => (
+              <div
+                key={index}
+                className={`nav-item ${activeIdx === index ? 'active' : ''}`}
+                onClick={() => goToLandmark(index)}
+              >
+                <div className="hex-bg"></div>
+                <span className="item-index">0{index + 1}</span>
+                <div className="item-text">
+                  <div className="item-title">{info.title}</div>
+                </div>
+                <div className="item-status"></div>
               </div>
-              <div className="item-status"></div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </>
