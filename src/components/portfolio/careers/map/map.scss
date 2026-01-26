@@ -4,3 +4,122 @@
   width: 100%;
   height: 100%;
 }
+
+.mapboxgl-ctrl-logo,
+.mapboxgl-ctrl-attrib {
+  display: none !important;
+}
+
+////////// label
+
+#labels-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* 연결선 스타일 (SVG) */
+.label-line-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+$label-box-top: #ffffff19;
+$connet-line: #ffffff35;
+$label-box-active: #ffffff7e;
+$connet-line-active: #ffffff8d;
+
+/* 텍스트 박스 스타일 */
+.label-box {
+  position: absolute;
+  background: rgba(114, 114, 114, 0.223);
+  //border: 1px solid rgba(0, 255, 255, 0.5);
+  padding: 8px 12px;
+  color: #fff;
+  font-family: 'Pretendard', sans-serif;
+  min-width: 100px;
+  pointer-events: auto;
+  transition:
+    opacity 0.3s,
+    background-color 0.3s,
+    min-width 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+    border-color 0.3s;
+  //box-shadow: 0 0 2px rgba(0, 255, 255, 0.2), inset 0 0 10px rgba(0, 255, 255, 0.1);
+  overflow: hidden;
+  backdrop-filter: blur(1px);
+  border-radius: 0px 0px 10px 10px;
+  border-top: 1px solid $label-box-top;
+
+  &.active {
+    border-color: $label-box-active;
+    background: #ffffff11;
+    color: #000000;
+    min-width: 200px;
+  }
+
+  .label-title {
+    font-weight: 700;
+    font-size: 13px;
+    color: #ffffff;
+    margin-bottom: 2px;
+    letter-spacing: -0.02em;
+  }
+
+  .label-desc {
+    font-size: 11px;
+    color: #a0aec0;
+    line-height: 1.3;
+  }
+
+  /* 추가 정보 영역 (평소엔 숨김) */
+  .label-extra-info {
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.5s ease;
+    font-size: 11px;
+    color: #a0aec0;
+    border-top: 1px solid rgba(151, 154, 154, 0.2);
+    margin-top: 0;
+    padding-top: 0;
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2px;
+    }
+
+    .info-label {
+      color: rgba(255, 255, 255, 0.6);
+      margin-right: 8px;
+    }
+  }
+}
+
+.label-box.active .label-extra-info {
+  max-height: 100px;
+  opacity: 1;
+  margin-top: 6px;
+  padding-top: 6px;
+}
+
+/* 선 애니메이션 (SVG) */
+.connector-path {
+  stroke: $connet-line;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 3px rgba(151, 154, 154, 0.2));
+  transition: opacity 0.3s;
+  &.active {
+    stroke: $connet-line-active;
+    stroke-width: 2;
+  }
+}
+
+////////// ./label

@@ -43,7 +43,7 @@ const harin = css`
 `
 const contentContainerStyle = css`
   margin: 0 auto; /* 중앙 정렬 */
-  padding: 0 8rem;
+  padding: 0 2rem;
 `
 
 const AboutPage: React.FC = () => {

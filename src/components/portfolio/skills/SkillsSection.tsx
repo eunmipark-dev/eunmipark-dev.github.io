@@ -48,15 +48,13 @@ const SkillsSection: React.FC = () => {
       >
         {skillsData.map((group, idx) => (
           <motion.div key={idx} className="skill-card" variants={itemVariants}>
-            {/* Stack Overflow 방식: 내부 요소를 추가하여 테두리를 만듭니다. */}
             <div className="skill-card-inner">
               <div className="card-header">
                 <h3>{group.category}</h3>
               </div>
               <ul className="skill-list">
                 {group.items.map((item, i) => (
-                  <li key={i}>
-                    <span className="dot"></span>
+                  <li key={i} className="skill-item">
                     {item}
                   </li>
                 ))}

@@ -30,9 +30,7 @@ const MapComponent: React.FC = () => {
     }
   }, [])
 
-  return (
-    <MapContainer ref={mapContainer} width="100%" height="400px" id="my_map" />
-  )
+  return <MapContainer ref={mapContainer} id="my_map" />
 }
 
 export default MapComponent
