@@ -21,6 +21,7 @@ const MapComponent: React.FC = () => {
 
   const goToLandmark = (index: number) => {
     setActiveIdx(index)
+    mapInstance.current?.threeLayer.selectLandmark(index)
     // TODO: MapManager.getInstance().flyMap(...) 등을 호출하여 지도 이동 연동
     console.log(`Moving to landmark: ${landmarkList[index].title}`)
   }

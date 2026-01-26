@@ -22,15 +22,14 @@ const CareersSection: React.FC = () => {
 
   return (
     <div className="careers-container">
-      <div className="careers-content">
-        <div className="map-frame">
-          {/* 실제 지도 컴포넌트 */}
-          <MapComponent />
+      <div className="map-frame">
+        {/* 실제 지도 컴포넌트 */}
+        <MapComponent />
 
-          {/* 지도를 배경에 녹여내는 그라데이션 레이어 */}
-          <div className="map-vignette"></div>
+        {/* 지도를 배경에 녹여내는 그라데이션 레이어 */}
+        <div className="map-vignette"></div>
 
-          {/* <div className="landmark-nav">
+        {/* <div className="landmark-nav">
             <div className="nav-header">
               <div className="hex-icon"></div>
               CAREER NODES
@@ -53,7 +52,6 @@ const CareersSection: React.FC = () => {
               ))}
             </div>
           </div> */}
-        </div>
       </div>
     </div>
   )
