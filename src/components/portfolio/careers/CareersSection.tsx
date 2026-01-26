@@ -13,14 +13,16 @@ const landmarkList = [
 
 const CareersSection: React.FC = () => {
   return (
-    <div className="careers-container">
-      <div className="map-frame">
-        {/* 실제 지도 컴포넌트 */}
-        <div className="map-frame-inner">
-          <MapComponent />
+    <Section title="Careers">
+      <div className="careers-container">
+        <div className="map-frame">
+          {/* 실제 지도 컴포넌트 */}
+          <div className="map-frame-inner">
+            <MapComponent />
+          </div>
         </div>
       </div>
-    </div>
+    </Section>
   )
 }
 

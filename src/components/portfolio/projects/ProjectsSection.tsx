@@ -78,44 +78,17 @@ const ProjectsSection: React.FC = () => {
   return (
     <Section title="My Work">
       {/* 카테고리 필터 영역 */}
-      <div
-        css={css`
-          display: flex;
-          gap: 1.5rem;
-          margin-bottom: 3rem;
-          border-bottom: 1px solid #eee;
-          padding-bottom: 1rem;
-        `}
-      >
+      <div className="project-filters">
         {categories.map(category => (
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
-            css={css`
-              background: none;
-              border: none;
-              cursor: pointer;
-              position: relative;
-              padding: 0.5rem 0;
-              font-size: 0.9rem;
-              font-weight: 500;
-              color: ${selectedCategory === category ? '#000' : '#888'};
-              transition: color 0.3s ease;
-              &:hover {
-                color: #000;
-              }
-            `}
+            className={`project-category ${selectedCategory == category ? 'active' : ''}`}
           >
             {category}
             {/* 넘버링 첨자 처리 */}
             <span
-              css={css`
-                font-size: 0.6rem;
-                position: absolute;
-                top: 0;
-                right: -12px;
-                color: ${selectedCategory === category ? '#007bff' : '#aaa'};
-              `}
+              className={`project-category-count ${selectedCategory == category ? 'active' : ''}`}
             >
               {categoryCounts[category]}
             </span>
@@ -126,11 +99,7 @@ const ProjectsSection: React.FC = () => {
       {/* 프로젝트 그리드 */}
       <motion.div
         layout // 레이아웃 변경 시 부드러운 이동
-        css={css`
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-          gap: 2rem;
-        `}
+        className="projects-grid"
       >
         <AnimatePresence mode="popLayout">
           {filteredProjects.map(project => (
