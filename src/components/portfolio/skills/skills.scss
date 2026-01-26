@@ -2,7 +2,7 @@
 .skills-grid {
   display: grid;
   /* 80px 대신 120px~150px 정도로 최소값을 높여야 긴 텍스트가 안전하게 다음 줄로 넘어갑니다 */
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 1.5rem; /* 카드 사이의 간격을 넉넉히 주어 가독성 확보 */
   //width: 100%;
   padding: 0rem 1rem;

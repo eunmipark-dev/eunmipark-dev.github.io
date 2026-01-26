@@ -3,6 +3,7 @@
 .careers-container {
   width: 100%;
   margin: 14rem auto;
+  padding: 20px;
   //padding: 0 2rem;
   height: 100vh; // 화면 높이에 맞춘 시원한 지도 뷰
 }
@@ -13,18 +14,18 @@
   height: calc(100% - 40px);
   background: #dbdada;
 
-  margin: 20px;
+  //padding: 20px;
   //border-top: 1px solid white;
 
   clip-path: polygon(
-    60px 0%,
-    calc(100% - 60px) 0%,
-    100% 60px,
-    100% calc(100% - 60px),
-    calc(100% - 60px) 100%,
-    60px 100%,
-    0% calc(100% - 60px),
-    0% 60px
+    20px 0%,
+    calc(100% - 20px) 0%,
+    100% 20px,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    20px 100%,
+    0% calc(100% - 20px),
+    0% 20px
   );
 
   .map-frame-inner {
