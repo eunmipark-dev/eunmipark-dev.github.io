@@ -132,7 +132,7 @@ $font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   &:hover {
     background: #000;
     color: #fff;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    //box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
   }
 
   /* 이미지가 없을 때 나타나는 스타일 */
@@ -163,7 +163,7 @@ $font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   background: rgb(31, 31, 31);
 
   .project-tech {
-    font-family: $font-mono;
+    //font-family: $font-mono;
     font-size: 0.6rem;
     color: $text-dim;
     margin-bottom: 0.4rem;

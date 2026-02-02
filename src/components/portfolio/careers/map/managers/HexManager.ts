@@ -8,7 +8,7 @@ export default class HexManager {
 
   constructor(rings: number, uniforms: any) {
     const points = getCubeSpiral({ q: 0, r: 0, s: 0 }, rings)
-    const geometry = new THREE.CircleGeometry(1, 6)
+    const geometry = new THREE.CircleGeometry(2, 6)
     const material = new THREE.ShaderMaterial({
       uniforms,
       vertexShader: _VS_scale,
@@ -23,7 +23,7 @@ export default class HexManager {
 
     const dummy = new THREE.Object3D()
     points.forEach((p, i) => {
-      const pos = cubeToCartesian(p, 1.1, 0.06)
+      const pos = cubeToCartesian(p, 2.2, 0.06)
       dummy.position.copy(pos)
       dummy.rotation.set(0, 0, Math.PI / 6)
       dummy.updateMatrix()

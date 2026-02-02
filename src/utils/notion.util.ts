@@ -23,8 +23,8 @@ export const parseNotionColumn = (
   return {
     id: id.unique_id.number || -1,
     remark: getPlainTextByRichText(remark.rich_text),
-    lastEditedTime: convertDatetimeFormat(edited_date.date.start || ''),
-    createdTime: convertDatetimeFormat(created_date.date.start || ''),
+    lastEditedTime: convertDatetimeFormat(edited_date?.date?.start || ''),
+    createdTime: convertDatetimeFormat(created_date?.date?.start || ''),
     notionUrl: URL.url || '',
     tag: tag.multi_select || [],
     series: series.select,
