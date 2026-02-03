@@ -1,6 +1,7 @@
 // map/managers/LabelManager.ts
 import * as THREE from 'three'
 import mapboxgl from 'mapbox-gl'
+import { Landmark } from '../data'
 
 export default class LabelManager {
   private container: HTMLElement
@@ -19,13 +20,12 @@ export default class LabelManager {
   }
 
   // 1. 초기 라벨 엘리먼트 생성
-  public createLabels(landmarkInfos: any[]) {
+  public createLabels(landmarkInfos: Landmark[]) {
     landmarkInfos.forEach(info => {
       const box = document.createElement('div')
       box.className = 'label-box'
       box.innerHTML = `
-        <div class="label-title">${info.title}</div>
-        <div class="label-desc">${info.desc}</div>
+        <div class="label-title">${info.name}</div>
         <div class="label-extra-info">
           ${
             info.role

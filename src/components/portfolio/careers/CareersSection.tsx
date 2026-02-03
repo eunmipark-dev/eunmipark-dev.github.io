@@ -5,12 +5,6 @@ import MapComponent from './map/MapComponent'
 import './careers.scss'
 //import MapComponent2 from '@components/main/MapComponent2'
 
-const landmarkList = [
-  { title: 'SIN I&C', desc: 'Smart City Solution' },
-  { title: 'CEST', desc: 'Embedded Research' },
-  { title: 'MORAI', desc: 'Autonomous Platform' },
-]
-
 const CareersSection: React.FC = () => {
   return (
     <Section title="Careers">

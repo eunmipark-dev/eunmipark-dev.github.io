@@ -19,6 +19,7 @@ import {
 import LabelManager from './managers/LabelManager'
 import BuildingManager from './managers/BuildingManager'
 import HexManager from './managers/HexManager'
+import { landmarkInfos } from './data'
 
 interface layerProps {
   mapManager: MapManager
@@ -43,33 +44,6 @@ const params = {
   //hexColor: '#ffffff',
   innerColor: '#ffffff',
 }
-
-const landmarkInfos = [
-  {
-    name: 'sin I&C',
-    lnglat: [127.041619, 37.503216],
-    title: 'SIN I&C',
-    desc: 'Smart City Solution',
-    role: 'junior developer',
-    period: '2018',
-  },
-  {
-    name: 'cest',
-    lnglat: [128.6106, 35.8914],
-    title: 'CEST',
-    desc: 'Embedded Research',
-    role: 'developer',
-    period: '2021~2022',
-  },
-  {
-    name: 'morai',
-    lnglat: [127.0563, 37.5118],
-    title: 'MORAI',
-    desc: 'Autonomous Platform',
-    role: 'senior eveloper',
-    period: '2023~current',
-  },
-]
 
 const uniforms = {
   uColor: { value: new THREE.Color(params.hexColor) },
@@ -264,7 +238,7 @@ export default class {
       if (isAnimating) {
         // 현재 선택된 효과는 응축 (0 -> 1)
         if (uniforms.uActiveProgress.value < 1.0) {
-          uniforms.uActiveProgress.value += 0.04
+          uniforms.uActiveProgress.value += 0.03
         }
 
         // 이전 선택된 효과는 확산하며 소멸 (기존 값 -> 0)
@@ -387,13 +361,24 @@ export default class {
     uniforms.uActivePos.value.copy(pos)
     uniforms.uActiveProgress.value = 0.0
 
+    // this.mbox.flyTo({
+    //   center: info.lnglat as LngLatLike,
+    //   zoom: 11,
+    //   pitch: 45,
+    //   duration: 2000,
+    // })
+
+    isAnimating = true
+    this.mbox.fire('landmarkSelected', { index })
+  }
+
+  public moveToLandmark(index: number) {
+    const info = landmarkInfos[index]
     this.mbox.flyTo({
       center: info.lnglat as LngLatLike,
       zoom: 11,
       pitch: 45,
       duration: 2000,
     })
-    isAnimating = true
-    this.mbox.fire('landmarkSelected', { index })
   }
 }

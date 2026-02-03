@@ -142,29 +142,36 @@ export const _FS_scale = `
       finalAlpha += ambientMask * 0.2;
     }
 
-    // 2. 활성화된 랜드마크 효과 (강화된 상시 펄스)
-    if (uActiveProgress > 0.0) {
-      float gridDist = distance(vInstPos, uActivePos) / uScale;
-      float lastRadius = 6.0;
-
-      // [응축 로직]
-      float condenseRadius = mix(maxRadius * 0.8, lastRadius, uActiveProgress);
-      float thickness = mix(5.0, 1.5, uActiveProgress);
-      float ring = getRing(gridDist, condenseRadius, thickness);
-      float coreMask = 1.0 - smoothstep(0.0, lastRadius, gridDist);
-
-      // --- [강화된] 잔잔한 상시 펄스 (Steady Pulse) ---
-      float idleMask = 1.0 - smoothstep(0.0, 35.0 / radiusFactor, gridDist);
-      float wave = pow(sin(gridDist * 0.8 - uTime * 3.0) * 0.5 + 0.5, 2.0);
-      float steadyPulse = idleMask * wave * 0.8 * smoothstep(0.2, 1.0, uActiveProgress);
-
-      float activeEffect = max(ring, coreMask);
-      float boost = mix(1.0, 5.0, uActiveProgress);
-      
-      // 최종 강도
-      finalIntensity = max(finalIntensity, mix(1.0, boost, activeEffect) + steadyPulse * 2.5);
-      finalAlpha = max(finalAlpha, (activeEffect + steadyPulse) * uActiveProgress);
-    }
+// 2. 활성화된 랜드마크 효과 (응축되며 채워지는 로직)
+if (uActiveProgress > 0.0) {
+    float gridDist = distance(vInstPos, uActivePos) / uScale;
+    
+    // 반지름 설정 (점점 작아짐)
+    float lastRadius = 6.0;
+    float condenseRadius = mix(maxRadius * 3.0, lastRadius, uActiveProgress);
+    
+    // [A] 테두리 링 효과
+    float thickness = 2.0;
+    float ring = getRing(gridDist, condenseRadius, thickness);
+    ring *= 0.5; // 링 밝기 줄이기
+    
+    // [B] 내부 채우기 효과 (핵심)
+    // 현재 응축 중인 반지름보다 안쪽 영역을 찾습니다.
+    float fillMask = 1.0 - smoothstep(condenseRadius - 2.0, condenseRadius, gridDist);
+    
+    // Progress가 진행될수록 내부가 더 진하게 채워지도록 설정
+    // 0.0일 때는 투명(0), 1.0일 때는 반투명(0.5) 정도로 조절 가능
+    float fillIntensity = fillMask * (uActiveProgress * 0.5); 
+    
+    // [C] 시각적 결합
+    // 링(테두리)과 채우기 효과 중 더 큰 값을 선택
+    //float activeEffect = fillIntensity;
+    float activeEffect = max(ring, fillIntensity);
+    
+    // 최종 광도와 투명도 업데이트
+    finalIntensity = max(finalIntensity, mix(1.0, 3.0, activeEffect));
+    finalAlpha = max(finalAlpha, activeEffect);
+}
 
     if (finalAlpha < 0.01) discard;
 
@@ -173,6 +180,7 @@ export const _FS_scale = `
     color += uColor * finalIntensity;
 
     gl_FragColor = vec4(color, finalAlpha);
+
     //gl_FragColor = vec4(0.2, 0.2, 0.8, finalAlpha);
   }
 `
