@@ -72,12 +72,12 @@ export const aboutData: AboutData = {
     },
     {
       name: 'gaia3d',
-      roles: ['Frontend Development', 'Senior Software Engineer'],
+      roles: ['Full-Stack Development', 'Senior Software Engineer'],
       period: '2022',
     },
     {
       name: 'cest',
-      roles: ['Frontend Development'],
+      roles: ['Full-Stack Development'],
       period: '2020 ~ 2022',
     },
     {

@@ -13,7 +13,7 @@ const AboutSection: React.FC = () => {
         <div className="hero-content">
           <div className="hero-label-wrapper">
             {/* 헥사곤 포인트 아이콘 */}
-            <div className="hero-label">FRONT-END DEVELOPER</div>
+            <div className="hero-label">VISUALIZATION ENGINEER</div>
           </div>
 
           <h1>

@@ -6,16 +6,20 @@ import './skills.scss'
 
 const skillsData = [
   {
-    category: 'Core Frontend',
-    items: ['React', 'Vue', 'TypeScript', 'JavaScript (ES6+)'],
+    category: 'Frontend',
+    items: ['React', 'Vue', 'TypeScript', 'JavaScript'],
   },
   {
     category: 'Graphics & Map',
-    items: ['Three.js', 'Mapbox GL JS', 'Canvas API', 'WebGL'],
+    items: ['Three.js', 'Mapbox GL JS', 'OpenLayers', ' '],
+  },
+  {
+    category: 'Backend',
+    items: ['Node/Express', 'Spring', 'PostgreSQL'],
   },
   {
     category: 'Build & Tools',
-    items: ['Vite', 'Webpack', 'Emotion', 'SCSS'],
+    items: ['Vite', 'Git', 'Jira', 'Trello'],
   },
 ]
 

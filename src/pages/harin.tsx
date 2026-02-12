@@ -42,10 +42,23 @@ const harin = css`
   transition: background 0.3s ease;
 `
 const contentContainerStyle = css`
-  margin: 0 auto; /* 중앙 정렬 */
-  //padding: 0 2rem;
-`
+  /* 1. 최대 너비 설정 (지도 대시보드와 일치시키는 것을 권장) */
+  max-width: 1400px;
 
+  /* 2. 중앙 정렬 */
+  margin: 0 auto;
+
+  /* 3. 모바일/태블릿 등 작은 화면에서 컨텐츠가 벽에 붙지 않도록 여백 설정 */
+  padding: 0 40px;
+
+  /* 4. 화면이 아주 커질 때를 대비한 추가 안전 장치 */
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    padding: 0 20px; /* 모바일에서는 여백을 줄여 공간 확보 */
+  }
+`
 const AboutPage: React.FC = () => {
   return (
     <Layout>

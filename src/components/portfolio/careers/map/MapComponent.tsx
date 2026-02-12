@@ -15,6 +15,22 @@ const MapComponent: React.FC = () => {
   const [activeIdx, setActiveIdx] = useState<number | null>(2)
   const activeLandmark = activeIdx !== null ? landmarkInfos[activeIdx] : null
 
+  const [barWidths, setBarWidths] = useState<number[]>([])
+
+  useEffect(() => {
+    if (activeLandmark?.skills) {
+      // 1. 먼저 모든 바를 0으로 초기화
+      setBarWidths(activeLandmark.skills.map(() => 0))
+
+      // 2. 브라우저가 0%를 렌더링할 시간을 준 뒤, 목표 수치로 업데이트
+      const timer = setTimeout(() => {
+        setBarWidths(activeLandmark.skills!.map(s => s.level))
+      }, 20) // 20ms 정도면 충분합니다.
+
+      return () => clearTimeout(timer)
+    }
+  }, [activeIdx]) // 회사가 바뀔 때마다 실행
+
   const goToLandmark = (index: number) => {
     setActiveIdx(index)
     mapInstance.current?.threeLayer.selectLandmark(index)
@@ -57,70 +73,76 @@ const MapComponent: React.FC = () => {
   return (
     <>
       <MapContainer ref={mapContainer} id="my_map" />
-      <div className="landmark-nav">
-        <div className="nav-header">CAREER NODES</div>
 
-        {/* 좌측 하단 랜드마크 리스트 */}
-        <div className="nav-list">
-          <div className="landmark-nav-inner">
-            {landmarkInfos.map((info, index) => (
-              <div
-                key={index}
-                className={`nav-item ${activeIdx === index ? 'active' : ''}`}
-                onClick={() => goToLandmark(index)}
-              >
-                <div className="hex-bg"></div>
-                <span className="item-index">0{index + 1}</span>
-                <div className="item-text">
-                  <div className="item-title">{info.name}</div>
+      {/* 통합 대시보드 패널 */}
+      <div className="dashboard-bottom">
+        <div className="dashboard-container">
+          {/* 1. 커리어 노드 셀렉터 (왼쪽) */}
+          <div className="dashboard-nav">
+            <div className="dashboard-label">CAREER NODES</div>
+            <div className="node-list">
+              {landmarkInfos.map((info, index) => (
+                <div
+                  key={index}
+                  className={`node-item ${activeIdx === index ? 'active' : ''}`}
+                  onClick={() => goToLandmark(index)}
+                >
+                  <span className="node-index">0{index + 1}</span>
+                  <span className="node-name">{info.name}</span>
                 </div>
-                <div className="item-status"></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* 하단 상세 정보 패널 */}
-      {activeLandmark && (
-        <div className="bottom-info-panel">
-          <div className="panel-inner">
-            {/* 왼쪽: 업무 영역 */}
-            <div className="section-tasks">
-              <div className="section-label">ASSIGNED TASKS</div>
-              <ul className="task-list">
-                {activeLandmark.tasks?.map((task, i) => (
-                  <li key={i}>{task}</li>
-                ))}
-              </ul>
+              ))}
             </div>
+          </div>
 
-            {/* 중간 구분선 (디자인 요소) */}
-            <div className="divider"></div>
-
-            {/* 오른쪽: 스킬 영역 */}
-            <div className="section-skills">
-              <div className="section-label">TECHNICAL SKILLS</div>
-              <div className="skill-grid">
-                {activeLandmark.skills?.map((skill, i) => (
-                  <div key={i} className="skill-item">
-                    <div className="skill-text">
-                      <span>{skill.name}</span>
-                      <span>{skill.level}%</span>
+          {/* 2. 상세 업무 (중앙) */}
+          <div className="dashboard-tasks">
+  <div className="dashboard-label">ASSIGNED TASKS</div>
+  {activeLandmark?.tasks ? (
+    <div className="task-tree">
+      {activeLandmark.tasks.map((task, i) => (
+        <div key={i} className="task-group">
+          <div className="task-parent">{task.title}</div>
+          {task.subTasks && (
+            <ul className="task-child-list">
+              {task.subTasks.map((sub, j) => (
+                <li key={j} className="task-child">{sub}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p className="placeholder">Select a node to see details</p>
+  )}
+</div>
+          {/* 3. 스킬 그래프 (오른쪽) */}
+          <div className="dashboard-skills">
+            <div className="dashboard-label">TECHNICAL SKILLS</div>
+            {activeLandmark?.skills ? (
+              /* key={activeIdx} 를 주어 회사가 바뀔 때마다 애니메이션 재트리거 */
+              <div className="skill-grid" key={activeIdx}>
+                {activeLandmark.skills.map((skill, i) => (
+                  <div key={i} className="skill-bar-unit">
+                    <div className="skill-info">
+                      <span className="skill-name">{skill.name}</span>
+                      <span className="skill-perc">{skill.level}%</span>
                     </div>
-                    <div className="progress-bg">
+                    <div className="bar-bg">
                       <div
-                        className="progress-fill"
-                        style={{ width: `${skill.level}%` }}
-                      ></div>
+                        className="bar-fill"
+                        style={{ width: `${barWidths[i] || 0}%` }}
+                      />
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
+            ) : (
+              <p className="placeholder">No skill data available</p>
+            )}
           </div>
         </div>
-      )}
+      </div>
     </>
   )
 }

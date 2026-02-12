@@ -120,267 +120,173 @@ $connet-line-active: #ffffff8d;
 
 ////////// ./label
 
-.landmark-nav {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  width: 180px;
-  background: rgba(0, 0, 0, 0.418);
-  backdrop-filter: blur(2px);
-  border: 1px 1px 0px 0px solid #fff;
-  border-color: #fff;
-  border-width: 1px;
-  //border: 1px solid rgba(0, 255, 255, 0.2);
-  padding: 1px;
-  //border-radius: 4px;
-  // padding: 15px 0;
-  z-index: 100;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-
-  clip-path: polygon(
-    0px 0%,
-    calc(100% - 0px) 0%,
-    100% 0px,
-    100% calc(100% - 0px),
-    calc(100% - 20px) 100%,
-    20px 100%,
-    0% calc(100% - 20px),
-    0% 20px
-  );
-
-  .landmark-nav-inner {
-    /* 2. 자식은 실제 카드 배경색이 됩니다. */
-    background: #0a0a0a;
-    //padding: 1.2rem;
-    //height: 100%;
-    width: 100%;
-    height: 100%;
-    /* 부모와 동일한 모양을 상속받거나 직접 지정하여 1px 안쪽으로 들어오게 합니다. */
-    clip-path: inherit;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .nav-header {
-    padding: 20px 20px 15px;
-    font-size: 13px;
-    font-weight: 800;
-    color: rgba(255, 255, 255, 0.8);
-    letter-spacing: 2px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
-  }
-
-  .nav-item {
-    display: flex;
-    align-items: center;
-    padding: 12px 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    border-left: 3px solid transparent;
-
-    &.active {
-      background: rgba(0, 255, 255, 0.15); /* 배경 광택 */
-      border-left: 3px solid #00ffff;
-      box-shadow: inset 5px 0 15px rgba(0, 255, 255, 0.1);
-
-      .item-index {
-        color: #00ffff;
-        font-weight: 400;
-        text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
-      }
-
-      .item-title {
-        color: #00ffff !important;
-      }
-
-      .item-arrow {
-        opacity: 1;
-        transform: translateX(0);
-        color: #00ffff;
-      }
-
-      /* 사이버네틱 글로우 라인 추가 */
-      &::after {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 0;
-        height: 100%;
-        width: 1px;
-        // background: linear-gradient(
-        //   to bottom,
-        //   transparent,
-        //   #00ffff,
-        //   transparent
-        // );
-      }
-    }
-
-    &:hover {
-      background: rgba(0, 255, 255, 0.05);
-      border-left: 3px solid #00ffff;
-      padding-left: 25px;
-
-      .item-arrow {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    .item-index {
-      font-size: 15px;
-      font-weight: 200;
-      color: rgba(0, 255, 255, 0.4);
-      margin-right: 15px;
-    }
-
-    .item-text {
-      flex: 1;
-      .item-title {
-        font-size: 14px;
-        font-weight: 700;
-        color: #fff;
-        margin-bottom: 2px;
-      }
-      .item-desc {
-        font-size: 10px;
-        color: rgba(156, 173, 173, 0.8);
-      }
-    }
-
-    .item-arrow {
-      font-size: 10px;
-      color: #00ffff;
-      opacity: 0;
-      transform: translateX(-10px);
-      transition: all 0.3s ease;
-    }
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
 .label-box,
 .landmark-nav {
   /* 요소 내부 스크롤이 끝났을 때 부모(문서) 스크롤 방지 */
   overscroll-behavior: contain;
 }
 
-// map.scss에 추가
-.bottom-info-panel {
+.dashboard-bottom {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 180px; // 지도 시야 확보를 위해 높이 제한
   background: linear-gradient(
     to top,
-    rgba(0, 10, 20, 0.9),
-    rgba(0, 10, 20, 0.6)
+    rgba(0, 5, 10, 0.3),
+    rgba(0, 5, 10, 0.14)
   );
-  backdrop-filter: blur(15px);
-  border-top: 1px solid rgba(0, 255, 255, 0.2);
+  backdrop-filter: blur(2px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px 0;
   z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #fff;
 
-  .panel-inner {
-    width: 90%;
-    max-width: 1200px;
+  .dashboard-container {
     display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
     gap: 40px;
+    height: 140px; // 고정 높이로 가독성 확보
   }
 
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 2px;
+  .dashboard-label {
+    font-size: 13px;
     color: #00ffff;
-    margin-bottom: 15px;
-    opacity: 0.7;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    font-weight: 800;
   }
 
-  // 왼쪽 업무 리스트
-  .section-tasks {
-    flex: 1.2;
-    .task-list {
+  // 노드 셀렉터 (왼쪽)
+  .dashboard-nav {
+    flex: 0.8;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    .node-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .node-item {
+      cursor: pointer;
+      font-size: 13px;
+      opacity: 0.5;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      &.active {
+        opacity: 1;
+        color: #00ffff;
+        transform: translateX(5px);
+        font-weight: 700;
+      }
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  // 업무 리스트 (중앙)
+  .dashboard-tasks {
+    flex: 1.5;
+    overflow-y: auto;
+    padding-right: 10px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* 커스텀 스크롤바 */
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 255, 255, 0.3);
+      border-radius: 10px;
+      &:hover {
+        background: #00ffff;
+      }
+    }
+
+    .task-group {
+      margin-bottom: 20px;
+    }
+
+    /* 1단계 스타일 */
+    .task-parent {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 15px;
+
+      &::before {
+        content: '▹'; // 화살표 아이콘
+        position: absolute;
+        left: 0;
+        color: #00ffff;
+      }
+    }
+
+    /* 2단계 스타일 */
+    .task-child-list {
       list-style: none;
-      padding: 0;
-      li {
-        color: #fff;
-        font-size: 13px;
-        margin-bottom: 8px;
+      padding-left: 25px; // 2단계 들여쓰기
+      margin: 0;
+
+      .task-child {
+        font-size: 12.5px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 6px;
+        line-height: 1.5;
         position: relative;
-        padding-left: 15px;
+
         &::before {
-          content: '•';
+          content: '-';
           position: absolute;
-          left: 0;
-          color: #00ffff;
+          left: -12px;
+          color: rgba(0, 255, 255, 0.5);
         }
       }
     }
   }
 
-  .divider {
-    width: 1px;
-    background: rgba(255, 255, 255, 0.1);
-    margin: 10px 0;
-  }
-
-  // 오른쪽 스킬 그래프
-  .section-skills {
-    flex: 1;
+  // 스킬 그래프 (오른쪽)
+  .dashboard-skills {
+    flex: 1.2;
     .skill-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr; // 가로로 두 줄 배치하여 공간 절약
-      gap: 15px 30px;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 25px;
     }
-    .skill-item {
-      .skill-text {
+    .skill-bar-unit {
+      .skill-info {
         display: flex;
         justify-content: space-between;
         font-size: 11px;
-        color: rgba(255, 255, 255, 0.8);
-        margin-bottom: 5px;
+        margin-bottom: 4px;
       }
-      .progress-bg {
-        height: 3px;
+
+      .bar-bg {
+        height: 6px; // 가독성을 위해 살짝 두껍게 조정
         background: rgba(255, 255, 255, 0.1);
-        .progress-fill {
+        border-radius: 3px;
+        overflow: hidden;
+        position: relative;
+
+        .bar-fill {
           height: 100%;
           background: #00ffff;
+          /* 핵심: width가 바뀔 때 1초 동안 부드럽게 변화 */
+          transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
           box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+          border-radius: 3px;
+          width: 0; // 초기값
         }
       }
     }
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
   }
 }

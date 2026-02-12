@@ -59,7 +59,7 @@ $font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 /* 그리드 레이아웃 */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   gap: 1rem;
 }
 
