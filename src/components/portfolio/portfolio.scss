@@ -1,15 +1,105 @@
+// ============================================================
+//  PORTFOLIO — global tokens, keyframes & base
+//  (loaded once via pages/portfolio.tsx)
+// ============================================================
+
 :root {
-  --portfolio-heading: 'Poppins', 'Noto Sans KR', sans-serif;
+  // -- base surfaces --------------------------------------------------------
+  --cy-bg: #050a12; // deepest background
+  --cy-bg-2: #070e18; // raised background
+  --cy-panel: rgba(12, 22, 34, 0.62); // glass panel fill
+  --cy-panel-solid: #0a1422;
+  --cy-panel-border: rgba(94, 234, 255, 0.18);
+  --cy-grid-line: rgba(94, 234, 255, 0.06);
+
+  // -- accents --------------------------------------------------------------
+  --cy-cyan: #19e3ff;
+  --cy-cyan-dim: rgba(25, 227, 255, 0.45);
+  --cy-amber: #ff9f1c;
+  --cy-teal: #2ee6a6;
+  --cy-red: #ff4d6d;
+
+  // -- text -----------------------------------------------------------------
+  --cy-text: #d6ecf7;
+  --cy-text-dim: #7d97ad;
+  --cy-text-faint: #4a6076;
+
+  // -- glow -----------------------------------------------------------------
+  --cy-glow-cyan: 0 0 12px rgba(25, 227, 255, 0.55);
+  --cy-glow-amber: 0 0 12px rgba(255, 159, 28, 0.55);
+
+  // -- type -----------------------------------------------------------------
+  --cy-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', 'Cascadia Code',
+    Consolas, 'Liberation Mono', monospace;
+  --cy-display: 'Poppins', 'Noto Sans KR', system-ui, sans-serif;
+
+  --portfolio-heading: var(--cy-display);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--bj-font-heading);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+// -- shared keyframes -------------------------------------------------------
+@keyframes cy-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes cy-flicker {
+  0%,
+  92%,
+  96%,
+  100% {
+    opacity: 1;
+  }
+  94% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes cy-scan {
+  from {
+    transform: translateY(-120%);
+  }
+  to {
+    transform: translateY(120%);
+  }
+}
+
+@keyframes cy-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+// -- base -------------------------------------------------------------------
+.portfolio-root {
+  font-family: var(--cy-display);
+  color: var(--cy-text);
+  background: var(--cy-bg);
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--cy-display);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
 }

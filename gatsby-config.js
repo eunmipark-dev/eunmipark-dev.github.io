@@ -120,56 +120,7 @@ module.exports = {
         stripQueryString: true,
       },
     },
-    /* 노션 사이트맵 설정 */
-
-    // 'gatsby-plugin-sitemap',
-    // {
-    //   resolve: 'gatsby-plugin-robots-txt',
-    //   options: {
-    //     policy: [{ userAgent: '*', allow: '/' }],
-    //   },
-    // },
-    {
-      resolve: `gatsby-plugin-sitemap`,
-      options: {
-        query: `{
-          allNotion {
-            edges {
-              node {
-                id
-                title
-              }
-            }
-          }
-        }`,
-        resolveSiteUrl: () => siteUrl,
-        resolvePages: ({ allNotion: { edges: allPages } }) => {
-          return allPages
-            .filter(edge => edge.node.title)
-            .map(edge => {
-              return { ...edge.node, path: edge.node.title }
-            })
-        },
-        serialize: props => {
-          return {
-            url: `${props.title}`,
-            changefreq: 'daily',
-            priority: 0.7,
-          }
-        },
-      },
-    },
-    {
-      resolve: `gatsby-source-notion-feely`,
-      options: {
-        token: process.env.GATSBY_INTEGRATION_TOKEN,
-        databases: [
-          {
-            id: process.env.GATSBY_DATABASE_ID,
-            name: `milot`,
-          },
-        ],
-      },
-    },
+    // Sitemap of all generated pages
+    `gatsby-plugin-sitemap`,
   ],
 }

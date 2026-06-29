@@ -7,19 +7,19 @@ import './skills.scss'
 const skillsData = [
   {
     category: 'Frontend',
-    items: ['React', 'Vue', 'TypeScript', 'JavaScript'],
+    items: ['Vue', 'React', 'TypeScript', 'JavaScript', 'Sass'],
   },
   {
     category: 'Graphics & Map',
-    items: ['Three.js', 'Mapbox GL JS', 'OpenLayers', ' '],
+    items: ['Three.js', 'Konva', 'Mapbox', 'MapLibre', 'OpenLayers'],
   },
   {
     category: 'Backend',
-    items: ['Node/Express', 'Spring', 'PostgreSQL'],
+    items: ['Node/Express', 'Spring', 'PostgreSQL (PostGIS)'],
   },
   {
     category: 'Build & Tools',
-    items: ['Vite', 'Git', 'Jira', 'Trello'],
+    items: ['Vite', 'Git', 'Sourcetree', 'Jira', 'Trello'],
   },
 ]
 

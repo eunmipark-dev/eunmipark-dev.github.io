@@ -1,0 +1,81 @@
+// ============================================================
+//  CYBER DESIGN SYSTEM  —  mixins (no CSS output until invoked)
+//  Tokens (:root vars) + shared @keyframes live in portfolio.scss
+//  Inspired by src/refs/전체 디자인.png (CYBERSPHERE)
+//  Usage:  @use '../../../scss/abstracts/cyber' as *;
+// ============================================================
+
+// HUD label — small, spaced, monospace
+@mixin cy-label {
+  font-family: var(--cy-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--cy-text-dim);
+}
+
+// Glass panel surface
+@mixin cy-panel {
+  background: var(--cy-panel);
+  border: 1px solid var(--cy-panel-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+// Decorative L-shaped corner brackets on a relatively-positioned element
+@mixin cy-corners($size: 14px, $color: var(--cy-cyan), $thick: 1px) {
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: $size;
+    height: $size;
+    pointer-events: none;
+  }
+  &::before {
+    top: -1px;
+    left: -1px;
+    border-top: $thick solid $color;
+    border-left: $thick solid $color;
+  }
+  &::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: $thick solid $color;
+    border-right: $thick solid $color;
+  }
+}
+
+// Faint hex-grid background image
+@mixin cy-hexgrid($opacity: 0.05) {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='rgba(94,234,255,#{$opacity})' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 56px 100px;
+}
+
+// Animated scanline overlay
+@mixin cy-scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.025) 0px,
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+// Clipped angular corners (octagon-ish)
+@mixin cy-clip($c: 12px) {
+  clip-path: polygon(
+    #{$c} 0%,
+    calc(100% - #{$c}) 0%,
+    100% #{$c},
+    100% calc(100% - #{$c}),
+    calc(100% - #{$c}) 100%,
+    #{$c} 100%,
+    0% calc(100% - #{$c}),
+    0% #{$c}
+  );
+}
+
+// Shared @keyframes (cy-pulse / cy-flicker / cy-scan) are defined once
+// in portfolio.scss so they are not duplicated per compiled stylesheet.

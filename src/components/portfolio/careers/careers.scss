@@ -1,60 +1,321 @@
-/* careers.scss */
+@use '../../../scss/abstracts/cyber' as *;
 
-.careers-container {
+// ============================================================
+//  CAREERS + SKILLS — split command panel
+// ============================================================
+.cskl {
+  flex: 1;
   width: 100%;
-  //  margin: 14rem auto;
-  padding: 20px;
-  //padding: 0 2rem;
-  height: 100vh; // 화면 높이에 맞춘 시원한 지도 뷰
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1.2rem;
+  padding: 1.6rem 2rem 2rem;
+  min-height: 0;
+
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
 }
 
-.map-frame {
+.cskl__left {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 1.2rem;
+  min-height: 0;
+}
+
+// -- reusable cyber card ----------------------------------------------------
+.cy-card {
   position: relative;
-  width: calc(100% - 40px);
-  height: calc(100% - 40px);
-  background: #dbdada2d;
+  @include cy-panel;
+  @include cy-corners(14px, var(--cy-cyan), 1px);
+  padding: 1.1rem 1.2rem;
   display: flex;
-  padding: 1px; /* 테두리 두께 */
-  //padding: 20px;
-  //border-top: 1px solid white;
+  flex-direction: column;
+  min-height: 0;
 
-  clip-path: polygon(
-    20px 0%,
-    calc(100% - 20px) 0%,
-    100% 20px,
-    100% calc(100% - 20px),
-    calc(100% - 20px) 100%,
-    20px 100%,
-    0% calc(100% - 20px),
-    0% 20px
-  );
+  &__label {
+    @include cy-label;
+    margin-bottom: 1rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid var(--cy-panel-border);
+    flex-shrink: 0;
 
-  .map-frame-inner {
-    /* 2. 자식은 실제 카드 배경색이 됩니다. */
-    background: #0a0a0a;
-    //padding: 1.2rem;
-    //height: 100%;
-    width: 100%;
-    height: 100%;
-    /* 부모와 동일한 모양을 상속받거나 직접 지정하여 1px 안쪽으로 들어오게 합니다. */
-    clip-path: inherit;
-    display: flex;
-    flex-direction: column;
+    .hl {
+      color: var(--cy-cyan);
+      letter-spacing: 0.2em;
+    }
+  }
+}
+
+// ============================================================
+//  career node list
+// ============================================================
+.cskl__node-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cskl__node {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.7rem 0.9rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid transparent;
+  border-left: 2px solid var(--cy-text-faint);
+  color: var(--cy-text-dim);
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &-idx {
+    font-family: var(--cy-mono);
+    font-size: 0.78rem;
+    color: var(--cy-text-faint);
   }
 
-  /* 2. 테두리 라인 구현 (가상 요소) */
-  //   &::before {
-  //     content: '';
-  //     position: absolute;
-  //     inset: 0;
-  //     padding: 1px;
-  //     -webkit-mask:
-  //       linear-gradient(#fbfafa 0 0) content-box,
-  //       linear-gradient(#f2f2f2 0 0);
-  //     -webkit-mask-composite: xor;
-  //     mask-composite: exclude;
-  //     clip-path: inherit;
-  //     z-index: 3;
-  //     pointer-events: none;
-  //   }
+  &-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &-name {
+    font-family: var(--cy-display);
+    font-weight: 700;
+    font-size: 0.98rem;
+    letter-spacing: 0.06em;
+    color: var(--cy-text);
+  }
+
+  &-meta {
+    font-family: var(--cy-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--cy-text-faint);
+  }
+
+  &-arrow {
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: all 0.25s ease;
+  }
+
+  &:hover {
+    background: rgba(25, 227, 255, 0.06);
+    border-left-color: var(--cy-cyan-dim);
+  }
+
+  &.is-active {
+    background: rgba(25, 227, 255, 0.1);
+    border-left-color: var(--cy-cyan);
+    box-shadow: inset 0 0 18px rgba(25, 227, 255, 0.08);
+
+    .cskl__node-idx {
+      color: var(--cy-cyan);
+    }
+    .cskl__node-arrow {
+      opacity: 1;
+      transform: translateX(0);
+      color: var(--cy-cyan);
+    }
+  }
+}
+
+// ============================================================
+//  task tree
+// ============================================================
+.cskl__tasks {
+  overflow: hidden;
+}
+
+.cskl__task-scroll {
+  overflow-y: auto;
+  padding-right: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.cskl__task {
+  &-title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    font-family: var(--cy-display);
+    font-weight: 600;
+    font-size: 0.92rem;
+    line-height: 1.4;
+    color: var(--cy-text);
+  }
+
+  &-bullet {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    margin-top: 2px;
+    background: var(--cy-amber);
+    box-shadow: var(--cy-glow-amber);
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  }
+}
+
+.cskl__sub {
+  list-style: none;
+  margin: 0.6rem 0 0;
+  padding: 0 0 0 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+
+  li {
+    position: relative;
+    font-family: var(--cy-mono);
+    font-size: 0.74rem;
+    line-height: 1.55;
+    letter-spacing: 0.02em;
+    color: var(--cy-text-dim);
+    padding-left: 0.9rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 5px;
+      height: 1px;
+      background: var(--cy-cyan-dim);
+    }
+  }
+}
+
+.cskl__empty {
+  font-family: var(--cy-mono);
+  font-size: 0.74rem;
+  color: var(--cy-text-faint);
+  letter-spacing: 0.1em;
+}
+
+// ============================================================
+//  skills panel
+// ============================================================
+.cskl__skills {
+  align-items: center;
+}
+
+.cskl__radar-wrap {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  padding: 0.5rem 0;
+}
+
+.cskl__legend {
+  list-style: none;
+  margin: 0;
+  padding: 0.8rem 0 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem 1.2rem;
+  border-top: 1px solid var(--cy-panel-border);
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--cy-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+  }
+
+  &-name {
+    color: var(--cy-text-dim);
+  }
+  &-val {
+    color: var(--cy-cyan);
+  }
+}
+
+// ============================================================
+//  SVG radar
+// ============================================================
+.skill-radar {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  overflow: visible;
+
+  &__ring {
+    fill: none;
+    stroke: var(--cy-grid-line);
+    stroke-width: 1;
+  }
+  &__axis {
+    stroke: rgba(94, 234, 255, 0.12);
+    stroke-width: 1;
+  }
+  &__label {
+    fill: var(--cy-text-dim);
+    font-family: var(--cy-mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+  &__data {
+    stroke: var(--cy-cyan);
+    stroke-width: 1.6;
+    filter: drop-shadow(0 0 6px rgba(25, 227, 255, 0.6));
+  }
+  &__node {
+    fill: #001018;
+    stroke: var(--cy-cyan);
+    stroke-width: 1.6;
+  }
+}
+
+// ============================================================
+//  bar fallback (when < 3 skills)
+// ============================================================
+.skill-bars {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 1rem 0;
+}
+
+.skill-bar {
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+    font-family: var(--cy-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+  }
+  &__name {
+    color: var(--cy-text);
+  }
+  &__pct {
+    color: var(--cy-cyan);
+  }
+  &__track {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+  }
+  &__fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cy-cyan-dim), var(--cy-cyan));
+    box-shadow: var(--cy-glow-cyan);
+  }
 }

@@ -3,8 +3,6 @@ import { create } from 'zustand'
 import { Themes } from '@src/constants'
 import { allowBodyScroll, preventBodyScroll } from '@utils/scroll.util'
 
-import { ImageChildren, MultiSelect } from '@appTypes/notion.type'
-
 interface SnowflakeState {
   isVisibility: boolean
   toggle: () => void
@@ -60,26 +58,6 @@ export const useShowSearchStore = create<ShowSearchState>((set, get) => ({
   },
 }))
 
-interface ShowImageLayerState {
-  isVisibility: boolean
-  imageBlock?: ImageChildren
-  show: (imageBlock: ImageChildren) => void
-  hide: () => void
-}
-export const useShowImageLayerStore = create<ShowImageLayerState>(
-  (set, get) => ({
-    isVisibility: false,
-    show(imageBlock: ImageChildren) {
-      preventBodyScroll()
-      set(() => ({ isVisibility: true, imageBlock }))
-    },
-    hide() {
-      allowBodyScroll()
-      set(() => ({ isVisibility: false }))
-    },
-  }),
-)
-
 interface ThemeState {
   theme: Themes
   setDarkTheme: () => void
@@ -93,24 +71,4 @@ export const useThemeStore = create<ThemeState>(set => ({
   setLightTheme() {
     set(() => ({ theme: Themes.LIGHT }))
   },
-}))
-
-interface EveryPostsTagNamesState {
-  everyPostsTagNames: string[]
-  set: (everyPostsTagNames: string[]) => void
-}
-export const useEveryPostsTagNamesStore = create<EveryPostsTagNamesState>(
-  set => ({
-    everyPostsTagNames: [],
-    set: everyPostsTagNames => set(() => ({ everyPostsTagNames })),
-  }),
-)
-
-interface EveryPostSeriesState {
-  everyPostSeries: MultiSelect
-  set: (everyPostSeries: MultiSelect) => void
-}
-export const useEverySeriesNamesStore = create<EveryPostSeriesState>(set => ({
-  everyPostSeries: [],
-  set: everyPostSeries => set(() => ({ everyPostSeries: everyPostSeries })),
 }))

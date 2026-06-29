@@ -1,64 +1,113 @@
-.contact-section {
-  padding: 80px 20px;
+@use '../../../scss/abstracts/cyber' as *;
+
+.contact-view {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 2rem;
+}
+
+.contact-view__inner {
   text-align: center;
+  max-width: 760px;
+  width: 100%;
+}
 
-  .contact-title {
-    font-size: 2rem;
+.contact-view__label {
+  @include cy-label;
+  color: var(--cy-cyan);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.contact-view__title {
+  font-family: var(--cy-display);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 5vw, 3.4rem);
+  letter-spacing: 0.04em;
+  color: #fff;
+  text-shadow: 0 0 24px rgba(25, 227, 255, 0.35);
+}
+
+.contact-view__mail {
+  display: inline-block;
+  margin: 1.2rem 0 2.6rem;
+  font-family: var(--cy-mono);
+  font-size: clamp(0.9rem, 2vw, 1.15rem);
+  letter-spacing: 0.12em;
+  color: var(--cy-text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--cy-cyan-dim);
+  padding-bottom: 4px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    color: var(--cy-cyan);
+    border-color: var(--cy-cyan);
+  }
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-node {
+  position: relative;
+  @include cy-panel;
+  @include cy-corners(12px, var(--cy-cyan-dim), 1px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.6rem 1rem;
+  text-decoration: none;
+  color: var(--cy-text-dim);
+  transition: transform 0.3s ease, color 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &__icon {
+    width: 34px;
+    height: 34px;
+    color: var(--cy-text-dim);
+    transition: color 0.3s ease, transform 0.3s ease;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__name {
+    font-family: var(--cy-display);
     font-weight: 700;
-    margin-bottom: 40px;
-    color: #111;
+    font-size: 0.92rem;
+    letter-spacing: 0.08em;
+    color: var(--cy-text);
   }
 
-  .contact-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-
-    @media (max-width: 480px) {
-      gap: 20px;
-    }
+  &__handle {
+    font-family: var(--cy-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    color: var(--cy-text-faint);
   }
 
-  .contact-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: #888; // 기본 색상 (회색조)
-    //color: red;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    transform: translateY(-6px);
+    border-color: var(--cy-cyan);
+    box-shadow: 0 12px 36px rgba(25, 227, 255, 0.15);
 
-    .icon-wrapper {
-      width: 40px;
-      height: 40px;
-      margin-bottom: 8px;
-
-      svg {
-        width: 100%;
-        height: 100%;
-        transition: transform 0.3s ease;
-      }
-    }
-
-    .icon-label {
-      font-size: 0.85rem;
-      font-weight: 500;
-      opacity: 0.6;
-      transition: opacity 0.3s ease;
-    }
-
-    // 호버 효과: baejino.com 스타일
-    &:hover {
-      color: var(--hover-color); // 아이콘 색상 변경
-      transform: translateY(-8px); // 위로 살짝 올라옴
-
-      .icon-label {
-        opacity: 1; // 텍스트 진하게
-      }
-
-      svg {
-        // 추가적인 아이콘 애니메이션을 원한다면 여기에 작성
-      }
+    .contact-node__icon {
+      color: var(--cy-cyan);
+      transform: scale(1.08);
     }
   }
 }

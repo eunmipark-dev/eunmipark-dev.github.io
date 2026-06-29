@@ -23,8 +23,8 @@ export const landmarkInfos: Landmark[] = [
     name: 'SHINSEGAE I&C',
     lnglat: [127.041619, 37.503216],
     desc: 'Smart City Solution',
-    role: '담당',
-    period: '2018',
+    role: 'Associate (Intern → Staff)',
+    period: '2017',
     tasks: [
       {
         title: 'Managed Starfield mobile application development & maintenance',
@@ -39,7 +39,8 @@ export const landmarkInfos: Landmark[] = [
     name: 'CEST',
     lnglat: [128.6106, 35.8914],
     desc: 'Embedded Research',
-    role: '연구원',
+    role: 'Research Engineer',
+    period: '2020~2022',
     tasks: [
       {
         title:
@@ -59,7 +60,8 @@ export const landmarkInfos: Landmark[] = [
       {
         title: 'Intelligent V2X Infrastructure & Control System Development',
         subTasks: [
-          'Developed real-time analysis and visualization features for multi-protocol V2X messages',
+          'Developed real-time analysis and visualization features for multi-protocol V2X messages (PVSD, PIM, VCAM, SPaT, BSM)',
+          'Built 2D server-monitoring and 3D HD-map-based vehicle HMI web applications',
         ],
       },
       {
@@ -69,7 +71,6 @@ export const landmarkInfos: Landmark[] = [
         ],
       },
     ],
-    period: '2021~2022',
     skills: [
       { name: 'JS', level: 70 },
       { name: 'PostgreSQL', level: 20 },
@@ -79,22 +80,52 @@ export const landmarkInfos: Landmark[] = [
     ],
   },
   {
+    name: 'Gaia3D',
+    lnglat: [126.8826, 37.4815],
+    desc: 'Geospatial Platform',
+    role: 'Senior Research Engineer',
+    period: '2022',
+    tasks: [
+      {
+        title:
+          'Multi-dimensional Disaster Risk Map Visualization Platform Development',
+        subTasks: [
+          'Built user authentication & admin pages with Spring Security + JWT (login, sign-up approval, user management)',
+          'Collected real-time and static disaster risk data, loaded it into the DB, and visualized it on the map',
+          'Pre-processed disaster risk grade rasters (GeoTIFF) and rendered them in 2D (OpenLayers) and 3D (CesiumJS)',
+        ],
+      },
+    ],
+    skills: [
+      { name: 'Vue', level: 70 },
+      { name: 'OpenLayers', level: 80 },
+      { name: 'CesiumJS', level: 60 },
+      { name: 'Spring', level: 40 },
+      { name: 'PostgreSQL', level: 40 },
+    ],
+  },
+  {
     name: 'MORAI',
     lnglat: [127.0563, 37.5118],
     desc: 'Autonomous Platform',
-    role: '선임연구원',
-    period: '2023~current',
+    role: 'Map Application Engineer',
+    period: '2023~2026',
     tasks: [
       {
-        title: 'Scenario Editor Development (ASAM Standards)',
+        title: 'Scenario Editor Development (ASAM OpenSCENARIO Standards)',
         subTasks: [
-          'High-Definition (HD) Map Visualization & Performance Optimization',
-          'Implementation of editor framework and feature development',
+          'Designed a manager-based editor architecture (Hotkey/Command/Action/View) and event-driven communication to reduce coupling',
+          'Optimized 3D rendering of tens of thousands of HD-map items with merged geometry to minimize draw calls',
+          'Built virtualized list editing (react-window + Zustand) with single/multi selection and geometry editing',
         ],
       },
       {
         title:
-          'Open-source based customized labeling front-end software development tailored to SAIT (Samsung) requirements',
+          'Open-source based customized labeling front-end software for SAIT (Samsung) requirements',
+        subTasks: [
+          'Improved dataset interface (auto-upload, paging, real-time counts) and cut list-load time from ~5s to ~0.1s',
+          'Developed segmentation data loading/editing including line geometry editing and point add/remove',
+        ],
       },
     ],
     skills: [
@@ -102,6 +133,29 @@ export const landmarkInfos: Landmark[] = [
       { name: 'Vue', level: 60 },
       { name: 'React', level: 30 },
       { name: 'Three', level: 90 },
+    ],
+  },
+  {
+    name: 'CLOBOT',
+    lnglat: [127.0286, 37.4833],
+    desc: 'Robot Fleet Control',
+    role: 'Manager',
+    period: '2026~current',
+    tasks: [
+      {
+        title: 'CROMS Heterogeneous Fleet Control Platform Enhancement',
+        subTasks: [
+          'Added a 3D visualization mode to the existing 2D map view with Three.js-based robot/topology rendering',
+          'Implemented folder/tree-based task list UI and a task detail panel',
+          'Built Konva-based heatmap statistics views (clustering, matrix)',
+        ],
+      },
+    ],
+    skills: [
+      { name: 'Vue', level: 80 },
+      { name: 'Three', level: 90 },
+      { name: 'Konva', level: 70 },
+      { name: 'TS', level: 80 },
     ],
   },
 ]

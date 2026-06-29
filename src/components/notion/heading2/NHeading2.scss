@@ -1,7 +1,0 @@
-@use '@scss/abstracts/mixin' as *;
-
-h2 {
-  @include text-gradient;
-
-  margin-block: 1em 0.5em;
-}
